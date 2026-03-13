@@ -1,0 +1,4654 @@
+{
+  "title": "Salesforce Logo and Icon Library",
+  "description": "Official RGB web-ready logos for Salesforce, MuleSoft, Slack, Tableau, and Informatica. All paths are relative to this HTML file. Use the 'preferred' field to identify the recommended logo for each brand. Use 'background' to determine appropriate placement. Brand colors are provided for use in infographics and design work. The 'svg' or 'png' field is null when that format is unavailable.",
+  "lastUpdated": "2026-03-12",
+  "brands": [
+    {
+      "id": "salesforce",
+      "name": "Salesforce",
+      "brandColors": {
+        "primary": "#0176d3",
+        "navy": "#032d60",
+        "cloud": "#1b96ff",
+        "white": "#ffffff"
+      },
+      "logos": [
+        {
+          "id": "sf-horiz-color",
+          "name": "Horizontal Logo",
+          "variant": "Color",
+          "background": "light",
+          "preferred": true,
+          "usage": "Primary Salesforce logo. Use on white or light-colored backgrounds. Preferred for all digital use.",
+          "png": "Original/Logo Assets for Upload/Horizontal Logo RGB/Salesforce-Corporate-Logo-Horiz-RGB.png",
+          "svg": "Original/Logo Assets for Upload/Horizontal Logo RGB/Salesforce-Corporate-Logo-Horiz-RGB.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "salesforce",
+            "corporate",
+            "primary",
+            "brand",
+            "CRM",
+            "horizontal"
+          ],
+          "use_cases": [
+            "slide header",
+            "title slide",
+            "partner grid",
+            "email footer",
+            "co-brand lockup"
+          ],
+          "dimensions": {
+            "width": 8084,
+            "height": 1441,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 5.61,
+            "ratio": "8084:1441",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 808,
+            "height": 144,
+            "aspect_ratio_decimal": 5.6133,
+            "ratio": "101:18"
+          }
+        },
+        {
+          "id": "sf-horiz-knockout",
+          "name": "Horizontal Logo \u2014 Knockout",
+          "variant": "Knockout",
+          "background": "dark",
+          "preferred": false,
+          "usage": "Use on Salesforce Navy or other dark backgrounds. Do not use on light backgrounds.",
+          "png": "Original/Logo Assets for Upload/Horizontal Logo RGB/Salesforce-Corporate-Logo-Horiz-KO-RGB.png",
+          "svg": "Original/Logo Assets for Upload/Horizontal Logo RGB/Salesforce-Corporate-Logo-Horiz-KO-RGB.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "salesforce",
+            "knockout",
+            "reversed",
+            "dark background",
+            "navy"
+          ],
+          "use_cases": [
+            "dark slide header",
+            "navy background",
+            "dark hero section",
+            "reversed treatment"
+          ],
+          "dimensions": {
+            "width": 809,
+            "height": 145,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 5.5793,
+            "ratio": "809:145",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 808,
+            "height": 144,
+            "aspect_ratio_decimal": 5.6133,
+            "ratio": "101:18"
+          }
+        },
+        {
+          "id": "sf-horiz-white",
+          "name": "Horizontal Logo \u2014 White",
+          "variant": "White",
+          "background": "dark",
+          "preferred": false,
+          "usage": "All-white logo for use on dark, colored, or photographic backgrounds.",
+          "png": "Original/Logo Assets for Upload/Horizontal Logo RGB/Salesforce-Corporate-Logo-Horiz-White-RGB.png",
+          "svg": "Original/Logo Assets for Upload/Horizontal Logo RGB/Salesforce-Corporate-Logo-Horiz-White-RGB.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "salesforce",
+            "white",
+            "knockout",
+            "photo overlay",
+            "colored background"
+          ],
+          "use_cases": [
+            "dark background",
+            "photo overlay",
+            "colored background",
+            "print on dark"
+          ],
+          "dimensions": {
+            "width": 809,
+            "height": 145,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 5.5793,
+            "ratio": "809:145",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 808,
+            "height": 144,
+            "aspect_ratio_decimal": 5.6133,
+            "ratio": "101:18"
+          }
+        },
+        {
+          "id": "sf-cloud-color",
+          "name": "Cloud Mark",
+          "variant": "Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce cloud icon mark without wordmark. Use on light backgrounds as a standalone icon.",
+          "png": "Original/Logo Assets for Upload/Cloud Logo RGB/Salesforce-Corporate-Logo-Cloud-RBG.png",
+          "svg": "Original/Logo Assets for Upload/Cloud Logo RGB/Salesforce-Corporate-Logo-Cloud-RBG.svg",
+          "type": "icon-mark",
+          "orientation": "square",
+          "co_branded": false,
+          "keywords": [
+            "salesforce",
+            "cloud mark",
+            "icon",
+            "logomark",
+            "app icon",
+            "square"
+          ],
+          "use_cases": [
+            "small icon",
+            "app icon",
+            "favicon",
+            "icon grid",
+            "badge",
+            "product bullet"
+          ],
+          "dimensions": {
+            "width": 206,
+            "height": 145,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.4207,
+            "ratio": "206:145",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 206,
+            "height": 144,
+            "aspect_ratio_decimal": 1.4287,
+            "ratio": "103:72"
+          }
+        },
+        {
+          "id": "sf-cloud-white",
+          "name": "Cloud Mark \u2014 White",
+          "variant": "White",
+          "background": "dark",
+          "preferred": false,
+          "usage": "All-white cloud icon for use on Salesforce Blue or dark backgrounds.",
+          "png": "Original/Logo Assets for Upload/Cloud Logo RGB/Salesforce-Corporate-Logo-Cloud-White-RBG.png",
+          "svg": "Original/Logo Assets for Upload/Cloud Logo RGB/Salesforce-Corporate-Logo-Cloud-White-RBG.svg",
+          "type": "icon-mark",
+          "orientation": "square",
+          "co_branded": false,
+          "keywords": [
+            "salesforce",
+            "cloud mark",
+            "white",
+            "icon",
+            "dark background"
+          ],
+          "use_cases": [
+            "dark background icon",
+            "small dark icon",
+            "reversed icon grid"
+          ],
+          "dimensions": {
+            "width": 206,
+            "height": 145,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.4207,
+            "ratio": "206:145",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 206,
+            "height": 144,
+            "aspect_ratio_decimal": 1.4287,
+            "ratio": "103:72"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mulesoft",
+      "name": "MuleSoft",
+      "brandColors": {
+        "primary": "#ff6627",
+        "dark": "#c94a00",
+        "black": "#000000",
+        "white": "#ffffff"
+      },
+      "logos": [
+        {
+          "id": "ms-standalone",
+          "name": "MuleSoft Logo",
+          "variant": "Standalone",
+          "background": "light",
+          "preferred": true,
+          "usage": "Primary standalone MuleSoft logo. Use on white or light-colored backgrounds.",
+          "png": "Mulesoft/Mulesoft.png",
+          "svg": "Mulesoft/Mulesoft.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "mulesoft",
+            "integration",
+            "API",
+            "anypoint",
+            "standalone"
+          ],
+          "use_cases": [
+            "slide header",
+            "partner slide",
+            "integration narrative",
+            "technology slide"
+          ],
+          "dimensions": {
+            "width": 255,
+            "height": 253,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0079,
+            "ratio": "255:253",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 122,
+            "height": 121,
+            "aspect_ratio_decimal": 1.0061,
+            "ratio": "122:121"
+          }
+        },
+        {
+          "id": "ms-from-sf-color",
+          "name": "MuleSoft from Salesforce",
+          "variant": "Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Co-branded logo with Salesforce endorsement. Use when Salesforce affiliation should be explicit.",
+          "png": "Mulesoft/MuleSoft-From-Salesforce-Logo-RGB.png",
+          "svg": "Mulesoft/MuleSoft-From-Salesforce-Logo-RGB.svg",
+          "type": "co-brand",
+          "orientation": "horizontal",
+          "co_branded": true,
+          "keywords": [
+            "mulesoft",
+            "salesforce",
+            "co-brand",
+            "endorsement",
+            "integration",
+            "from salesforce"
+          ],
+          "use_cases": [
+            "co-brand slide",
+            "salesforce endorsement",
+            "partner overview",
+            "ecosystem slide"
+          ],
+          "dimensions": {
+            "width": 468,
+            "height": 157,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 2.9809,
+            "ratio": "468:157",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 467,
+            "height": 155,
+            "aspect_ratio_decimal": 3.0081,
+            "ratio": "467:155"
+          }
+        },
+        {
+          "id": "ms-from-sf-ko",
+          "name": "MuleSoft from Salesforce \u2014 Knockout",
+          "variant": "Knockout",
+          "background": "dark",
+          "preferred": false,
+          "usage": "Reversed co-branded logo for use on dark backgrounds.",
+          "png": "Mulesoft/MuleSoft-From-Salesforce-Logo-RGB-KO.png",
+          "svg": "Mulesoft/MuleSoft-From-Salesforce-Logo-RGB-KO.svg",
+          "type": "co-brand",
+          "orientation": "horizontal",
+          "co_branded": true,
+          "keywords": [
+            "mulesoft",
+            "salesforce",
+            "co-brand",
+            "knockout",
+            "dark background",
+            "from salesforce"
+          ],
+          "use_cases": [
+            "dark co-brand slide",
+            "navy background endorsement",
+            "dark hero co-brand"
+          ],
+          "dimensions": {
+            "width": 468,
+            "height": 157,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 2.9809,
+            "ratio": "468:157",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 467,
+            "height": 155,
+            "aspect_ratio_decimal": 3.0081,
+            "ratio": "467:155"
+          }
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "brandColors": {
+        "aubergine": "#4a154b",
+        "primary": "#4a154b",
+        "white": "#ffffff",
+        "black": "#1d1c1d"
+      },
+      "logos": [
+        {
+          "id": "slack-standalone",
+          "name": "Slack Logo",
+          "variant": "Standalone",
+          "background": "light",
+          "preferred": true,
+          "usage": "Primary standalone Slack logo. Use on white or light-colored backgrounds.",
+          "png": "Slack/Slack.png",
+          "svg": "Slack/Slack.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "slack",
+            "messaging",
+            "collaboration",
+            "communication",
+            "workspace",
+            "standalone"
+          ],
+          "use_cases": [
+            "slide header",
+            "partner slide",
+            "collaboration narrative",
+            "product overview"
+          ],
+          "dimensions": {
+            "width": 212,
+            "height": 212,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 101,
+            "height": 101,
+            "aspect_ratio_decimal": 1.0011,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "slack-from-sf",
+          "name": "Slack from Salesforce",
+          "variant": "Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Co-branded logo with Salesforce endorsement. Use on light backgrounds.",
+          "png": "Slack/SLA-Slack-from-Salesforce-logo.png",
+          "svg": "Slack/SLA-Slack-from-Salesforce-logo.svg",
+          "type": "co-brand",
+          "orientation": "horizontal",
+          "co_branded": true,
+          "keywords": [
+            "slack",
+            "salesforce",
+            "co-brand",
+            "endorsement",
+            "from salesforce",
+            "collaboration"
+          ],
+          "use_cases": [
+            "co-brand slide",
+            "salesforce endorsement",
+            "partner overview",
+            "light background co-brand"
+          ],
+          "dimensions": {
+            "width": 1600,
+            "height": 572,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 2.7972,
+            "ratio": "400:143",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 400,
+            "height": 143,
+            "aspect_ratio_decimal": 2.8007,
+            "ratio": "400:143"
+          }
+        },
+        {
+          "id": "slack-from-sf-inverse",
+          "name": "Slack from Salesforce \u2014 Inverse",
+          "variant": "Inverse",
+          "background": "dark",
+          "preferred": false,
+          "usage": "Inverse co-branded logo for Slack Aubergine (#4a154b) or dark backgrounds.",
+          "png": "Slack/SLA-Slack-from-Salesforce-logo-inverse.png",
+          "svg": "Slack/SLA-Slack-from-Salesforce-logo-inverse.svg",
+          "type": "co-brand",
+          "orientation": "horizontal",
+          "co_branded": true,
+          "keywords": [
+            "slack",
+            "salesforce",
+            "co-brand",
+            "inverse",
+            "purple",
+            "dark background"
+          ],
+          "use_cases": [
+            "Slack purple background",
+            "dark co-brand",
+            "inverse treatment",
+            "brand campaign"
+          ],
+          "dimensions": {
+            "width": 1600,
+            "height": 572,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 2.7972,
+            "ratio": "400:143",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 400,
+            "height": 143,
+            "aspect_ratio_decimal": 2.8007,
+            "ratio": "400:143"
+          }
+        },
+        {
+          "id": "slack-from-sf-black",
+          "name": "Slack from Salesforce \u2014 Black",
+          "variant": "Black",
+          "background": "light",
+          "preferred": false,
+          "usage": "All-black co-branded logo. Use on white or very light backgrounds only.",
+          "png": "Slack/SLA-Slack-From-Salesforce-Logo-BLACK.png",
+          "svg": "Slack/SLA-Slack-From-Salesforce-Logo-BLACK.svg",
+          "type": "co-brand",
+          "orientation": "horizontal",
+          "co_branded": true,
+          "keywords": [
+            "slack",
+            "salesforce",
+            "co-brand",
+            "black",
+            "monochrome",
+            "single color"
+          ],
+          "use_cases": [
+            "monochrome co-brand",
+            "black background",
+            "single-color print",
+            "dark monochrome"
+          ],
+          "dimensions": {
+            "width": 1600,
+            "height": 572,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 2.7972,
+            "ratio": "400:143",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 400,
+            "height": 143,
+            "aspect_ratio_decimal": 2.8007,
+            "ratio": "400:143"
+          }
+        },
+        {
+          "id": "slack-from-sf-white",
+          "name": "Slack from Salesforce \u2014 White",
+          "variant": "White",
+          "background": "dark",
+          "preferred": false,
+          "usage": "All-white co-branded logo for use on dark or colored backgrounds.",
+          "png": "Slack/SLA-Slack-From-Salesforce-Logo-WHITE.png",
+          "svg": "Slack/SLA-Slack-From-Salesforce-Logo-WHITE.svg",
+          "type": "co-brand",
+          "orientation": "horizontal",
+          "co_branded": true,
+          "keywords": [
+            "slack",
+            "salesforce",
+            "co-brand",
+            "white",
+            "knockout",
+            "reversed"
+          ],
+          "use_cases": [
+            "white reversed co-brand",
+            "dark background co-brand",
+            "knockout treatment"
+          ],
+          "dimensions": {
+            "width": 1600,
+            "height": 572,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 2.7972,
+            "ratio": "400:143",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 400,
+            "height": 143,
+            "aspect_ratio_decimal": 2.8007,
+            "ratio": "400:143"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tableau",
+      "name": "Tableau",
+      "brandColors": {
+        "primary": "#005f9e",
+        "blue": "#005f9e",
+        "orange": "#e97627",
+        "white": "#ffffff"
+      },
+      "logos": [
+        {
+          "id": "tab-standalone",
+          "name": "Tableau Logo",
+          "variant": "Standalone",
+          "background": "light",
+          "preferred": true,
+          "usage": "Primary standalone Tableau logo. Use on white or light-colored backgrounds.",
+          "png": "Tableau/Tableau.png",
+          "svg": "Tableau/Tableau.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "tableau",
+            "analytics",
+            "data visualization",
+            "BI",
+            "standalone"
+          ],
+          "use_cases": [
+            "slide header",
+            "analytics narrative",
+            "data story",
+            "product overview"
+          ],
+          "dimensions": {
+            "width": 347,
+            "height": 347,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 166,
+            "height": 166,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "tab-rgb",
+          "name": "Tableau Logo \u2014 RGB",
+          "variant": "Color RGB",
+          "background": "light",
+          "preferred": false,
+          "usage": "Standard RGB color logo for digital use on light backgrounds.",
+          "png": "Tableau/Tableau-Logo-RGB.png",
+          "svg": "Tableau/Tableau-Logo-RGB.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "tableau",
+            "RGB",
+            "color",
+            "digital",
+            "screen"
+          ],
+          "use_cases": [
+            "digital presentation",
+            "screen use",
+            "RGB digital output"
+          ],
+          "dimensions": {
+            "width": 801,
+            "height": 167,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 4.7964,
+            "ratio": "801:167",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 800,
+            "height": 166,
+            "aspect_ratio_decimal": 4.8164,
+            "ratio": "400:83"
+          }
+        },
+        {
+          "id": "tab-cmyk",
+          "name": "Tableau Logo \u2014 CMYK",
+          "variant": "CMYK",
+          "background": "light",
+          "preferred": false,
+          "usage": "CMYK color profile intended for print production. PNG only \u2014 use RGB variants for digital work.",
+          "png": "Tableau/Tableau-Logo-CMYK.png",
+          "svg": null,
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "tableau",
+            "CMYK",
+            "print",
+            "dark background",
+            "white"
+          ],
+          "use_cases": [
+            "dark background",
+            "print on dark",
+            "navy slide background"
+          ],
+          "dimensions": {
+            "width": 801,
+            "height": 167,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 4.7964,
+            "ratio": "801:167",
+            "is_square": false
+          }
+        },
+        {
+          "id": "tab-white",
+          "name": "Tableau Logo \u2014 White",
+          "variant": "White",
+          "background": "dark",
+          "preferred": false,
+          "usage": "All-white logo for use on dark or colored backgrounds. PNG only.",
+          "png": "Tableau/Tableau-Logo-White.png",
+          "svg": null,
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "tableau",
+            "white",
+            "knockout",
+            "reversed",
+            "dark background"
+          ],
+          "use_cases": [
+            "dark background",
+            "photo overlay",
+            "reversed treatment",
+            "dark hero slide"
+          ],
+          "dimensions": {
+            "width": 801,
+            "height": 167,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 4.7964,
+            "ratio": "801:167",
+            "is_square": false
+          }
+        },
+        {
+          "id": "tab-from-sf-color",
+          "name": "Tableau from Salesforce",
+          "variant": "Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Co-branded logo with Salesforce endorsement. Use on light backgrounds.",
+          "png": "Tableau/Tableau-From-Salesforce-Logo-COLOR.png",
+          "svg": "Tableau/Tableau-From-Salesforce-Logo-COLOR.svg",
+          "type": "co-brand",
+          "orientation": "horizontal",
+          "co_branded": true,
+          "keywords": [
+            "tableau",
+            "salesforce",
+            "co-brand",
+            "endorsement",
+            "from salesforce",
+            "analytics"
+          ],
+          "use_cases": [
+            "co-brand slide",
+            "salesforce endorsement",
+            "analytics + salesforce narrative"
+          ],
+          "dimensions": {
+            "width": 525,
+            "height": 143,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 3.6713,
+            "ratio": "525:143",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 525,
+            "height": 142,
+            "aspect_ratio_decimal": 3.688,
+            "ratio": "525:142"
+          }
+        },
+        {
+          "id": "tab-from-sf-reverse",
+          "name": "Tableau from Salesforce \u2014 Reverse",
+          "variant": "Reverse",
+          "background": "dark",
+          "preferred": false,
+          "usage": "Reversed co-branded logo for use on dark backgrounds.",
+          "png": "Tableau/Tableau-From-Salesforce-Logo-REVERSE.png",
+          "svg": "Tableau/Tableau-From-Salesforce-Logo-REVERSE.svg",
+          "type": "co-brand",
+          "orientation": "horizontal",
+          "co_branded": true,
+          "keywords": [
+            "tableau",
+            "salesforce",
+            "co-brand",
+            "reverse",
+            "dark background",
+            "knockout"
+          ],
+          "use_cases": [
+            "dark co-brand slide",
+            "reversed co-brand",
+            "dark background endorsement"
+          ],
+          "dimensions": {
+            "width": 525,
+            "height": 143,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 3.6713,
+            "ratio": "525:143",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 525,
+            "height": 142,
+            "aspect_ratio_decimal": 3.688,
+            "ratio": "525:142"
+          }
+        }
+      ]
+    },
+    {
+      "id": "informatica",
+      "name": "Informatica",
+      "brandColors": {
+        "primary": "#ff4713",
+        "orange": "#ff4713",
+        "black": "#000000",
+        "white": "#ffffff"
+      },
+      "logos": [
+        {
+          "id": "inf-color-rgb",
+          "name": "Informatica Logo",
+          "variant": "Color RGB",
+          "background": "light",
+          "preferred": true,
+          "usage": "Primary Informatica logo. Use on white or light-colored backgrounds.",
+          "png": "Informatica/Informatica-Logo-RGB.png",
+          "svg": "Informatica/Informatica-Logo-RGB.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "informatica",
+            "data integration",
+            "ETL",
+            "data management",
+            "MDM",
+            "standalone"
+          ],
+          "use_cases": [
+            "slide header",
+            "partner slide",
+            "data integration narrative",
+            "technology overview"
+          ],
+          "dimensions": {
+            "width": 288,
+            "height": 288,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 138,
+            "height": 138,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "inf-fullcolor-rgb",
+          "name": "Informatica Logo \u2014 Full Color",
+          "variant": "Full Color RGB",
+          "background": "light",
+          "preferred": false,
+          "usage": "Full color variant. SVG only \u2014 no PNG available. Use on light backgrounds.",
+          "png": null,
+          "svg": "Informatica/Informatica-Logo-Full-Color-RGB.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "informatica",
+            "full color",
+            "SVG only",
+            "data integration"
+          ],
+          "use_cases": [
+            "high-quality SVG use",
+            "scalable output",
+            "full color digital"
+          ],
+          "dimensions": {
+            "width": 562,
+            "height": 142,
+            "source": "svg"
+          },
+          "aspect_ratio": {
+            "decimal": 3.9451,
+            "ratio": "281:71",
+            "is_square": false
+          }
+        },
+        {
+          "id": "inf-reverse-rgb",
+          "name": "Informatica Logo \u2014 Reverse",
+          "variant": "Reverse RGB",
+          "background": "dark",
+          "preferred": false,
+          "usage": "Reversed variant for use on dark or colored backgrounds.",
+          "png": "Informatica/Informatica-Logo-Reverse-RGB.png",
+          "svg": "Informatica/Informatica-Logo-Reverse-RGB.svg",
+          "type": "logo",
+          "orientation": "horizontal",
+          "co_branded": false,
+          "keywords": [
+            "informatica",
+            "reverse",
+            "dark background",
+            "knockout",
+            "white"
+          ],
+          "use_cases": [
+            "dark slide header",
+            "dark background",
+            "reversed treatment"
+          ],
+          "dimensions": {
+            "width": 562,
+            "height": 142,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 3.9577,
+            "ratio": "281:71",
+            "is_square": false
+          },
+          "svg_intrinsic": {
+            "width": 562,
+            "height": 142,
+            "aspect_ratio_decimal": 3.9451,
+            "ratio": "281:71"
+          }
+        }
+      ]
+    },
+    {
+      "id": "product-icons",
+      "name": "Salesforce Product Icons",
+      "brandColors": {
+        "primary": "#0176d3",
+        "navy": "#032d60",
+        "background": "#f4f6f9"
+      },
+      "description": "Official 2D product icon set. Each icon is available in 5 variants: Full Color, 1-Color, 1-Color KO (knockout/white), 1-Color Stroke, and 1-Color Stroke KO.",
+      "logos": [
+        {
+          "id": "icon-admin",
+          "name": "Admin",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Admin 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Admin-2D-Product-Icon/Admin-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Admin-2D-Product-Icon/Admin-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Tools for configuring, customizing, and managing a Salesforce org \u2014 users, security, workflows, and settings.",
+          "keywords": [
+            "admin",
+            "administrator",
+            "configuration",
+            "setup",
+            "manage",
+            "customize",
+            "permissions"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 640,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0016,
+            "ratio": "641:640",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-agentforce",
+          "name": "Agentforce",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Agentforce 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Agentforce-2D-Product-Icon/Agentforce-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Agentforce-2D-Product-Icon/Agentforce-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "AI",
+          "product_description": "Salesforce's autonomous AI agent platform for deploying agents that take action across sales, service, and marketing workflows.",
+          "keywords": [
+            "AI",
+            "agent",
+            "autonomous AI",
+            "agentforce",
+            "LLM",
+            "copilot",
+            "einstein",
+            "automation",
+            "generative AI"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 640,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0016,
+            "ratio": "641:640",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-apex",
+          "name": "Apex",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Apex 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Apex-2D-Product-Icon/Apex-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Apex-2D-Product-Icon/Apex-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce's proprietary programming language for building custom business logic and server-side integrations on the platform.",
+          "keywords": [
+            "apex",
+            "code",
+            "programming",
+            "developer",
+            "custom logic",
+            "backend",
+            "development",
+            "classes"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-apex-guru",
+          "name": "Apex Guru",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Apex Guru 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Apex-Guru-2D-Product-Icon/Apex-Guru-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Apex-Guru-2D-Product-Icon/Apex-Guru-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "AI",
+          "product_description": "AI-powered code review and optimization tool for Salesforce Apex \u2014 provides automated suggestions and bug detection.",
+          "keywords": [
+            "AI",
+            "code review",
+            "apex",
+            "developer tools",
+            "code analysis",
+            "static analysis",
+            "einstein",
+            "copilot"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-architect",
+          "name": "Architect",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Architect 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Architect-2D-Product-Icon/Architect-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Architect-2D-Product-Icon/Architect-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Resources and tools for Salesforce architects designing scalable, enterprise-grade solutions and technical blueprints.",
+          "keywords": [
+            "architect",
+            "solution design",
+            "enterprise architecture",
+            "technical design",
+            "blueprint",
+            "CTA"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-archive",
+          "name": "Archive",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Archive 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Archive-2D-Product-Icon/Archive-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Archive-2D-Product-Icon/Archive-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Data",
+          "product_description": "Salesforce data archiving solution for managing data lifecycle, long-term retention, and storage optimization.",
+          "keywords": [
+            "archive",
+            "data lifecycle",
+            "storage",
+            "retention",
+            "records",
+            "data management",
+            "purge"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-authenticator",
+          "name": "Authenticator",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Authenticator 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Authenticator-2D-Product-Icon/Authenticator-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Authenticator-2D-Product-Icon/Authenticator-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Authenticator mobile app providing multi-factor authentication (MFA) for secure logins.",
+          "keywords": [
+            "authentication",
+            "MFA",
+            "multi-factor",
+            "2FA",
+            "security",
+            "login",
+            "identity",
+            "mobile security"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-automotive",
+          "name": "Automotive",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Automotive 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Automotive-2D-Product-Icon/Automotive-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Automotive-2D-Product-Icon/Automotive-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Automotive Cloud \u2014 industry-specific CRM for automotive OEMs, dealers, and after-sales service.",
+          "keywords": [
+            "automotive",
+            "car",
+            "vehicle",
+            "dealer",
+            "OEM",
+            "manufacturer",
+            "after-sales",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 640,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0016,
+            "ratio": "641:640",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-blockchain",
+          "name": "Blockchain",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Blockchain 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Blockchain-2D-Product-Icon/Blockchain-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Blockchain-2D-Product-Icon/Blockchain-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Blockchain for building trusted partner networks and sharing verifiable, tamper-proof data across ecosystems.",
+          "keywords": [
+            "blockchain",
+            "distributed ledger",
+            "trust",
+            "partner network",
+            "verification",
+            "immutable"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-bots",
+          "name": "Bots",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Bots 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Bots-2D-Product-Icon/Bots-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Bots-2D-Product-Icon/Bots-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "AI",
+          "product_description": "Salesforce Einstein Bots \u2014 conversational AI chatbots for automating customer interactions across web, mobile, and messaging.",
+          "keywords": [
+            "bot",
+            "chatbot",
+            "conversational AI",
+            "automation",
+            "self-service",
+            "einstein",
+            "chat",
+            "deflection"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-cms",
+          "name": "CMS",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce CMS 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/CMS-2D-Product-Icon/CMS-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/CMS-2D-Product-Icon/CMS-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce CMS (Content Management System) for creating and delivering content headlessly across any digital channel.",
+          "keywords": [
+            "CMS",
+            "content management",
+            "headless",
+            "digital content",
+            "publishing",
+            "web content",
+            "channels"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-canvas-quip",
+          "name": "Canvas Quip",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Canvas Quip 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Canvas-Quip-2D-Product-Icon/Canvas-Quip-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Canvas-Quip-2D-Product-Icon/Canvas-Quip-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Quip \u2014 collaborative productivity suite with live documents and spreadsheets embedded inside Salesforce records.",
+          "keywords": [
+            "quip",
+            "canvas",
+            "collaboration",
+            "documents",
+            "spreadsheets",
+            "embedded",
+            "productivity",
+            "co-authoring"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-channels",
+          "name": "Channels",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Channels 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Channels-2D-Product-Icon/Channels-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Channels-2D-Product-Icon/Channels-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Marketing",
+          "product_description": "Salesforce Marketing Cloud Channels for reaching customers via email, mobile push, SMS, social, and advertising.",
+          "keywords": [
+            "channels",
+            "email",
+            "mobile",
+            "SMS",
+            "social",
+            "advertising",
+            "omnichannel",
+            "marketing"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-code-builder",
+          "name": "Code Builder",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Code Builder 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Code-Builder-2D-Product-Icon/Code-Builder-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Code-Builder-2D-Product-Icon/Code-Builder-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Code Builder \u2014 browser-based IDE for developing, testing, and deploying Salesforce apps without local tooling.",
+          "keywords": [
+            "code builder",
+            "IDE",
+            "developer",
+            "cloud development",
+            "browser IDE",
+            "web development",
+            "dev tools"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-commerce",
+          "name": "Commerce",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Commerce 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Commerce-2D-Product-Icon/Commerce-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Commerce-2D-Product-Icon/Commerce-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "CRM",
+          "product_description": "Salesforce Commerce Cloud for building AI-powered B2C and B2B e-commerce storefronts and buying experiences.",
+          "keywords": [
+            "commerce",
+            "e-commerce",
+            "B2C",
+            "B2B",
+            "online store",
+            "shopping",
+            "checkout",
+            "ordering",
+            "retail"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-connected-experiences",
+          "name": "Connected Experiences",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Connected Experiences 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Connected-Experiences-2D-Product-Icon/Connected-Experiences-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Connected-Experiences-2D-Product-Icon/Connected-Experiences-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Connected Experiences for building unified customer journeys across digital and physical touchpoints.",
+          "keywords": [
+            "connected experiences",
+            "customer journey",
+            "omnichannel",
+            "touchpoints",
+            "digital",
+            "IoT",
+            "engagement"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-consumer-goods",
+          "name": "Consumer Goods",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Consumer Goods 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Consumer-Goods-2D-Product-Icon/Consumer-Goods-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Consumer-Goods-2D-Product-Icon/Consumer-Goods-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Consumer Goods Cloud for CPG field operations, retail execution, and trade promotion management.",
+          "keywords": [
+            "consumer goods",
+            "CPG",
+            "retail execution",
+            "field operations",
+            "trade promotion",
+            "FMCG",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-customer-360",
+          "name": "Customer 360",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Customer 360 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Customer-360-2D-Product-Icon/Customer-360-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Customer-360-2D-Product-Icon/Customer-360-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Customer 360 \u2014 the complete platform providing a unified view of every customer across all business functions.",
+          "keywords": [
+            "customer 360",
+            "unified data",
+            "single view",
+            "CDP",
+            "platform",
+            "complete customer",
+            "360 view"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 640,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0016,
+            "ratio": "641:640",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-customer-identity",
+          "name": "Customer Identity",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Customer Identity 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Customer-Identity-2D-Product-Icon/Customer-Identity-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Customer-Identity-2D-Product-Icon/Customer-Identity-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Customer Identity (CIAM) for managing customer registration, login, consent, and profile data securely at scale.",
+          "keywords": [
+            "identity",
+            "CIAM",
+            "login",
+            "registration",
+            "OAuth",
+            "SSO",
+            "access management",
+            "identity provider"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-customer-success",
+          "name": "Customer Success",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Customer Success 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Customer-Success-2D-Product-Icon/Customer-Success-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Customer-Success-2D-Product-Icon/Customer-Success-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Service",
+          "product_description": "Salesforce Customer Success \u2014 support plans and resources helping customers maximize ROI on their Salesforce investment.",
+          "keywords": [
+            "customer success",
+            "support",
+            "adoption",
+            "ROI",
+            "value realization",
+            "enablement",
+            "CS"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-dx",
+          "name": "DX",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce DX 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/DX-2D-Product-Icon/DX-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/DX-2D-Product-Icon/DX-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Developer Experience (DX) \u2014 modern CLI, source-driven development workflow, scratch orgs, and DevOps tooling.",
+          "keywords": [
+            "DX",
+            "developer experience",
+            "CLI",
+            "source control",
+            "scratch org",
+            "DevOps",
+            "SFDX",
+            "CI/CD"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-data-cloud",
+          "name": "Data 360",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Data 360 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Data-Cloud-2D-Product-Icon/Data-Cloud-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Data-Cloud-2D-Product-Icon/Data-Cloud-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Data",
+          "product_description": "Salesforce Data 360 (formerly Data Cloud) \u2014 real-time customer data platform (CDP) that unifies first-party data for a single, actionable customer profile.",
+          "keywords": [
+            "Data 360",
+            "Data Cloud",
+            "CDP",
+            "data platform",
+            "real-time data",
+            "identity resolution",
+            "unified profile",
+            "first-party data",
+            "data activation"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-data-mask",
+          "name": "Data Mask",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Data Mask 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Data-Mask-2D-Product-Icon/Data-Mask-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Data-Mask-2D-Product-Icon/Data-Mask-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Data Mask for anonymizing, scrambling, or deleting sensitive PII data in sandbox environments for compliance.",
+          "keywords": [
+            "data mask",
+            "anonymization",
+            "sandbox",
+            "privacy",
+            "PII",
+            "data protection",
+            "GDPR",
+            "compliance",
+            "obfuscation"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-data-residency",
+          "name": "Data Residency",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Data Residency 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Data-Residency-2D-Product-Icon/Data-Residency-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Data-Residency-2D-Product-Icon/Data-Residency-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Data Residency Option (DRO) for storing Salesforce data within specific geographic regions to meet sovereignty requirements.",
+          "keywords": [
+            "data residency",
+            "sovereignty",
+            "GDPR",
+            "compliance",
+            "geography",
+            "regional data",
+            "EU",
+            "data localization"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-education",
+          "name": "Education",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Education 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Education-2D-Product-Icon/Education-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Education-2D-Product-Icon/Education-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Education Cloud for higher education institutions and K-12 schools managing student success and engagement.",
+          "keywords": [
+            "education",
+            "higher ed",
+            "university",
+            "K-12",
+            "students",
+            "academic",
+            "EDA",
+            "campus",
+            "admissions"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-engineering-construction-real-estate",
+          "name": "Engineering Construction Real Estate",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Engineering Construction Real Estate 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Engineering-Construction-Real-Estate-2D-Product-Icon/Engineering-Construction-Real-Estate-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Engineering-Construction-Real-Estate-2D-Product-Icon/Engineering-Construction-Real-Estate-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce for Engineering, Construction, and Real Estate \u2014 managing projects, assets, clients, and partner relationships.",
+          "keywords": [
+            "engineering",
+            "construction",
+            "real estate",
+            "EPC",
+            "property",
+            "projects",
+            "assets",
+            "development",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-events",
+          "name": "Events",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Events 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Events-2D-Product-Icon/Events-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Events-2D-Product-Icon/Events-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Marketing",
+          "product_description": "Salesforce Events management for planning, promoting, and executing virtual and in-person marketing events and webinars.",
+          "keywords": [
+            "events",
+            "webinar",
+            "conference",
+            "virtual events",
+            "marketing events",
+            "promotions",
+            "campaigns"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-experience-cloud",
+          "name": "Experience Cloud",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Experience Cloud 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Experience-Cloud-2D-Product-Icon/Experience-Cloud-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Experience-Cloud-2D-Product-Icon/Experience-Cloud-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Experience Cloud for building branded customer portals, partner portals, help centers, and self-service sites.",
+          "keywords": [
+            "experience cloud",
+            "community",
+            "portal",
+            "partner portal",
+            "customer portal",
+            "self-service",
+            "website",
+            "digital experience"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-field-service",
+          "name": "Field Service",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Field Service 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Field-Service-2D-Product-Icon/Field-Service-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Field-Service-2D-Product-Icon/Field-Service-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Service",
+          "product_description": "Salesforce Field Service Lightning \u2014 intelligent field operations for scheduling technicians, managing work orders, and on-site service.",
+          "keywords": [
+            "field service",
+            "FSL",
+            "technician",
+            "work order",
+            "scheduling",
+            "dispatch",
+            "on-site service",
+            "mobile worker",
+            "maintenance"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-financial-services",
+          "name": "Financial Services",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Financial Services 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Financial-Services-2D-Product-Icon/Financial-Services-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Financial-Services-2D-Product-Icon/Financial-Services-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Financial Services Cloud for banking, insurance, and wealth management firms managing client relationships and compliance.",
+          "keywords": [
+            "financial services",
+            "banking",
+            "insurance",
+            "wealth management",
+            "FSC",
+            "fintech",
+            "advisor",
+            "AUM",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-government-cloud",
+          "name": "Government Cloud",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Government Cloud 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Government-Cloud-2D-Product-Icon/Government-Cloud-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Government-Cloud-2D-Product-Icon/Government-Cloud-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Government Cloud \u2014 FedRAMP-authorized Salesforce environment for U.S. federal, state, and local government agencies.",
+          "keywords": [
+            "government",
+            "public sector",
+            "federal",
+            "FedRAMP",
+            "state government",
+            "local government",
+            "GovCloud",
+            "compliance"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-healthcare",
+          "name": "Healthcare",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Healthcare 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Healthcare-2D-Product-Icon/Healthcare-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Healthcare-2D-Product-Icon/Healthcare-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Health Cloud for patient management, care coordination, payer workflows, and connected healthcare journeys.",
+          "keywords": [
+            "healthcare",
+            "health cloud",
+            "patient",
+            "care coordination",
+            "clinical",
+            "payer",
+            "provider",
+            "HIPAA",
+            "EHR"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-heroku",
+          "name": "Heroku",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Heroku 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Heroku-2D-Product-Icon/Heroku-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Heroku-2D-Product-Icon/Heroku-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Heroku \u2014 developer-focused cloud application platform (PaaS) for deploying, managing, and scaling apps and microservices.",
+          "keywords": [
+            "heroku",
+            "PaaS",
+            "cloud platform",
+            "deployment",
+            "containers",
+            "microservices",
+            "developer",
+            "apps",
+            "dynos"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-human-resources",
+          "name": "Human Resources",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Human Resources 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Human-Resources-2D-Product-Icon/Human-Resources-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Human-Resources-2D-Product-Icon/Human-Resources-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce HR solutions for employee experience, workforce management, HR service delivery, and talent management.",
+          "keywords": [
+            "HR",
+            "human resources",
+            "employees",
+            "workforce",
+            "HCM",
+            "talent",
+            "people operations",
+            "HRIS"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-hyperforce",
+          "name": "Hyperforce",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Hyperforce 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Hyperforce-2D-Product-Icon/Hyperforce-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Hyperforce-2D-Product-Icon/Hyperforce-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Hyperforce \u2014 next-generation infrastructure architecture running Salesforce on public cloud providers (AWS, Azure, GCP).",
+          "keywords": [
+            "hyperforce",
+            "infrastructure",
+            "cloud architecture",
+            "public cloud",
+            "AWS",
+            "Azure",
+            "GCP",
+            "scalability",
+            "compliance"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-it",
+          "name": "IT",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce IT 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/IT-2D-Product-Icon/IT-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/IT-2D-Product-Icon/IT-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce IT Service Management \u2014 ITSM tools for internal helpdesk, asset management, and IT operations.",
+          "keywords": [
+            "IT",
+            "ITSM",
+            "helpdesk",
+            "IT service",
+            "service desk",
+            "technology management",
+            "internal IT"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-idea-exchange",
+          "name": "Idea Exchange",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Idea Exchange 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Idea-Exchange-2D-Product-Icon/Idea-Exchange-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Idea-Exchange-2D-Product-Icon/Idea-Exchange-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Idea Exchange \u2014 community platform for submitting, voting on, and tracking product improvement ideas.",
+          "keywords": [
+            "idea exchange",
+            "product feedback",
+            "feature requests",
+            "community",
+            "roadmap",
+            "voting",
+            "IdeaExchange"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-industries",
+          "name": "Industries",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Industries 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Industries-2D-Product-Icon/Industries-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Industries-2D-Product-Icon/Industries-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Industries \u2014 umbrella brand for the suite of vertical-specific clouds tailored for individual industry needs.",
+          "keywords": [
+            "industries",
+            "vertical",
+            "industry cloud",
+            "sector",
+            "specialized CRM",
+            "vertical solutions",
+            "clouds"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-lightning",
+          "name": "Lightning",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Lightning 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Lightning-2D-Product-Icon/Lightning-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Lightning-2D-Product-Icon/Lightning-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Lightning \u2014 modern UI framework and Lightning Web Component (LWC) development platform for building Salesforce apps.",
+          "keywords": [
+            "lightning",
+            "LWC",
+            "Lightning Web Components",
+            "Aura",
+            "UI framework",
+            "components",
+            "developer",
+            "frontend"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-low-code",
+          "name": "Low Code",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Low Code 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Low-Code-2D-Product-Icon/Low-Code-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Low-Code-2D-Product-Icon/Low-Code-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce low-code and no-code tools \u2014 Flow Builder, App Builder, and declarative automation for citizen developers.",
+          "keywords": [
+            "low code",
+            "no code",
+            "flow",
+            "Flow Builder",
+            "automation",
+            "declarative",
+            "app builder",
+            "citizen developer"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-loyalty-management",
+          "name": "Loyalty Management",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Loyalty Management 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Loyalty-Management-2D-Product-Icon/Loyalty-Management-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Loyalty-Management-2D-Product-Icon/Loyalty-Management-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Marketing",
+          "product_description": "Salesforce Loyalty Management for designing, launching, and managing customer loyalty programs, tiers, and reward fulfillment.",
+          "keywords": [
+            "loyalty",
+            "rewards",
+            "loyalty program",
+            "points",
+            "tiers",
+            "retention",
+            "customer loyalty",
+            "membership"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-manufacturing",
+          "name": "Manufacturing",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Manufacturing 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Manufacturing-2D-Product-Icon/Manufacturing-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Manufacturing-2D-Product-Icon/Manufacturing-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Manufacturing Cloud for sales agreements, account-based forecasting, and partner channel management in manufacturing.",
+          "keywords": [
+            "manufacturing",
+            "factory",
+            "production",
+            "supply chain",
+            "OEM",
+            "B2B",
+            "run-rate",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-marketing",
+          "name": "Marketing",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Marketing 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Marketing-2D-Product-Icon/Marketing-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Marketing-2D-Product-Icon/Marketing-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Marketing",
+          "product_description": "Salesforce Marketing Cloud \u2014 enterprise platform for email, mobile, social, advertising, journeys, and data-driven personalization.",
+          "keywords": [
+            "marketing",
+            "email",
+            "Marketing Cloud",
+            "automation",
+            "campaigns",
+            "journeys",
+            "personalization",
+            "SFMC",
+            "engagement"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-media",
+          "name": "Media",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Media 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Media-2D-Product-Icon/Media-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Media-2D-Product-Icon/Media-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Media Cloud for media and entertainment companies managing advertising sales, subscribers, and content distribution.",
+          "keywords": [
+            "media",
+            "entertainment",
+            "advertising",
+            "subscribers",
+            "content",
+            "broadcasting",
+            "publishing",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-mobile",
+          "name": "Mobile",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Mobile 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Mobile-2D-Product-Icon/Mobile-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Mobile-2D-Product-Icon/Mobile-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Mobile App \u2014 native iOS and Android app for accessing Salesforce CRM, records, and dashboards on mobile devices.",
+          "keywords": [
+            "mobile",
+            "iOS",
+            "Android",
+            "mobile app",
+            "on-the-go",
+            "field",
+            "Salesforce app",
+            "smartphone"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-mobile-app-security-compliance",
+          "name": "Mobile App Security Compliance",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Mobile App Security Compliance 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Mobile-App-Security-Compliance-2D-Product-Icon/Mobile-App-Security-Compliance-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Mobile-App-Security-Compliance-2D-Product-Icon/Mobile-App-Security-Compliance-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Mobile App Security tools for enforcing mobile device compliance policies and securing enterprise mobile deployments.",
+          "keywords": [
+            "mobile security",
+            "compliance",
+            "MDM",
+            "app security",
+            "BYOD",
+            "enterprise mobility",
+            "device management"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-mulesoft",
+          "name": "Mulesoft",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Mulesoft 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Mulesoft-2D-Product-Icon/Mulesoft-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Mulesoft-2D-Product-Icon/Mulesoft-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Data",
+          "product_description": "MuleSoft Anypoint Platform \u2014 the leading integration platform for connecting apps, data, and devices across on-premise and cloud.",
+          "keywords": [
+            "mulesoft",
+            "integration",
+            "API",
+            "Anypoint",
+            "iPaaS",
+            "middleware",
+            "connectivity",
+            "ESB",
+            "API management"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-net-zero",
+          "name": "Net Zero",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Net Zero 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Net-Zero-2D-Product-Icon/Net-Zero-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Net-Zero-2D-Product-Icon/Net-Zero-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Net Zero Cloud for tracking and reporting on carbon emissions, energy use, and environmental sustainability goals.",
+          "keywords": [
+            "net zero",
+            "sustainability",
+            "carbon emissions",
+            "ESG",
+            "climate",
+            "green",
+            "environment",
+            "carbon accounting"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-non-profit",
+          "name": "Non Profit",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Non Profit 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Non-Profit-2D-Product-Icon/Non-Profit-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Non-Profit-2D-Product-Icon/Non-Profit-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Nonprofit Success Pack (NPSP) for fundraising, constituent management, grant tracking, and program delivery.",
+          "keywords": [
+            "nonprofit",
+            "NPSP",
+            "fundraising",
+            "donors",
+            "grants",
+            "NGO",
+            "charity",
+            "philanthropy",
+            "social impact"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-partners",
+          "name": "Partners",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Partners 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Partners-2D-Product-Icon/Partners-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Partners-2D-Product-Icon/Partners-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Partner Community for managing channel partners, ISVs, resellers, and partner program operations.",
+          "keywords": [
+            "partners",
+            "channel",
+            "reseller",
+            "ISV",
+            "partner community",
+            "ecosystem",
+            "PRM",
+            "AppExchange"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-platform",
+          "name": "Platform",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Platform 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Platform-2D-Product-Icon/Platform-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Platform-2D-Product-Icon/Platform-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Platform \u2014 core application development platform including custom objects, automation, APIs, and the AppExchange.",
+          "keywords": [
+            "platform",
+            "Salesforce Platform",
+            "Force.com",
+            "PaaS",
+            "custom apps",
+            "declarative",
+            "development",
+            "metadata"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-platform-builder",
+          "name": "Platform Builder",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Platform Builder 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Platform-Builder-2D-Product-Icon/Platform-Builder-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Platform-Builder-2D-Product-Icon/Platform-Builder-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Platform Builder (App Builder) for drag-and-drop design of app pages, record layouts, and UI components.",
+          "keywords": [
+            "platform builder",
+            "app builder",
+            "page builder",
+            "UI design",
+            "drag and drop",
+            "declarative",
+            "layout"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-playground",
+          "name": "Playground",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Playground 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Playground-2D-Product-Icon/Playground-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Playground-2D-Product-Icon/Playground-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Trailhead Playground \u2014 free Salesforce environments for hands-on learning, experimentation, and trying new features.",
+          "keywords": [
+            "playground",
+            "trailhead",
+            "sandbox",
+            "learning",
+            "hands-on",
+            "free org",
+            "trial",
+            "practice"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-policy-center",
+          "name": "Policy Center",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Policy Center 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Policy-Center-2D-Product-Icon/Policy-Center-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Policy-Center-2D-Product-Icon/Policy-Center-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Policy Center for insurance carriers managing policy lifecycle, underwriting, endorsements, and claims.",
+          "keywords": [
+            "policy center",
+            "insurance",
+            "underwriting",
+            "claims",
+            "policy management",
+            "P&C",
+            "carrier",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-privacy-center",
+          "name": "Privacy Center",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Privacy Center 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Privacy-Center-2D-Product-Icon/Privacy-Center-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Privacy-Center-2D-Product-Icon/Privacy-Center-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Privacy Center for data privacy compliance \u2014 handling consent, data subject requests, and GDPR/CCPA obligations.",
+          "keywords": [
+            "privacy",
+            "GDPR",
+            "CCPA",
+            "consent",
+            "compliance",
+            "data subject",
+            "right to be forgotten",
+            "PII",
+            "privacy law"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-private-connect",
+          "name": "Private Connect",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Private Connect 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Private-Connect-2D-Product-Icon/Private-Connect-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Private-Connect-2D-Product-Icon/Private-Connect-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Private Connect for secure, private network connectivity between Salesforce orgs and customer infrastructure via AWS PrivateLink.",
+          "keywords": [
+            "private connect",
+            "VPN",
+            "private network",
+            "PrivateLink",
+            "secure connection",
+            "network",
+            "zero trust"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-professional-services",
+          "name": "Professional Services",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Professional Services 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Professional-Services-2D-Product-Icon/Professional-Services-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Professional-Services-2D-Product-Icon/Professional-Services-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Service",
+          "product_description": "Salesforce Professional Services Cloud for project-based businesses managing client engagements, resources, and revenue recognition.",
+          "keywords": [
+            "professional services",
+            "PSA",
+            "project management",
+            "consulting",
+            "engagements",
+            "resource planning",
+            "billing"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-public-sector",
+          "name": "Public Sector",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Public Sector 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Public-Sector-2D-Product-Icon/Public-Sector-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Public-Sector-2D-Product-Icon/Public-Sector-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Public Sector Solutions for government agencies managing licenses, permits, inspections, and constituent services.",
+          "keywords": [
+            "public sector",
+            "government",
+            "licenses",
+            "permits",
+            "inspections",
+            "constituents",
+            "civic tech",
+            "GovTech"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-radio",
+          "name": "Radio",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Radio 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Radio-2D-Product-Icon/Radio-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Radio-2D-Product-Icon/Radio-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce IoT and connected device solutions for real-time telemetry, device management, and field connectivity.",
+          "keywords": [
+            "radio",
+            "IoT",
+            "connected devices",
+            "telemetry",
+            "field connectivity",
+            "device management",
+            "real-time"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-referral-marketing",
+          "name": "Referral Marketing",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Referral Marketing 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Referral-Marketing-2D-Product-Icon/Referral-Marketing-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Referral-Marketing-2D-Product-Icon/Referral-Marketing-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Marketing",
+          "product_description": "Salesforce Referral Marketing for building structured referral programs that turn satisfied customers into brand advocates.",
+          "keywords": [
+            "referral",
+            "word of mouth",
+            "referral program",
+            "advocacy",
+            "acquisition",
+            "viral",
+            "customer referral"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-retail",
+          "name": "Retail",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Retail 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Retail-2D-Product-Icon/Retail-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Retail-2D-Product-Icon/Retail-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce Retail solutions for omnichannel retail \u2014 connecting online and in-store experiences, loyalty, and store associates.",
+          "keywords": [
+            "retail",
+            "omnichannel",
+            "store",
+            "shopper",
+            "B2C",
+            "POS",
+            "commerce",
+            "consumer",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-robotics",
+          "name": "Robotics",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Robotics 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Robotics-2D-Product-Icon/Robotics-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Robotics-2D-Product-Icon/Robotics-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Robotics and RPA integrations for automating repetitive business processes with robotic process automation.",
+          "keywords": [
+            "robotics",
+            "RPA",
+            "automation",
+            "bots",
+            "workflow automation",
+            "process automation",
+            "intelligent automation"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-smb",
+          "name": "SMB",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce SMB 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/SMB-2D-Product-Icon/SMB-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/SMB-2D-Product-Icon/SMB-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "CRM",
+          "product_description": "Salesforce SMB solutions \u2014 CRM products designed and priced for small and medium-sized businesses ready to grow.",
+          "keywords": [
+            "SMB",
+            "small business",
+            "medium business",
+            "starter",
+            "essentials",
+            "growth",
+            "scale-up"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-sales",
+          "name": "Sales",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Sales 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Sales-2D-Product-Icon/Sales-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Sales-2D-Product-Icon/Sales-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "CRM",
+          "product_description": "Salesforce Sales Cloud \u2014 the world's #1 CRM for managing leads, opportunities, accounts, contacts, and revenue forecasting.",
+          "keywords": [
+            "sales",
+            "Sales Cloud",
+            "CRM",
+            "opportunities",
+            "leads",
+            "pipeline",
+            "forecast",
+            "revenue",
+            "accounts",
+            "contacts"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-sales-enablement",
+          "name": "Sales Enablement",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Sales Enablement 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Sales-Enablement-2D-Product-Icon/Sales-Enablement-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Sales-Enablement-2D-Product-Icon/Sales-Enablement-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "CRM",
+          "product_description": "Salesforce Sales Enablement (Enablement) for onboarding, coaching, and empowering sales reps with guided programs and content.",
+          "keywords": [
+            "sales enablement",
+            "training",
+            "onboarding",
+            "coaching",
+            "content",
+            "rep readiness",
+            "productivity",
+            "learning"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-sales-maps",
+          "name": "Sales Maps",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Sales Maps 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Sales-Maps-2D-Product-Icon/Sales-Maps-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Sales-Maps-2D-Product-Icon/Sales-Maps-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "CRM",
+          "product_description": "Salesforce Maps for geographic territory management, route optimization, and proximity-based field sales planning.",
+          "keywords": [
+            "sales maps",
+            "territory management",
+            "geographic",
+            "routing",
+            "field sales",
+            "mapping",
+            "proximity",
+            "location"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-sales-partner-cloud",
+          "name": "Sales Partner Cloud",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Sales Partner Cloud 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Sales-Partner-Cloud-2D-Product-Icon/Sales-Partner-Cloud-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Sales-Partner-Cloud-2D-Product-Icon/Sales-Partner-Cloud-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "CRM",
+          "product_description": "Salesforce Partner Relationship Management (PRM) for channel sales \u2014 deal registration, co-selling, and partner enablement.",
+          "keywords": [
+            "partner cloud",
+            "channel sales",
+            "deal registration",
+            "co-sell",
+            "reseller",
+            "PRM",
+            "indirect sales"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-sales-revenue",
+          "name": "Sales Revenue",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Sales Revenue 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Sales-Revenue-2D-Product-Icon/Sales-Revenue-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Sales-Revenue-2D-Product-Icon/Sales-Revenue-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "CRM",
+          "product_description": "Salesforce Revenue Cloud \u2014 CPQ, Billing, and Revenue Lifecycle Management for quote-to-cash and subscription revenue.",
+          "keywords": [
+            "revenue",
+            "CPQ",
+            "billing",
+            "subscription",
+            "configure price quote",
+            "Revenue Cloud",
+            "RLM",
+            "quote to cash"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-salesforce-backup",
+          "name": "Salesforce Backup",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Salesforce Backup 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Salesforce-Backup-2D-Product-Icon/Salesforce-Backup-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Salesforce-Backup-2D-Product-Icon/Salesforce-Backup-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Data",
+          "product_description": "Salesforce Backup for automated daily backups, point-in-time restore, and disaster recovery of Salesforce data.",
+          "keywords": [
+            "backup",
+            "restore",
+            "disaster recovery",
+            "data protection",
+            "business continuity",
+            "recovery point",
+            "DR"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-salesforce-discover",
+          "name": "Salesforce Discover",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Salesforce Discover 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Salesforce-Discover-2D-Product-Icon/Salesforce-Discover-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Salesforce-Discover-2D-Product-Icon/Salesforce-Discover-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Data",
+          "product_description": "Salesforce Einstein Discovery \u2014 AI-powered statistical analysis that delivers automated predictions and actionable recommendations.",
+          "keywords": [
+            "discover",
+            "Einstein Discovery",
+            "analytics",
+            "AI",
+            "predictive analytics",
+            "statistical",
+            "insights",
+            "recommendations"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-salesforce-starter",
+          "name": "Salesforce Starter",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Salesforce Starter 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Salesforce-Starter-2D-Product-Icon/Salesforce-Starter-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Salesforce-Starter-2D-Product-Icon/Salesforce-Starter-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "CRM",
+          "product_description": "Salesforce Starter \u2014 all-in-one CRM suite for small businesses combining sales, service, and email marketing in one simple app.",
+          "keywords": [
+            "starter",
+            "SMB",
+            "small business",
+            "all-in-one",
+            "essentials",
+            "beginner",
+            "entry level",
+            "simple CRM"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-sandboxes",
+          "name": "Sandboxes",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Sandboxes 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Sandboxes-2D-Product-Icon/Sandboxes-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Sandboxes-2D-Product-Icon/Sandboxes-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Sandboxes \u2014 isolated environments for development, testing, QA, and UAT before deploying changes to production.",
+          "keywords": [
+            "sandbox",
+            "testing",
+            "development",
+            "QA",
+            "UAT",
+            "staging",
+            "environments",
+            "deployment",
+            "full copy"
+          ],
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true,
+            "note": "File not available on dam.usefulto.me (HTTP 404). Dimensions inferred as 1:1 square \u2014 consistent with all other Salesforce product icons (641x641)."
+          }
+        },
+        {
+          "id": "icon-scale-center",
+          "name": "Scale Center",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Scale Center 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Scale-Center-2D-Product-Icon/Scale-Center-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Scale-Center-2D-Product-Icon/Scale-Center-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Scale Center for performance management, capacity planning, and optimization of large Salesforce implementations.",
+          "keywords": [
+            "scale center",
+            "performance",
+            "capacity planning",
+            "optimization",
+            "scalability",
+            "large org",
+            "limits"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-scale-testing",
+          "name": "Scale Testing",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Scale Testing 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Scale-Testing-2D-Product-Icon/Scale-Testing-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Scale-Testing-2D-Product-Icon/Scale-Testing-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Scale Testing tools for validating application performance under realistic high-load conditions before production.",
+          "keywords": [
+            "scale testing",
+            "load testing",
+            "performance testing",
+            "stress test",
+            "capacity",
+            "high volume",
+            "QA"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-security",
+          "name": "Security",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Security 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Security-2D-Product-Icon/Security-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Security-2D-Product-Icon/Security-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Security \u2014 platform-wide security capabilities including event monitoring, login forensics, and security health check.",
+          "keywords": [
+            "security",
+            "threat detection",
+            "event monitoring",
+            "health check",
+            "audit",
+            "login",
+            "SIEM",
+            "forensics"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-security-center",
+          "name": "Security Center",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Security Center 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Security-Center-2D-Product-Icon/Security-Center-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Security-Center-2D-Product-Icon/Security-Center-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Security Center for centralized security and compliance management across an entire Salesforce org portfolio.",
+          "keywords": [
+            "security center",
+            "multi-org",
+            "policy management",
+            "compliance",
+            "governance",
+            "monitoring",
+            "posture"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-segments",
+          "name": "Segments",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Segments 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Segments-2D-Product-Icon/Segments-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Segments-2D-Product-Icon/Segments-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Marketing",
+          "product_description": "Salesforce Data 360 Segments \u2014 dynamic audience segmentation for targeting and activating customer groups across channels.",
+          "keywords": [
+            "segments",
+            "audience",
+            "segmentation",
+            "targeting",
+            "personalization",
+            "Data 360",
+            "activation",
+            "lists",
+            "Data Cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-service",
+          "name": "Service",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Service 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Service-2D-Product-Icon/Service-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Service-2D-Product-Icon/Service-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Service",
+          "product_description": "Salesforce Service Cloud \u2014 omnichannel customer service platform for case management, agent productivity, and self-service.",
+          "keywords": [
+            "service",
+            "Service Cloud",
+            "customer service",
+            "support",
+            "case management",
+            "helpdesk",
+            "contact center",
+            "agents"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-service-delivery",
+          "name": "Service Delivery",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Service Delivery 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Service-Delivery-2D-Product-Icon/Service-Delivery-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Service-Delivery-2D-Product-Icon/Service-Delivery-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Service",
+          "product_description": "Salesforce Service Delivery tools for managing implementation projects, professional service milestones, and delivery quality.",
+          "keywords": [
+            "service delivery",
+            "delivery",
+            "project",
+            "milestones",
+            "professional services",
+            "implementation",
+            "engagement"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-shield",
+          "name": "Shield",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Shield 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Shield-2D-Product-Icon/Shield-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Shield-2D-Product-Icon/Shield-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Shield \u2014 advanced security suite with Platform Encryption, Event Monitoring, Field Audit Trail, and Einstein Data Detect.",
+          "keywords": [
+            "shield",
+            "encryption",
+            "platform encryption",
+            "field audit trail",
+            "event monitoring",
+            "compliance",
+            "HIPAA",
+            "PCI",
+            "security"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-slack",
+          "name": "Slack",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Slack 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Slack-2D-Product-Icon/Slack-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Slack-2D-Product-Icon/Slack-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Slack \u2014 business messaging and collaboration platform serving as the digital HQ, deeply integrated with Salesforce CRM.",
+          "keywords": [
+            "slack",
+            "messaging",
+            "collaboration",
+            "chat",
+            "channels",
+            "workspace",
+            "digital HQ",
+            "notifications",
+            "automation"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-success-plans",
+          "name": "Success Plans",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Success Plans 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Success-Plans-2D-Product-Icon/Success-Plans-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Success-Plans-2D-Product-Icon/Success-Plans-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Service",
+          "product_description": "Salesforce Success Plans \u2014 Standard, Premier, and Signature support tiers providing 24/7 support, experts, and accelerators.",
+          "keywords": [
+            "success plans",
+            "support",
+            "premier",
+            "signature",
+            "SLA",
+            "support tier",
+            "experts",
+            "accelerators",
+            "24/7"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-success-professional-services",
+          "name": "Success Professional Services",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Success Professional Services 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Success-Professional-Services-2D-Product-Icon/Success-Professional-Services-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Success-Professional-Services-2D-Product-Icon/Success-Professional-Services-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Service",
+          "product_description": "Salesforce Professional Services \u2014 Salesforce-delivered implementation, advisory, and digital transformation engagements.",
+          "keywords": [
+            "professional services",
+            "implementation",
+            "consulting",
+            "advisory",
+            "transformation",
+            "PS",
+            "delivery",
+            "Salesforce experts"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-sustainability",
+          "name": "Sustainability",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Sustainability 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Sustainability-2D-Product-Icon/Sustainability-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Sustainability-2D-Product-Icon/Sustainability-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Security",
+          "product_description": "Salesforce Sustainability Cloud (Net Zero Cloud) for tracking environmental data, carbon footprint, and ESG reporting.",
+          "keywords": [
+            "sustainability",
+            "ESG",
+            "environmental",
+            "carbon",
+            "green",
+            "climate",
+            "net zero",
+            "impact reporting",
+            "scope 3"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-tableau",
+          "name": "Tableau",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Tableau 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Tableau-2D-Product-Icon/Tableau-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Tableau-2D-Product-Icon/Tableau-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Data",
+          "product_description": "Tableau \u2014 leading visual analytics and business intelligence platform for interactive dashboards, charts, and data storytelling.",
+          "keywords": [
+            "tableau",
+            "analytics",
+            "data visualization",
+            "BI",
+            "dashboards",
+            "reporting",
+            "business intelligence",
+            "charts",
+            "data story"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-technology",
+          "name": "Technology",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Technology 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Technology-2D-Product-Icon/Technology-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Technology-2D-Product-Icon/Technology-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce for Technology industry \u2014 CRM solutions for software, hardware, SaaS, and IT services companies.",
+          "keywords": [
+            "technology",
+            "tech",
+            "software",
+            "SaaS",
+            "hardware",
+            "IT services",
+            "tech sector",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-trailhead",
+          "name": "Trailhead",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Trailhead 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Trailhead-2D-Product-Icon/Trailhead-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Trailhead-2D-Product-Icon/Trailhead-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Trailhead \u2014 free gamified online learning platform for Salesforce skills, certifications, and career development.",
+          "keywords": [
+            "trailhead",
+            "learning",
+            "training",
+            "certification",
+            "badges",
+            "modules",
+            "trails",
+            "education",
+            "career"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-travel-transportation-hospitality",
+          "name": "Travel Transportation Hospitality",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Travel Transportation Hospitality 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Travel-Transportation-Hospitality-2D-Product-Icon/Travel-Transportation-Hospitality-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Travel-Transportation-Hospitality-2D-Product-Icon/Travel-Transportation-Hospitality-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Industries",
+          "product_description": "Salesforce for Travel, Transportation, and Hospitality \u2014 managing bookings, guest experiences, and loyalty programs.",
+          "keywords": [
+            "travel",
+            "transportation",
+            "hospitality",
+            "hotel",
+            "airline",
+            "booking",
+            "loyalty",
+            "tourism",
+            "industry cloud"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-vibe-codey",
+          "name": "Vibe Codey",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Vibe Codey 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Vibe-Codey-2D-Product-Icon/Vibe-Codey-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Vibe-Codey-2D-Product-Icon/Vibe-Codey-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "AI",
+          "product_description": "Salesforce Vibe Codey \u2014 AI developer assistant and Salesforce mascot representing Einstein generative AI coding capabilities.",
+          "keywords": [
+            "codey",
+            "vibe",
+            "AI coding",
+            "Einstein",
+            "developer AI",
+            "mascot",
+            "generative AI",
+            "copilot",
+            "LLM"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        },
+        {
+          "id": "icon-workflow-automation",
+          "name": "Workflow Automation",
+          "variant": "Full Color",
+          "background": "light",
+          "preferred": false,
+          "usage": "Salesforce Workflow Automation 2D product icon. Full-color RGB version for digital and web use.",
+          "png": "Icons/extracted/Workflow-Automation-2D-Product-Icon/Workflow-Automation-2D-Product-Icon-Full-Color-RGB.png",
+          "svg": "Icons/extracted/Workflow-Automation-2D-Product-Icon/Workflow-Automation-2D-Product-Icon-Full-Color-RGB.svg",
+          "category": "Platform",
+          "product_description": "Salesforce Flow and Workflow Automation \u2014 no-code/low-code tools for automating business processes, approvals, and notifications.",
+          "keywords": [
+            "workflow",
+            "automation",
+            "flow",
+            "Flow Builder",
+            "no code",
+            "process builder",
+            "approvals",
+            "business rules"
+          ],
+          "dimensions": {
+            "width": 641,
+            "height": 641,
+            "source": "png"
+          },
+          "aspect_ratio": {
+            "decimal": 1.0,
+            "ratio": "1:1",
+            "is_square": true
+          },
+          "svg_intrinsic": {
+            "width": 64,
+            "height": 64,
+            "aspect_ratio_decimal": 1.0,
+            "ratio": "1:1"
+          }
+        }
+      ]
+    }
+  ],
+  "_ai_instructions": {
+    "purpose": "This manifest is the authoritative index of all visual assets in this partner logo library. Use it to select the correct asset for any design request.",
+    "how_to_select_an_asset": [
+      "1. Identify the brand(s) required from the user request (Salesforce, MuleSoft, Slack, Tableau, Informatica, or a product icon).",
+      "2. For brand logos: check 'co_branded' if the user wants a Salesforce-endorsed lockup, or 'preferred:true' for the default standalone logo.",
+      "3. Match 'background' field to the slide or artifact background \u2014 'light' for white/light slides, 'dark' for navy/dark slides.",
+      "4. For product icons: search 'keywords' and 'category' to find the icon closest to the user's topic or product.",
+      "5. Always prefer SVG over PNG for scalable digital artifacts. Use PNG as a fallback (png field may be null for SVG-only assets).",
+      "6. Reference the 'use_cases' array to validate that your chosen asset fits the design context.",
+      "7. Use 'brandColors' at the brand level to maintain correct color when building infographics or slide designs."
+    ],
+    "asset_types": {
+      "logo": "Full brand wordmark or wordmark+logomark combination. Use for headers and primary brand presence.",
+      "icon-mark": "Logomark only (e.g. cloud shape) without wordmark. Use for small icons, badges, and tight spaces.",
+      "co-brand": "Dual-brand lockup (e.g. 'Slack from Salesforce'). Use only when Salesforce endorsement is required.",
+      "product-icon": "Salesforce 2D product icon representing a specific product or cloud. Use in product grids, feature slides, and capability callouts."
+    },
+    "icon_categories": {
+      "AI": "Artificial intelligence, agents, bots, and Einstein products \u2014 use for AI/ML slides and Agentforce narratives.",
+      "CRM": "Core CRM clouds (Sales, Service, Marketing, Commerce) \u2014 use for CRM capability and product overview slides.",
+      "Platform": "Developer tools, platform infrastructure, admin, and low-code products.",
+      "Data": "Data integration, CDP, analytics, backup, and MuleSoft-related data products.",
+      "Industries": "Vertical industry clouds for specific sectors (automotive, healthcare, financial services, etc.).",
+      "Marketing": "Marketing Cloud products, channels, loyalty, and campaign tools.",
+      "Service": "Service Cloud, field service, professional services, and customer success products.",
+      "Security": "Trust, security, compliance, privacy, sustainability, and identity products."
+    },
+    "file_path_note": "All 'png' and 'svg' values are relative file paths from the location of this HTML file. Prepend the gallery base URL or file system path to resolve them.",
+    "disclaimer": "This manifest is an unofficial internal reference tool. It is not affiliated with or endorsed by Salesforce, Inc. When generating artifacts using these assets, do not imply they originate from an official Salesforce publication. Always attribute trademarks to Salesforce, Inc.",
+    "proportion_rules": {
+      "must_preserve_aspect_ratio": true,
+      "rule": "NEVER set both width and height to independent arbitrary values. Always derive one dimension from the other.",
+      "enforcement": "HARD REQUIREMENT \u2014 distorting logos or icons is a brand violation.",
+      "dimension_fields_explained": {
+        "dimensions": "Actual pixel size of the file as hosted on dam.usefulto.me (canonical for layout)",
+        "aspect_ratio.decimal": "width \u00f7 height \u2014 use this to compute the missing dimension",
+        "aspect_ratio.ratio": "Simplified integer ratio (e.g. '400:143')",
+        "aspect_ratio.is_square": "True if width \u2248 height (\u00b12px); you may safely use width=height",
+        "svg_intrinsic": "SVG viewBox dimensions (artwork boundary, no canvas padding)",
+        "canvas_padding_warning": "Present when PNG includes significant whitespace padding around the artwork"
+      },
+      "computing_missing_dimension": {
+        "know_width": "height = round(width  / aspect_ratio.decimal)",
+        "know_height": "width  = round(height * aspect_ratio.decimal)"
+      },
+      "methods_by_context": {
+        "html_img": "Set width OR height only (never both to arbitrary values), or both with object-fit:contain",
+        "css": "width:Xpx; height:auto  OR  height:Xpx; width:auto",
+        "pptx_python": "Set only pic.width OR pic.height; python-pptx calculates the other from EMU",
+        "svg_image_tag": "Set width or height only; add preserveAspectRatio='xMidYMid meet'",
+        "powerpoint_ui": "Check 'Lock aspect ratio' before resizing"
+      },
+      "product_icons_note": "All 90 product icons have is_square=true (641\u00d7640 or 641\u00d7641) \u2014 width==height is safe.",
+      "brand_logos_note": "All brand wordmarks are non-square \u2014 always derive one dimension from the other."
+    }
+  },
+  "disclaimer": "UNOFFICIAL RESOURCE: This library is an internal reference tool and is not affiliated with, endorsed by, or an official publication of Salesforce, Inc. All logos, icons, and trademarks are the property of Salesforce, Inc. and its subsidiaries. Do not represent these assets as coming from an official Salesforce source. For official brand assets and usage guidelines, visit https://www.salesforce.com/brand.",
+  "colorRoles": {
+    "_description": "Semantic color roles only. For the full 156-swatch palette visit https://dam.usefulto.me",
+    "roles": {
+      "Blue": [
+        {
+          "name": "Blue 80",
+          "hex": "#AACBFF",
+          "roles": [
+            "focus-ring",
+            "selected"
+          ]
+        },
+        {
+          "name": "Blue 60",
+          "hex": "#1B96FF",
+          "roles": [
+            "cloud-blue",
+            "highlight",
+            "link-on-dark",
+            "brand"
+          ]
+        },
+        {
+          "name": "Blue 50",
+          "hex": "#0176D3",
+          "roles": [
+            "primary",
+            "action",
+            "interactive",
+            "brand"
+          ]
+        },
+        {
+          "name": "Blue 40",
+          "hex": "#0B5CAB",
+          "roles": [
+            "hover",
+            "interactive-hover"
+          ]
+        },
+        {
+          "name": "Blue 30",
+          "hex": "#014486",
+          "roles": [
+            "pressed",
+            "interactive-pressed"
+          ]
+        },
+        {
+          "name": "Blue 20",
+          "hex": "#032D60",
+          "roles": [
+            "navy",
+            "dark-background",
+            "heading-text",
+            "brand"
+          ]
+        }
+      ],
+      "Cloud Blue": [
+        {
+          "name": "Cloud Blue 80",
+          "hex": "#90D0FE",
+          "roles": [
+            "info-light"
+          ]
+        },
+        {
+          "name": "Cloud Blue 60",
+          "hex": "#0D9DDA",
+          "roles": [
+            "info",
+            "info-icon"
+          ]
+        }
+      ],
+      "Green": [
+        {
+          "name": "Green 80",
+          "hex": "#91DB8B",
+          "roles": [
+            "success-light"
+          ]
+        },
+        {
+          "name": "Green 50",
+          "hex": "#2E844A",
+          "roles": [
+            "success",
+            "positive",
+            "success-icon"
+          ]
+        }
+      ],
+      "Yellow": [
+        {
+          "name": "Yellow 80",
+          "hex": "#FCC003",
+          "roles": [
+            "warning-light"
+          ]
+        },
+        {
+          "name": "Yellow 60",
+          "hex": "#CA8501",
+          "roles": [
+            "warning",
+            "caution",
+            "warning-icon"
+          ]
+        }
+      ],
+      "Hot Orange": [
+        {
+          "name": "Hot Orange 60",
+          "hex": "#FF5D2D",
+          "roles": [
+            "mulesoft-primary",
+            "mulesoft-brand"
+          ]
+        },
+        {
+          "name": "Hot Orange 50",
+          "hex": "#D83A00",
+          "roles": [
+            "mulesoft-dark"
+          ]
+        }
+      ],
+      "Neutral": [
+        {
+          "name": "Neutral 95",
+          "hex": "#F3F3F3",
+          "roles": [
+            "surface",
+            "page-background"
+          ]
+        },
+        {
+          "name": "Neutral 90",
+          "hex": "#E5E5E5",
+          "roles": [
+            "surface-alt",
+            "background-alt"
+          ]
+        },
+        {
+          "name": "Neutral 80",
+          "hex": "#C9C9C9",
+          "roles": [
+            "border",
+            "divider"
+          ]
+        },
+        {
+          "name": "Neutral 60",
+          "hex": "#939393",
+          "roles": [
+            "text-placeholder",
+            "icon-subdued"
+          ]
+        },
+        {
+          "name": "Neutral 20",
+          "hex": "#2E2E2E",
+          "roles": [
+            "text-secondary"
+          ]
+        },
+        {
+          "name": "Neutral 10",
+          "hex": "#181818",
+          "roles": [
+            "text-default",
+            "heading"
+          ]
+        }
+      ],
+      "(Error) Red": [
+        {
+          "name": "(Error) Red 80",
+          "hex": "#FEB8AB",
+          "roles": [
+            "error-light"
+          ]
+        },
+        {
+          "name": "(Error) Red 50",
+          "hex": "#EA001E",
+          "roles": [
+            "error",
+            "danger",
+            "error-icon",
+            "destructive"
+          ]
+        }
+      ]
+    }
+  }
+}
