@@ -1,7 +1,7 @@
 {
   "title": "Salesforce Logo and Icon Library",
   "description": "Official RGB web-ready logos for Salesforce, MuleSoft, Slack, Tableau, and Informatica. All paths are relative to this HTML file. Use the 'preferred' field to identify the recommended logo for each brand. Use 'background' to determine appropriate placement. Brand colors are provided for use in infographics and design work. The 'svg' or 'png' field is null when that format is unavailable.",
-  "lastUpdated": "2026-03-12",
+  "lastUpdated": "2026-03-13",
   "brands": [
     {
       "id": "salesforce",
