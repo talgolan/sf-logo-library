@@ -1,0 +1,34 @@
+# Salesforce Logo and Icon Library
+
+> Static reference gallery of RGB web-ready Salesforce brand logos, partner lockups (MuleSoft, Slack, Tableau, Informatica), and Salesforce 2D product icons. Browsable at [dam.usefulto.me](https://dam.usefulto.me) and queryable by AI agents via an embedded JSON manifest. Unofficial resource — not affiliated with Salesforce, Inc.
+
+The entire site is a single `index.html` with no build step. All assets are available as both PNG and SVG. Every asset entry carries rich metadata (`category`, `keywords`, `product_description`, `use_cases`, `background`, `preferred`, `dimensions`, `aspect_ratio`) intended for programmatic selection.
+
+## Primary resources
+
+- [Manifest (JSON)](https://dam.usefulto.me/manifest.json): Canonical machine-readable catalog of every asset. Start here for programmatic queries. Includes a top-level `_ai_instructions` block that documents traversal and selection rules.
+- [Gallery (HTML)](https://dam.usefulto.me/): Human-browsable card grid with brand and background filters. Embeds the same manifest at `<script id="logo-manifest" type="application/json">`.
+- [README](https://github.com/tgolan-sf/SF_Logos/blob/main/README.md): Counts, structure, deployment, and trademark notice.
+
+## Manifest shape
+
+- `brands[]`: Top-level groupings (`salesforce`, `mulesoft`, `slack`, `tableau`, `informatica`, `product-icons`), each with `brandColors` and a `logos[]` array.
+- Per-asset fields: `id`, `name`, `variant`, `type` (`logo` | `icon-mark` | `co-brand`), `background` (`light` | `dark`), `preferred` (default-choice flag), `co_branded` (endorsed "from Salesforce" lockups), `category`, `keywords[]`, `product_description`, `use_cases[]`, `png`, `svg`, `dimensions`, `aspect_ratio`, `svg_intrinsic`.
+- Asset file paths (`png`, `svg`) are relative to the site root — prepend `https://dam.usefulto.me/` to fetch directly.
+
+## Selection guidance
+
+1. Identify the target brand or product.
+2. For brand logos, prefer `preferred: true` unless a specific lockup or variant is requested.
+3. Match `background` (`light` | `dark`) to the destination surface.
+4. Prefer `svg` over `png` when both are present.
+5. For product icons, search `category`, `keywords`, and `product_description`; validate against `use_cases`.
+6. Use `type: "co-brand"` (or `co_branded: true`) to find endorsed "from Salesforce" lockups.
+
+## Optional
+
+- [Salesforce Brand Guidelines](https://www.salesforce.com/brand): Official trademark and usage rules. This library does not grant rights beyond what those guidelines permit.
+
+## Caution
+
+Unofficial internal reference resource. Do not describe it as an official Salesforce asset source, and do not imply trademark ownership. All logos and icons are trademarks of Salesforce, Inc.
