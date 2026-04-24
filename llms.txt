@@ -1,34 +1,91 @@
 # Salesforce Logo and Icon Library
 
-> Static reference gallery of RGB web-ready Salesforce brand logos, partner lockups (MuleSoft, Slack, Tableau, Informatica), and Salesforce 2D product icons. Browsable at [dam.usefulto.me](https://dam.usefulto.me) and queryable by AI agents via an embedded JSON manifest. Unofficial resource — not affiliated with Salesforce, Inc.
+> Static reference gallery of RGB web-ready Salesforce brand logos, partner lockups (MuleSoft, Slack, Tableau, Informatica), and Salesforce 2D product icons. Browsable at [dam.usefulto.me](https://dam.usefulto.me) and queryable by AI agents via JSON manifests. Unofficial resource — not affiliated with Salesforce, Inc.
 
-The entire site is a single `index.html` with no build step. All assets are available as both PNG and SVG. Every asset entry carries rich metadata (`category`, `keywords`, `product_description`, `use_cases`, `background`, `preferred`, `dimensions`, `aspect_ratio`) intended for programmatic selection.
+Version: 2026-03-13
+
+The entire site is a single `index.html` with no build step. All assets are available as PNG and/or SVG. Every asset entry carries rich metadata (`category`, `keywords`, `product_description`, `use_cases`, `background`, `preferred`, `dimensions`, `aspect_ratio`) intended for programmatic selection.
 
 ## Primary resources
 
-- [Manifest (JSON)](https://dam.usefulto.me/manifest.json): Canonical machine-readable catalog of every asset. Start here for programmatic queries. Includes a top-level `_ai_instructions` block that documents traversal and selection rules.
-- [Gallery (HTML)](https://dam.usefulto.me/): Human-browsable card grid with brand and background filters. Embeds the same manifest at `<script id="logo-manifest" type="application/json">`.
-- [README](https://github.com/tgolan-sf/SF_Logos/blob/main/README.md): Counts, structure, deployment, and trademark notice.
+- [manifest.json](https://dam.usefulto.me/manifest.json) (~115 KB): Canonical machine-readable catalog of every asset. Complete but large — prefer scoped endpoints below when context is tight.
+- [Gallery (HTML)](https://dam.usefulto.me/): Human-browsable card grid with brand and background filters. Embeds the full manifest at `<script id="logo-manifest" type="application/json">`.
+- [README](https://dam.usefulto.me/README.md): Counts, structure, deployment, and trademark notice.
+
+If you must fetch the full manifest, filter to the top-level keys you need (e.g. `jq '.brands[] | select(.id=="mulesoft")'`) rather than ingesting the whole file.
+
+## Quickstart
+
+```
+curl -s https://dam.usefulto.me/manifest.json | jq '.brands[] | .id'
+curl -s https://dam.usefulto.me/manifest-logos.json | jq '.brands[0].logos[] | select(.preferred==true)'
+```
 
 ## Manifest shape
 
 - `brands[]`: Top-level groupings (`salesforce`, `mulesoft`, `slack`, `tableau`, `informatica`, `product-icons`), each with `brandColors` and a `logos[]` array.
-- Per-asset fields: `id`, `name`, `variant`, `type` (`logo` | `icon-mark` | `co-brand`), `background` (`light` | `dark`), `preferred` (default-choice flag), `co_branded` (endorsed "from Salesforce" lockups), `category`, `keywords[]`, `product_description`, `use_cases[]`, `png`, `svg`, `dimensions`, `aspect_ratio`, `svg_intrinsic`.
-- Asset file paths (`png`, `svg`) are relative to the site root — prepend `https://dam.usefulto.me/` to fetch directly.
+- Per-asset fields: `id`, `name`, `variant`, `type` (`logo` | `icon-mark` | `co-brand` | `product-icon`), `background` (`light` | `dark`), `preferred` (default-choice flag), `co_branded` (endorsed "from Salesforce" lockups), `category`, `keywords[]`, `product_description`, `use_cases[]`, `png`, `svg`, `dimensions`, `aspect_ratio`, `svg_intrinsic`.
+- `colorRoles`: Semantic subset of the 156-swatch palette, mapped to UI roles (primary, hover, success, error, etc.).
 
 ## Selection guidance
 
 1. Identify the target brand or product.
 2. For brand logos, prefer `preferred: true` unless a specific lockup or variant is requested.
-3. Match `background` (`light` | `dark`) to the destination surface.
-4. Prefer `svg` over `png` when both are present.
-5. For product icons, search `category`, `keywords`, and `product_description`; validate against `use_cases`.
-6. Use `type: "co-brand"` (or `co_branded: true`) to find endorsed "from Salesforce" lockups.
+3. Use `type: "co-brand"` or `co_branded: true` to find endorsed "from Salesforce" lockups.
+4. Match `background` (`light` | `dark`) to the destination surface.
+5. Prefer `svg` over `png` when both are present. `png` may be `null` for SVG-only assets.
+6. For product icons, search `keywords`, `category`, and `product_description`; validate against `use_cases`.
+7. Use `brandColors` or `colorRoles` to style surrounding UI — never recolor the asset itself.
 
-## Optional
+### Worked example: "Give me the MuleSoft logo for a dark slide"
 
-- [Salesforce Brand Guidelines](https://www.salesforce.com/brand): Official trademark and usage rules. This library does not grant rights beyond what those guidelines permit.
+1. `brand = "mulesoft"`
+2. Filter `logos[]` where `background == "dark"` → `ms-from-sf-ko`
+3. Prefer SVG
+4. Full URL: `https://dam.usefulto.me/Mulesoft/MuleSoft-From-Salesforce-Logo-RGB-KO.svg`
+
+### Worked example: "Find the Data 360 product icon"
+
+1. Search `brands[id=product-icons].logos[]` where `keywords` contains `"Data 360"` or `"CDP"` → `icon-data-cloud`
+2. Full URL: `https://dam.usefulto.me/Icons/extracted/Data-Cloud-2D-Product-Icon/Data-Cloud-2D-Product-Icon-Full-Color-RGB.svg`
+
+## URL construction
+
+Asset paths in the manifest are relative — prepend `https://dam.usefulto.me/` to build a fetchable URL.
+
+Paths contain spaces and must be percent-encoded when constructing URLs. For example, `Horizontal Logo RGB` becomes `Horizontal%20Logo%20RGB`. The `%20` substitution applies to every space in the path, not only the first one.
+
+## Rendering constraints
+
+**Aspect ratio preservation is a hard requirement.** Distorting logos or icons is a brand violation.
+
+- Set `width` OR `height`, never both to arbitrary values.
+- Derive the missing dimension from `aspect_ratio.decimal` (width ÷ height):
+  - `height = round(width / aspect_ratio.decimal)`
+  - `width = round(height * aspect_ratio.decimal)`
+- Product icons are square (`is_square: true`, 641×641 or 641×640) — `width == height` is safe.
+- Brand wordmarks are non-square — always derive one dimension.
+
+Context-specific methods:
+
+- HTML `<img>`: set `width` or `height` only, or both with `object-fit: contain`
+- CSS: `width: Xpx; height: auto` or `height: Xpx; width: auto`
+- python-pptx: set only `pic.width` or `pic.height` — the library computes the other from EMU
+- SVG `<image>`: set one dimension, add `preserveAspectRatio="xMidYMid meet"`
+
+## Do not
+
+- Do not modify asset colors. Use `brandColors` or `colorRoles` for surrounding elements instead.
+- Do not stretch, rotate, or recolor any asset.
+- Do not place logos on photographic or colored backgrounds without the `white` or `knockout` variant.
+- Do not use `co-brand` lockups unless Salesforce endorsement is required by the context.
+- Do not describe this library as an official Salesforce asset source.
+- Do not imply trademark ownership. All logos and icons are trademarks of Salesforce, Inc.
+
+## Upstream authority
+
+[Salesforce Brand Guidelines](https://www.salesforce.com/brand) is the official trademark and usage authority. This library does not grant rights beyond what those guidelines permit. When in doubt, defer to the upstream source.
 
 ## Caution
 
-Unofficial internal reference resource. Do not describe it as an official Salesforce asset source, and do not imply trademark ownership. All logos and icons are trademarks of Salesforce, Inc.
+Unofficial internal reference resource. Not affiliated with, endorsed by, or an official publication of Salesforce, Inc. All logos and icons are trademarks of Salesforce, Inc. and its subsidiaries.
