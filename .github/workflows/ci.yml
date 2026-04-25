@@ -1,0 +1,48 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Build
+        run: bun run build
+
+      - name: Unit & integration tests (Bun, with coverage)
+        run: bun test --coverage
+
+      - name: Server e2e under Node
+        run: |
+          set -euo pipefail
+          # minimal manual invocation: list_brands via stdio
+          printf '%s\n' \
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}' \
+            '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}' \
+            '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"list_brands","arguments":{}}}' \
+          | timeout 10 node bin/sf-logos-mcp \
+          | tee /tmp/rpc.out \
+          | grep -q '"brands"' || { echo "list_brands did not return brands[]"; exit 1; }

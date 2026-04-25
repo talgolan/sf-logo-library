@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+// bin/sf-logos-mcp — launcher for the compiled MCP server.
+//
+// Keeps the published shim tiny: imports the built server and runs it.
+// Compilation outputs live under dist/, so this path is relative to the
+// package root.
+
+import { main } from "../dist/src/server.js";
+
+main().catch((err) => {
+  // Final fallback: emit a minimal error to stderr so the host sees
+  // something rather than a silent crash. Structured logging inside
+  // main() already handles the typical cases.
+  process.stderr.write(
+    `[sf-logos-mcp] fatal: ${err instanceof Error ? err.stack ?? err.message : String(err)}\n`,
+  );
+  process.exit(1);
+});
