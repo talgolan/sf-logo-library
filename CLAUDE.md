@@ -11,6 +11,9 @@ This repo ships two things side by side:
 
 ## Authoritative docs (read before doing anything non-trivial)
 
+- **Session primer (read first in every new session):**
+  `docs/SESSION_PRIMER.md` — 5-minute orientation: what the project is,
+  where it stands, invariants that will bite, how to start real work.
 - **Design spec:** `docs/superpowers/specs/2026-04-24-sf-logos-mcp-design.md`
 - **Phase 1 plan:** `docs/superpowers/plans/2026-04-25-phase-1-foundation.md`
 - **Running learnings log:** `docs/LEARNINGS.md` — non-obvious findings
@@ -77,13 +80,9 @@ enforces this in CI and locally; run it if you're unsure.
 
 ## If you're a fresh agent opening this repo
 
-1. Read the design spec and this file.
-2. Run `bun install && bun run typecheck && bun run lint && bun test`
-   to confirm the tree is healthy.
-3. Run `bun run phase1:smoke` to confirm the server boots and serves
-   all five tools end-to-end.
-4. Read `docs/LEARNINGS.md`.
-5. Then engage with whatever the user asked for.
+Read `docs/SESSION_PRIMER.md` first. It contains the full onboarding
+sequence (sanity commands, invariants, where to look next) in one
+place. This file and the other doc files are referenced from there.
 
 ---
 
