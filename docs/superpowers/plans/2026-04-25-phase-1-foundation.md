@@ -66,12 +66,12 @@
 - [ ] **Step 2: Install dependencies**
 
 Run: `bun install`
-Expected: creates `node_modules/` and `bun.lockb`, no errors.
+Expected: creates `node_modules/` and `bun.lock`, no errors.
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add package.json bun.lockb
+git add package.json bun.lock
 git commit -m "$(cat <<'EOF'
 feat: initialize MCP server package
 
@@ -140,15 +140,22 @@ EOF
 Run: `bun add -d bun-types`
 Expected: `bun-types` added to `package.json` `devDependencies`, lockfile updated.
 
-- [ ] **Step 4: Verify typecheck runs on empty project**
+- [ ] **Step 4: Verify typecheck configuration is readable**
 
 Run: `bun run typecheck`
-Expected: exits 0 (no files yet to check beyond lib types).
+Expected: TypeScript either exits 0 (if any `.ts` files already exist) or prints
+`error TS18003: No inputs were found in config file ...` and exits non-zero. The
+latter is expected at this stage — we have no `.ts` files yet. Task 4 adds the
+first test file and from then on typecheck must pass cleanly.
+
+**Do NOT create a placeholder `.ts` file just to silence TS18003.** The real
+first source file is added in Task 6 (`src/manifest/types.ts`). Adding a stub
+here is scope creep.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add tsconfig.json tsconfig.build.json package.json bun.lockb
+git add tsconfig.json tsconfig.build.json package.json bun.lock
 git commit -m "$(cat <<'EOF'
 chore: add strict TypeScript config (NodeNext ESM)
 
@@ -215,7 +222,7 @@ node_modules/
 site/
 build/
 coverage/
-bun.lockb
+bun.lock
 ```
 
 - [ ] **Step 4: Verify lint runs on empty project**
