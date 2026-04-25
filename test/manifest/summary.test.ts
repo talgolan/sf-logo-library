@@ -66,4 +66,23 @@ describe("toAssetSummary", () => {
     expect(s.category).toBe("AI");
     expect(s.product_description).toBe("AI stuff");
   });
+
+  it("defaults type='product-icon' and co_branded=false for product-icon entries that omit them", () => {
+    // The bundled manifest's product-icon entries do not carry `type` or
+    // `co_branded`; the projection must fill them in so AssetSummary is
+    // never missing required fields.
+    const iconBrand: ManifestBrand = { ...brand, id: "product-icons" };
+    const { type: _t, co_branded: _c, ...rest } = baseLogo;
+    const bare: ManifestLogo = rest;
+    const s = toAssetSummary(bare, iconBrand);
+    expect(s.type).toBe("product-icon");
+    expect(s.co_branded).toBe(false);
+  });
+
+  it("defaults type='logo' for non-icon brands that omit the field", () => {
+    const { type: _t, ...rest } = baseLogo;
+    const bare: ManifestLogo = rest;
+    const s = toAssetSummary(bare, brand);
+    expect(s.type).toBe("logo");
+  });
 });

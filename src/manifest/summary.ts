@@ -22,15 +22,20 @@ export const ASSET_BASE_URL = "https://dam.usefulto.me";
 export function toAssetSummary(logo: ManifestLogo, brand: ManifestBrand): AssetSummary {
   const svgUrl = logo.svg !== null ? resolveUrl(logo.svg) : null;
   const pngUrl = logo.png !== null ? resolveUrl(logo.png) : null;
+  // Product-icon manifest entries omit `type` and `co_branded`; infer them
+  // from the brand so downstream consumers see a uniform shape. Brand logos
+  // always carry these fields explicitly.
+  const type = logo.type ?? (brand.id === "product-icons" ? "product-icon" : "logo");
+  const co_branded = logo.co_branded ?? false;
   return {
     id: logo.id,
     name: logo.name,
     brand_id: brand.id,
-    type: logo.type,
+    type,
     variant: logo.variant,
     background: logo.background,
     preferred: logo.preferred,
-    co_branded: logo.co_branded,
+    co_branded,
     category: logo.category ?? null,
     keywords: logo.keywords,
     product_description: logo.product_description ?? null,

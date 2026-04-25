@@ -67,9 +67,12 @@ export interface ManifestLogo {
   usage: string;
   png: string | null;
   svg: string | null;
-  type: AssetType;
-  co_branded: boolean;
+  /** Absent on product-icon entries — toAssetSummary defaults to "product-icon". */
+  type?: AssetType;
+  /** Absent on product-icon entries — toAssetSummary defaults to false. */
+  co_branded?: boolean;
   keywords: string[];
+  /** Absent on product-icon entries — toAssetSummary defaults to []. */
   use_cases?: string[];
   dimensions: ManifestDimensions;
   aspect_ratio: ManifestAspectRatio;
