@@ -36,7 +36,7 @@ export function scoreLogo(logo: ManifestLogo, tokens: string[]): number {
       score += DESCRIPTION_WEIGHT;
     }
     // Use-case band — count each token once across all use-case strings.
-    if (logo.use_cases.some((uc) => uc.toLowerCase().includes(token))) {
+    if ((logo.use_cases ?? []).some((uc) => uc.toLowerCase().includes(token))) {
       score += USE_CASE_WEIGHT;
     }
   }

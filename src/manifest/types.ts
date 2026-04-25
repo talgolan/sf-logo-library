@@ -70,7 +70,7 @@ export interface ManifestLogo {
   type: AssetType;
   co_branded: boolean;
   keywords: string[];
-  use_cases: string[];
+  use_cases?: string[];
   dimensions: ManifestDimensions;
   aspect_ratio: ManifestAspectRatio;
   svg_intrinsic: ManifestSvgIntrinsic | null;

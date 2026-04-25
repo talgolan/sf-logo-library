@@ -34,7 +34,7 @@ export function toAssetSummary(logo: ManifestLogo, brand: ManifestBrand): AssetS
     category: logo.category ?? null,
     keywords: logo.keywords,
     product_description: logo.product_description ?? null,
-    use_cases: logo.use_cases,
+    use_cases: logo.use_cases ?? [],
     usage: logo.usage,
     formats: { svg: svgUrl, png: pngUrl },
     preferred_format: svgUrl !== null ? "svg" : "png",
