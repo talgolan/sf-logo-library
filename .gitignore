@@ -9,3 +9,12 @@
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Node / MCP server
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example

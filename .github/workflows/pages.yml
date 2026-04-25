@@ -1,0 +1,82 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify site/ allowlist
+        run: bash scripts/check-pages-allowlist.sh
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  smoke:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post-deploy smoke test
+        run: |
+          set -euo pipefail
+          BASE="https://dam.usefulto.me"
+
+          expect_status () {
+            local url="$1" want="$2"
+            local got
+            got=$(curl -sS -o /dev/null -w "%{http_code}" -L --max-time 20 "$url")
+            if [ "$got" != "$want" ]; then
+              echo "FAIL: $url expected $want got $got" >&2
+              exit 1
+            fi
+            echo "OK:   $url -> $got"
+          }
+
+          expect_status "$BASE/"                                                200
+          expect_status "$BASE/manifest.json"                                   200
+          expect_status "$BASE/llms.txt"                                        200
+          expect_status "$BASE/src/server.ts"                                   404
+          expect_status "$BASE/package.json"                                    404
+          expect_status "$BASE/docs/superpowers/specs/2026-04-24-sf-logos-mcp-design.md" 404
+
+          # Sanity-check manifest structure
+          brand_count=$(curl -sS "$BASE/manifest.json" | python3 -c "import json,sys;print(len(json.load(sys.stdin)['brands']))")
+          if [ "$brand_count" != "6" ]; then
+            echo "FAIL: expected 6 brands, got $brand_count" >&2
+            exit 1
+          fi
+          echo "OK:   manifest.json has 6 brands"
