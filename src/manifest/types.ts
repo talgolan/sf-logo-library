@@ -116,3 +116,62 @@ export interface Manifest {
   _ai_instructions?: { disclaimer?: string; [k: string]: unknown };
   disclaimer?: string;
 }
+
+// ---------------------------------------------------------------------------
+// Tool-output types (projections served by the MCP tools)
+// ---------------------------------------------------------------------------
+
+/** Summary form served by find/list tools. See spec §3. */
+export interface AssetSummary {
+  id: string;
+  name: string;
+  brand_id: BrandId;
+  type: AssetType;
+  variant: string;
+  background: Background;
+  preferred: boolean;
+  co_branded: boolean;
+  /** null on brand logos; one of ProductIconCategory on product-icons. */
+  category: ProductIconCategory | null;
+  keywords: string[];
+  /** null on brand logos; string on product-icons. */
+  product_description: string | null;
+  use_cases: string[];
+  usage: string;
+  formats: { svg: string | null; png: string | null };
+  /** "svg" when available, else "png". */
+  preferred_format: "svg" | "png";
+  source_dimensions: ManifestDimensions;
+  aspect_ratio: ManifestAspectRatio;
+  svg_intrinsic: ManifestSvgIntrinsic | null;
+  /** At most 4 key/hex pairs from the brand's palette. */
+  brand_colors_hint: BrandColorMap;
+  /** Present only on find_product_icon results when `query` was supplied. */
+  match_score?: number;
+}
+
+/** Detail form served by fetch_asset. Superset of AssetSummary. */
+export interface AssetDetail extends AssetSummary {
+  /** The single format actually served by this call. */
+  format: "svg" | "png";
+  /** Always present. */
+  url: string;
+  /** Present when mode === "path". */
+  path?: string;
+  /** Present when mode === "bytes". */
+  bytes_base64?: string;
+  /** Present when target_width or target_height was set. */
+  computed_dimensions?: { width: number; height: number };
+  /** Present when computed_dimensions is present. */
+  dimension_source?: "svg_intrinsic" | "source_dimensions";
+}
+
+/** Per-brand row in list_brands output. */
+export interface BrandSummary {
+  id: BrandId;
+  name: string;
+  logo_count: number;
+}
+
+/** Row in get_color_roles output. */
+export type ColorEntry = ManifestColorRoleEntry;
