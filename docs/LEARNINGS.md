@@ -70,6 +70,10 @@ Every brand-logo entry has these fields; every product-icon entry does not. Task
 
 **General rule:** a type file and a JSON fixture both asserting "this shape matches" proves nothing if the fixture is synthetic. For every manifest-shape assertion, exercise it against `src/bundled/manifest.json`, not a handwritten minimal.
 
+### Product-icon `use_cases` is empty across all 90 entries
+The scoring rule gives +1 for a query token matching a `use_case` substring, but every product-icon entry in the bundled manifest ships with `use_cases: []` (or the field absent — defaulted to `[]` by `toAssetSummary`). The use-case band therefore contributes 0 to every product-icon search result, only brand-logo queries benefit. Not a code bug — it's a data gap. Before tuning phase 2's scoring weights, either (a) enrich the manifest with real `use_cases` for product icons, or (b) drop the band for this brand entirely.
+— Surfaced while running `bun run try` on 2026-04-25.
+
 ---
 
 ## CI / deployment
