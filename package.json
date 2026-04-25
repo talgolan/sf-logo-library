@@ -19,7 +19,8 @@
     "test:coverage": "bun test --coverage",
     "test:node": "node --test dist/test/**/*.test.js",
     "refresh-manifest": "bash scripts/refresh-bundled-manifest.sh",
-    "phase1:smoke": "bash scripts/phase1-smoke.sh"
+    "phase1:smoke": "bash scripts/phase1-smoke.sh",
+    "try": "bun run scripts/try-mcp.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
