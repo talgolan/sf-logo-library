@@ -24,7 +24,7 @@ structured API on top of the same manifest.
 |---|---|
 | `main` branch | Phase 1 + phase 2 shipped; CI green. |
 | MCP server phase 1 | **Shipped.** 5 read-only tools. |
-| MCP server phase 2 | **Shipped.** 6th tool `fetch_asset` (url / path / bytes; default path + png), on-disk cache under `<OS cache>/sf-logos-mcp/<manifest.lastUpdated>/<id>.<ext>`, `find_brand_logo` advisories (co-brand-only), `SIGUSR2` diagnostics snapshot. 108 tests, 26 regression scenarios (`bun run try:check`), 7-call smoke (`bun run phase2:smoke`). |
+| MCP server phase 2 | **Shipped.** 6th tool `fetch_asset` (url / path / bytes; default path + png), on-disk cache under `<OS cache>/sf-logos-mcp/<manifest.lastUpdated>/<id>.<ext>`, `find_brand_logo` advisories (co-brand-only), `SIGUSR2` diagnostics snapshot. 110 tests, 27 regression scenarios (`bun run try:check`), 7-call smoke (`bun run phase2:smoke`). |
 | MCP server phase 3 | Deferred. Scope: full 9-step CI + publishable docs. |
 | GitHub Pages | Served from `site/` via `.github/workflows/pages.yml`. Source = "GitHub Actions". |
 | Dog-food | Done 2026-04-25. Findings folded into LEARNINGS.md + phase-2 scope revision. |
@@ -61,7 +61,7 @@ bun install
 bun run typecheck && bun run lint && bun test
 
 # Confirm the built server still boots and serves every tool end-to-end.
-# 26 assertive scenarios hit the server via the real MCP SDK client.
+# 27 assertive scenarios hit the server via the real MCP SDK client.
 bun run try:check
 
 # (Also works: `bun run phase2:smoke` — 7 raw JSON-RPC calls.)

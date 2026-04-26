@@ -154,6 +154,18 @@ Two effective self-review moments:
 ### Keep `dist/` out of git and out of PRs
 `dist/` is built on demand; shipping it would bloat diffs and desync over time. CI, the e2e test, and `phase1:smoke` all build before asserting. Never commit `dist/`. `.gitignore` covers it; `files: ["bin/", "dist/", …]` in `package.json` ships it at publish time only.
 
+### Manifest-dependent regression scenarios need a 2-PR sequence
+`scripts/try-mcp.ts` runs the built server, which fetches the **live** manifest from dam.usefulto.me at startup — not `src/bundled/manifest.json`. This creates a deployment gap: a PR that adds manifest content + a regression scenario asserting that content would have the regression fail in PR CI (live site still has the old manifest), fail again on merge to main (before Pages redeploys), and only pass after the 30–60s Pages redeploy window.
+
+Correct sequence:
+1. **PR A:** `site/manifest.json` + `src/bundled/manifest.json` + unit tests (unit tests import the bundled copy, so they validate immediately). No new regression scenario yet. Regression count stays flat.
+2. **Merge PR A.** Pages workflow triggers on `site/**` change.
+3. **Verify live:** `curl -sS https://dam.usefulto.me/manifest.json | python3 -c "..."` to confirm the live site serves the new content.
+4. **PR B:** regression scenario in `scripts/try-mcp.ts`. Passes against the now-updated live DAM.
+
+This only applies to manifest changes whose content the regression asserts. Code-only changes or manifest changes without a matching new regression scenario can ship in a single PR.
+— Process adopted 2026-04-26 in the `caption-on-light` / `caption-on-dark` roll-out (commits `57137fe` + `ce9e3b3`).
+
 ### Revise the spec when dog-food data contradicts it — don't just implement the spec anyway
 Phase 2's original spec called for server-side `target_width`/`target_height` dimension computation. The phase-1 dog-food session showed the LLM doing that math correctly unaided. Rather than build the feature and carry the complexity, the phase-2 spec was revised (see `docs/superpowers/specs/2026-04-25-phase-2-scope-revision.md`) to drop those params entirely; if real usage later shows the LLM getting dimensions wrong, revisit.
 
