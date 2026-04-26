@@ -18,7 +18,7 @@ structured API on top of the same manifest.
 
 ## Current state (update when this changes)
 
-*Last updated: 2026-04-25 (post-phase-2-planning; `main` at `1af3290`)*
+*Last updated: 2026-04-26 (post-phase-2-planning, pre-phase-2-execution)*
 
 | Thing | State |
 |---|---|
@@ -62,8 +62,7 @@ bun run typecheck && bun run lint && bun test
 # 21 assertive scenarios hit the server via the real MCP SDK client.
 bun run try:check
 
-# (Legacy, also works: `bun run phase1:smoke` — 6 raw JSON-RPC calls.
-#  Phase 2 renames this to phase2-smoke.)
+# (Legacy, also works: `bun run phase1:smoke` — 6 raw JSON-RPC calls.)
 
 # Then read the user's request and the relevant docs above.
 ```
