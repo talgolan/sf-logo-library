@@ -35,6 +35,7 @@ interface Input {
 }
 interface Output {
   logos: AssetSummary[];
+  advisories?: string[];
 }
 
 const DESCRIPTION = [
@@ -49,6 +50,9 @@ const DESCRIPTION = [
   "whose dark-surface assets are all Salesforce co-brand lockups. If every result has",
   "`co_branded: true` when you asked for a dark background, the sanctioned options are:",
   "place the light-background mark on a white card, use the co-brand, or ask the user.",
+  "When that happens, the response also carries",
+  "`advisories: ['only_co_branded_for_requested_background']` as a machine-readable",
+  "signal for callers that don't parse the co_branded flag themselves.",
 ].join(" ");
 
 export const findBrandLogoTool = defineTool<Input, Output>({
@@ -131,6 +135,14 @@ export const findBrandLogoTool = defineTool<Input, Output>({
       return a.name.localeCompare(b.name);
     });
 
-    return Promise.resolve({ logos: logos.map((l) => toAssetSummary(l, brand)) });
+    const advisories: string[] = [];
+    if (input.background !== undefined && logos.length > 0 && logos.every((l) => l.co_branded)) {
+      advisories.push("only_co_branded_for_requested_background");
+    }
+
+    return Promise.resolve({
+      logos: logos.map((l) => toAssetSummary(l, brand)),
+      ...(advisories.length > 0 ? { advisories } : {}),
+    });
   },
 });
