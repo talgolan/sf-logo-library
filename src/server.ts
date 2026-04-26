@@ -229,6 +229,32 @@ export async function main(): Promise<void> {
 
   const server = buildServer({ manifest, logger, counters, cache });
 
+  // Diagnostics snapshot on SIGUSR2 — useful when an MCP client can't call
+  // tools but the process is still alive. See spec §5.3.7.
+  process.on("SIGUSR2", () => {
+    (async () => {
+      const { writeFileSync, mkdirSync } = await import("node:fs");
+      const snapshot = {
+        version: "0.1.0",
+        started_at: new Date().toISOString(),
+        manifest: { source, version: manifest.lastUpdated },
+        counters: counters.snapshot(),
+        recent_events: logger.ringSnapshot(),
+      };
+      const dir = nodePath.resolve(cacheRoot, "sf-logos-mcp", "diagnostics");
+      mkdirSync(dir, { recursive: true });
+      const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+      writeFileSync(
+        nodePath.join(dir, `diagnostics-${stamp}.json`),
+        JSON.stringify(snapshot, null, 2),
+      );
+    })().catch((err: unknown) => {
+      process.stderr.write(
+        `[sf-logos-mcp] SIGUSR2 dump failed: ${err instanceof Error ? err.message : String(err)}\n`,
+      );
+    });
+  });
+
   const transport = new StdioServerTransport();
   await server.mcp.connect(transport);
 
