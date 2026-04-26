@@ -52,6 +52,18 @@ Typing a fetch-injector param as `typeof globalThis.fetch` breaks test mocks tha
 Scripts using `mapfile -t arr < <(cmd)` work on Linux CI but silently fail locally on a fresh Mac. Use a portable `while IFS= read -r line; do ... done` loop if you need the script to run in both places.
 — Found: `scripts/check-pages-allowlist.sh` in the Pages-split work.
 
+### `@typescript-eslint/unbound-method` flags destructured Node stdlib functions
+`const { resolve } = await import("node:path")` trips the rule because `resolve` is typed as a method. The whole module has no `this`, but ESLint can't know that. Two fixes: (a) use a namespace import (`const nodePath = await import("node:path")` then `nodePath.resolve(...)`), or (b) type-annotate the callsite. Namespace is cleaner and survives re-exports.
+— Found: commit `b51cc3e` in phase 2 while wiring the cache root in `main()`.
+
+### `@typescript-eslint/no-unnecessary-condition` rejects exhaustive `if` chains
+After `if (mode === "url")` and `if (mode === "path")` return, a trailing `if (mode === "bytes")` is flagged — TS narrows `mode` to the single remaining literal, so the condition is always true. Drop the guard and add a comment naming the narrowing by elimination, or restructure as a `switch (mode)` with an exhaustiveness-checking `never` default.
+— Found: commit `61e058d` in phase 2.
+
+### `.claude/settings.json` gets auto-created by Claude Code and sneaks in via `git add -A`
+The Claude Code harness writes `.claude/settings.json` when the user approves permissions. If `.claude/` isn't in `.gitignore`, a `git add -A` (or `git add --all` from an agent prompt) commits local personal settings. Add `.claude/` to `.gitignore` on day one.
+— Found: commit `e89889c` in phase 2 (caught by `git status` after a `git add -A` in the smoke-script rename commit).
+
 ---
 
 ## MCP SDK
