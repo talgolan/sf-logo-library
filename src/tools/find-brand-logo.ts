@@ -45,6 +45,10 @@ const DESCRIPTION = [
   "the asset's variant, e.g. 'Knockout'), `preferred_only` (only the default-choice",
   "asset). Results sorted preferred-first. Always prefer SVG (summary.preferred_format).",
   "Never recolor or distort — preserve the aspect_ratio supplied on each result.",
+  "Data note: some brands have no standalone mark for dark backgrounds — notably Slack,",
+  "whose dark-surface assets are all Salesforce co-brand lockups. If every result has",
+  "`co_branded: true` when you asked for a dark background, the sanctioned options are:",
+  "place the light-background mark on a white card, use the co-brand, or ask the user.",
 ].join(" ");
 
 export const findBrandLogoTool = defineTool<Input, Output>({

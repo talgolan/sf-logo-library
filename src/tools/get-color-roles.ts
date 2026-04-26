@@ -25,8 +25,9 @@ const DESCRIPTION = [
   "Return the semantic UI-role palette: hex swatches tagged with roles like",
   "'primary', 'hover', 'error', 'focus-ring', 'brand'. Provide a `roles` array",
   "to filter to swatches that include any of those role names (union). Omit",
-  "`roles` to get every curated swatch. This is for functional UI only — it",
-  "is NOT a substitute for get_brand_colors when styling a logo's neighborhood.",
+  "`roles` to get every curated swatch (22 in the curated set — the full 156-swatch",
+  "palette is not exposed here). This is for functional UI only — it is NOT a",
+  "substitute for get_brand_colors when styling a logo's neighborhood.",
   "Unknown role names return an empty list, not an error.",
 ].join(" ");
 

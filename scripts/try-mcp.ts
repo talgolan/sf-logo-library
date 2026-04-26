@@ -296,15 +296,18 @@ const SCENARIOS: Scenario[] = [
 
   // ---------------------------------------------------------- get_color_roles
   {
-    label: "get_color_roles() — returns all curated swatches (≥ 20)",
+    label: "get_color_roles() — returns exactly 22 curated swatches",
     tool: "get_color_roles",
     input: {},
     expect: (out) => {
       const roles = asArray<{ name: string; hex: string; roles: string[] }>(
         asObject(out)["roles"],
       );
-      if (roles.length < 20) {
-        throw new Error(`expected ≥ 20 curated swatches, got ${roles.length}`);
+      // The curated swatch count is a known quantity we want pinned — if
+      // the manifest changes it, a tool description (and possibly the
+      // docs) will be stale, so CI should force that review.
+      if (roles.length !== 22) {
+        throw new Error(`expected exactly 22 curated swatches, got ${roles.length}`);
       }
     },
   },
@@ -463,6 +466,76 @@ const SCENARIOS: Scenario[] = [
     expect: (out) => {
       const icons = asArray(asObject(out)["icons"]);
       if (icons.length > 90) throw new Error(`limit not clamped: got ${icons.length}`);
+    },
+  },
+
+  // -------------------- Dog-food-derived scenarios (2026-04-25) --------------------
+  // These lock in behavior we observed working correctly in a live Claude Desktop
+  // session. If a future change breaks them, CI catches it. See
+  // docs/dogfood/2026-04-25-claude-desktop-transcript.md.
+  {
+    label: "Data Cloud rebrand: query 'Data Cloud' returns icon-data-cloud with name 'Data 360'",
+    tool: "find_product_icon",
+    input: { query: "Data Cloud" },
+    expect: (out) => {
+      const icons = asArray<{ id: string; name: string; match_score?: number }>(
+        asObject(out)["icons"],
+      );
+      if (icons.length === 0) throw new Error(`expected at least one match for 'Data Cloud'`);
+      const top = icons[0];
+      if (!top) throw new Error("top result missing");
+      if (top.id !== "icon-data-cloud") {
+        throw new Error(`expected top id icon-data-cloud, got ${top.id}`);
+      }
+      if (top.name !== "Data 360") {
+        throw new Error(`expected top name 'Data 360' (post-rebrand), got '${top.name}'`);
+      }
+      // Top hit should outscore every other result — confirms scoring ranks
+      // the right asset first when a former name is queried.
+      const topScore = top.match_score ?? 0;
+      for (const other of icons.slice(1)) {
+        if ((other.match_score ?? 0) > topScore) {
+          throw new Error(`${other.id} outscored the top hit`);
+        }
+      }
+    },
+  },
+  {
+    label:
+      "Slack dark-surface: all dark Slack results are co_branded=true (data gap documented in LEARNINGS)",
+    tool: "find_brand_logo",
+    input: { brand: "slack", background: "dark" },
+    expect: (out) => {
+      const logos = asArray<{ co_branded: boolean }>(asObject(out)["logos"]);
+      if (logos.length === 0) {
+        throw new Error(`expected at least one dark Slack asset`);
+      }
+      for (const l of logos) {
+        if (!l.co_branded) {
+          throw new Error(
+            `dark Slack result has co_branded=false — if a standalone dark Slack mark was added, ` +
+              `update LEARNINGS.md and the find_brand_logo description.`,
+          );
+        }
+      }
+    },
+  },
+  {
+    label:
+      "Agentforce single-icon invariant: keywords=['agentforce'] returns exactly 1 icon (sub-products share the parent mark per FY27)",
+    tool: "find_product_icon",
+    input: { keywords: ["agentforce"] },
+    expect: (out) => {
+      const icons = asArray<{ id: string }>(asObject(out)["icons"]);
+      if (icons.length !== 1) {
+        throw new Error(
+          `expected exactly 1 Agentforce icon, got ${icons.length}. ` +
+            `If sub-product icons were added to the manifest, this test needs updating.`,
+        );
+      }
+      if (icons[0]?.id !== "icon-agentforce") {
+        throw new Error(`expected icon-agentforce, got ${icons[0]?.id ?? "?"}`);
+      }
     },
   },
 ];

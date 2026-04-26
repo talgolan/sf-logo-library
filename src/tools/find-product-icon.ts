@@ -45,6 +45,9 @@ const DESCRIPTION = [
   "`background` ('light'/'dark'). Filters are ANDed. `limit` defaults to 10, max 90.",
   "Prefer SVG (summary.preferred_format). All 90 icons are square (is_square=true).",
   "Passing no filters raises InvalidInput.",
+  "Name drift: some products have been renamed (e.g. 'Data Cloud' → 'Data 360');",
+  "keywords cover former names, but `name` is always the current canonical label —",
+  "surface `name` to the user rather than the query string.",
 ].join(" ");
 
 function clamp(n: number, min: number, max: number): number {
