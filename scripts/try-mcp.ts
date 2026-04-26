@@ -538,6 +538,58 @@ const SCENARIOS: Scenario[] = [
       }
     },
   },
+  // ---------------------------------------------------- fetch_asset (phase 2)
+  {
+    label: "fetch_asset(id='icon-agentforce', mode='url') — URL round-trip; default format=png",
+    tool: "fetch_asset",
+    input: { id: "icon-agentforce", mode: "url" },
+    expect: (out) => {
+      const r = asObject(out);
+      const url = asString(r["url"], "url");
+      if (!url.startsWith("https://dam.usefulto.me/")) {
+        throw new Error(`url not under dam.usefulto.me: ${url}`);
+      }
+      if (r["format"] !== "png") {
+        throw new Error(`expected default format 'png', got '${String(r["format"])}'`);
+      }
+    },
+  },
+  {
+    label:
+      "fetch_asset(id='icon-agentforce', mode='path') — returns cache path ending in .png",
+    tool: "fetch_asset",
+    input: { id: "icon-agentforce", mode: "path" },
+    expect: (out) => {
+      const r = asObject(out);
+      const path = asString(r["path"], "path");
+      if (!path.endsWith("icon-agentforce.png")) {
+        throw new Error(`path does not end with icon-agentforce.png: ${path}`);
+      }
+    },
+  },
+  {
+    label:
+      "fetch_asset(id='icon-agentforce', mode='bytes', format='svg') — base64 bytes present",
+    tool: "fetch_asset",
+    input: { id: "icon-agentforce", mode: "bytes", format: "svg" },
+    expect: (out) => {
+      const r = asObject(out);
+      const b64 = asString(r["bytes_base64"], "bytes_base64");
+      if (b64.length < 100) throw new Error(`bytes_base64 suspiciously short (${String(b64.length)})`);
+    },
+  },
+  {
+    label: "fetch_asset(id='bogus') → AssetNotFound",
+    tool: "fetch_asset",
+    input: { id: "bogus", mode: "url" },
+    expectError: { code: "AssetNotFound" },
+  },
+  {
+    label: "fetch_asset(url='https://evil.example.com/x.svg') → InvalidAssetUrl",
+    tool: "fetch_asset",
+    input: { url: "https://evil.example.com/x.svg", mode: "url" },
+    expectError: { code: "InvalidAssetUrl" },
+  },
 ];
 
 // ---------------------------------------------------------------------------
