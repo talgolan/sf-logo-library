@@ -12,7 +12,14 @@ describe("defineTool", () => {
     expect(tool.name).toBe("square");
     const ctx: ToolContext = {
       manifest: { brands: [] } as never,
-      logger: { emit: () => {}, ringSnapshot: () => [], resizeRing: () => {}, setLevel: () => {} },
+      logger: {
+        emit: () => {},
+        ringSnapshot: () => [],
+        resizeRing: () => {},
+        setLevel: () => {},
+        flush: () => Promise.resolve(),
+        close: () => Promise.resolve(),
+      },
       reqId: "r",
       counters: {
         toolCall: () => {},

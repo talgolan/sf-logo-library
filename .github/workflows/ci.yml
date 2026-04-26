@@ -35,8 +35,8 @@ jobs:
       - name: Unit & integration tests (Bun, with coverage)
         run: bun test --coverage
 
-      - name: Server e2e smoke (6 tool calls over stdio)
-        run: bun run phase1:smoke
+      - name: Server e2e smoke (7 tool calls over stdio)
+        run: bun run phase2:smoke
 
       - name: MCP regression suite (assertive scenarios via SDK client)
         run: bun run try:check

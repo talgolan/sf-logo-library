@@ -13,7 +13,6 @@ export type SfLogosErrorCode =
   | "AssetNotFound"
   | "InvalidAssetUrl"
   | "FormatUnavailable"
-  | "InvalidDimensions"
   | "UnknownBrand"
   | "InvalidInput"
   | "FetchFailed";

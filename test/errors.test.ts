@@ -21,11 +21,10 @@ describe("SfLogosError", () => {
       "AssetNotFound",
       "InvalidAssetUrl",
       "FormatUnavailable",
-      "InvalidDimensions",
       "UnknownBrand",
       "InvalidInput",
       "FetchFailed",
     ];
-    expect(codes).toHaveLength(7);
+    expect(codes).toHaveLength(6);
   });
 });

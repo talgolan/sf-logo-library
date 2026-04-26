@@ -163,10 +163,6 @@ export interface AssetDetail extends AssetSummary {
   path?: string;
   /** Present when mode === "bytes". */
   bytes_base64?: string;
-  /** Present when target_width or target_height was set. */
-  computed_dimensions?: { width: number; height: number };
-  /** Present when computed_dimensions is present. */
-  dimension_source?: "svg_intrinsic" | "source_dimensions";
 }
 
 /** Per-brand row in list_brands output. */

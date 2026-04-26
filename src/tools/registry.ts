@@ -9,6 +9,7 @@
  * See spec §5.1.
  */
 
+import type { AssetCache } from "../assets/cache.js";
 import type { Manifest } from "../manifest/types.js";
 import type { Logger } from "../observability/logger.js";
 import type { Counters } from "../observability/counters.js";
@@ -18,6 +19,8 @@ export interface ToolContext {
   logger: Logger;
   reqId: string;
   counters: Counters;
+  /** Phase 2+: present only for tools that consult the on-disk cache. */
+  cache?: AssetCache;
 }
 
 /** Minimal JSON Schema subset used for tool inputs. */

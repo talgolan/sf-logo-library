@@ -14,7 +14,7 @@ function deps() {
 }
 
 describe("server dispatcher", () => {
-  it("lists five tools (phase 1)", () => {
+  it("lists six tools (phase 2)", () => {
     const s = buildServer(deps());
     const names = s.listTools().map((t) => t.name);
     for (const name of [
@@ -23,10 +23,20 @@ describe("server dispatcher", () => {
       "find_product_icon",
       "get_brand_colors",
       "get_color_roles",
+      "fetch_asset",
     ]) {
       expect(names).toContain(name);
     }
-    expect(names.length).toBe(5);
+    expect(names.length).toBe(6);
+  });
+
+  it("dispatches fetch_asset in URL mode without a cache", async () => {
+    const s = buildServer(deps());
+    const result = (await s.dispatch("fetch_asset", {
+      id: "icon-agentforce",
+      mode: "url",
+    })) as { id: string; url: string };
+    expect(result.url).toMatch(/^https:\/\/dam\.usefulto\.me\//);
   });
 
   it("dispatches list_brands and mints a req_id in the log", async () => {

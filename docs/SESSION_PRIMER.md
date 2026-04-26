@@ -18,23 +18,23 @@ structured API on top of the same manifest.
 
 ## Current state (update when this changes)
 
-*Last updated: 2026-04-25 (post-phase-2-planning; `main` at `1af3290`)*
+*Last updated: 2026-04-26 (phase 2 shipped)*
 
 | Thing | State |
 |---|---|
-| `main` branch | Phase 1 shipped; CI green. |
-| MCP server phase 1 | **Shipped.** 5 read-only tools, 82 tests, observability, end-to-end smoke, regression suite (`bun run try:check` — 21 scenarios). |
-| MCP server phase 2 | **Planned, not yet executing.** Adds `fetch_asset` + on-disk cache + `find_brand_logo` advisories + `SIGUSR2` diagnostics. 16 TDD-shaped tasks. Scope was revised from the original spec after dog-food (see "Dog-food findings" in LEARNINGS.md): dimension math dropped, diagnostics MCP tool deferred, default format flipped svg → png. |
+| `main` branch | Phase 1 + phase 2 shipped; CI green. |
+| MCP server phase 1 | **Shipped.** 5 read-only tools. |
+| MCP server phase 2 | **Shipped.** 6th tool `fetch_asset` (url / path / bytes; default path + png), on-disk cache under `<OS cache>/sf-logos-mcp/<manifest.lastUpdated>/<id>.<ext>`, `find_brand_logo` advisories (co-brand-only), `SIGUSR2` diagnostics snapshot. 108 tests, 26 regression scenarios (`bun run try:check`), 7-call smoke (`bun run phase2:smoke`). |
 | MCP server phase 3 | Deferred. Scope: full 9-step CI + publishable docs. |
 | GitHub Pages | Served from `site/` via `.github/workflows/pages.yml`. Source = "GitHub Actions". |
-| Dog-food | **Done.** Nine-prompt Claude Desktop session on 2026-04-25. Transcript: `docs/dogfood/2026-04-25-claude-desktop-transcript.md`. Load-bearing findings folded into `docs/LEARNINGS.md` and into the phase-2 scope revision. |
+| Dog-food | Done 2026-04-25. Findings folded into LEARNINGS.md + phase-2 scope revision. |
 
 ## Where to look for detail
 
 - **Design spec:** [docs/superpowers/specs/2026-04-24-sf-logos-mcp-design.md](superpowers/specs/2026-04-24-sf-logos-mcp-design.md) — the full MCP server design across all three phases (phase-2 parts superseded; see next bullet).
 - **Phase-2 scope revision:** [docs/superpowers/specs/2026-04-25-phase-2-scope-revision.md](superpowers/specs/2026-04-25-phase-2-scope-revision.md) — authoritative for phase 2. Supersedes the phase-2 portions of the original spec.
 - **Phase 1 plan (executed):** [docs/superpowers/plans/2026-04-25-phase-1-foundation.md](superpowers/plans/2026-04-25-phase-1-foundation.md) — 29 TDD-shaped tasks.
-- **Phase 2 plan (pending execution):** [docs/superpowers/plans/2026-04-25-phase-2-fetch-asset.md](superpowers/plans/2026-04-25-phase-2-fetch-asset.md) — 16 TDD-shaped tasks.
+- **Phase 2 plan (executed):** [docs/superpowers/plans/2026-04-25-phase-2-fetch-asset.md](superpowers/plans/2026-04-25-phase-2-fetch-asset.md) — 16 TDD-shaped tasks.
 - **Learnings log:** [docs/LEARNINGS.md](LEARNINGS.md) — every non-obvious finding across every session. Read this before writing code.
 - **Dog-food transcripts:** [docs/dogfood/](dogfood/) — verbatim records of real MCP-client sessions against the live server.
 - **Project conventions:** [CLAUDE.md](../CLAUDE.md) — runtime, commit style, scope discipline, the Pages→`site/` invariant.
@@ -48,6 +48,8 @@ structured API on top of the same manifest.
 4. **Strict TS flags are on.** `exactOptionalPropertyTypes` rejects explicit `undefined`, `noPropertyAccessFromIndexSignature` forces bracket access on index-signatured types. See LEARNINGS.md.
 5. **Bundled manifest ≠ handwritten fixture.** Always exercise manifest-shape assertions against `src/bundled/manifest.json`. Product-icon entries omit `type`, `co_branded`, and `use_cases`; `toAssetSummary` defaults them. See LEARNINGS.md.
 6. **MCP tool output is JSON-encoded text on the wire.** A tool returning `{"brands":[...]}` appears in the raw stdio bytes as `"\"brands\""`. Grep accordingly.
+7. **`fetch_asset` defaults: `mode=path`, `format=png`.** Callers that want a raw URL must pass `mode: "url"` explicitly (revised from phase-1 spec). URL input only supports `mode: "url"` — path/bytes from a raw URL would need a non-id cache key.
+8. **Cache root resolution order: `SFL_CACHE_ROOT` > `XDG_CACHE_HOME` > platform default.** Versioned by `manifest.lastUpdated`; a new manifest version starts a new directory and implicitly invalidates stale bytes.
 
 ## How to start real work in a new session
 
@@ -59,11 +61,10 @@ bun install
 bun run typecheck && bun run lint && bun test
 
 # Confirm the built server still boots and serves every tool end-to-end.
-# 21 assertive scenarios hit the server via the real MCP SDK client.
+# 26 assertive scenarios hit the server via the real MCP SDK client.
 bun run try:check
 
-# (Legacy, also works: `bun run phase1:smoke` — 6 raw JSON-RPC calls.
-#  Phase 2 renames this to phase2-smoke.)
+# (Also works: `bun run phase2:smoke` — 7 raw JSON-RPC calls.)
 
 # Then read the user's request and the relevant docs above.
 ```
@@ -86,7 +87,7 @@ This file earns its keep only if it stays current. When you finish work that cha
 - **Phase state** (any row in the state table).
 - **New invariant** discovered (add to the "Invariants" section if it would bite a fresh agent in their first 15 minutes; anything subtler goes in LEARNINGS.md only).
 - **New authoritative doc** worth reading first (add a pointer).
-- **Commit range on `main`** — update the "Last updated" line and the commit SHA.
+- **"Last updated" line** — bump the date when you change any row in the state table.
 
 **Do NOT** do any of the following in this file:
 

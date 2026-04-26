@@ -66,3 +66,34 @@ describe("find_brand_logo", () => {
     expect(findBrandLogoTool.description.length).toBeGreaterThanOrEqual(200);
   });
 });
+
+describe("find_brand_logo — advisories", () => {
+  const ctx = () => makeTestContext(bundled as unknown as Manifest);
+
+  it("emits 'only_co_branded_for_requested_background' when all dark Slack results are co-branded", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "slack", background: "dark" },
+      ctx(),
+    )) as { logos: Array<{ co_branded: boolean }>; advisories?: string[] };
+    expect(result.logos.length).toBeGreaterThan(0);
+    expect(result.logos.every((l) => l.co_branded)).toBe(true);
+    expect(result.advisories ?? []).toContain("only_co_branded_for_requested_background");
+  });
+
+  it("does NOT emit the advisory when some standalone results exist", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "salesforce", background: "light" },
+      ctx(),
+    )) as { logos: Array<{ co_branded: boolean }>; advisories?: string[] };
+    expect(result.logos.some((l) => !l.co_branded)).toBe(true);
+    expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
+  });
+
+  it("does NOT emit the advisory when background is not specified", async () => {
+    const result = (await findBrandLogoTool.handler({ brand: "slack" }, ctx())) as {
+      logos: Array<{ co_branded: boolean }>;
+      advisories?: string[];
+    };
+    expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
+  });
+});

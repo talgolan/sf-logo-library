@@ -52,6 +52,18 @@ Typing a fetch-injector param as `typeof globalThis.fetch` breaks test mocks tha
 Scripts using `mapfile -t arr < <(cmd)` work on Linux CI but silently fail locally on a fresh Mac. Use a portable `while IFS= read -r line; do ... done` loop if you need the script to run in both places.
 — Found: `scripts/check-pages-allowlist.sh` in the Pages-split work.
 
+### `@typescript-eslint/unbound-method` flags destructured Node stdlib functions
+`const { resolve } = await import("node:path")` trips the rule because `resolve` is typed as a method. The whole module has no `this`, but ESLint can't know that. Two fixes: (a) use a namespace import (`const nodePath = await import("node:path")` then `nodePath.resolve(...)`), or (b) type-annotate the callsite. Namespace is cleaner and survives re-exports.
+— Found: commit `b51cc3e` in phase 2 while wiring the cache root in `main()`.
+
+### `@typescript-eslint/no-unnecessary-condition` rejects exhaustive `if` chains
+After `if (mode === "url")` and `if (mode === "path")` return, a trailing `if (mode === "bytes")` is flagged — TS narrows `mode` to the single remaining literal, so the condition is always true. Drop the guard and add a comment naming the narrowing by elimination, or restructure as a `switch (mode)` with an exhaustiveness-checking `never` default.
+— Found: commit `61e058d` in phase 2.
+
+### `.claude/settings.json` gets auto-created by Claude Code and sneaks in via `git add -A`
+The Claude Code harness writes `.claude/settings.json` when the user approves permissions. If `.claude/` isn't in `.gitignore`, a `git add -A` (or `git add --all` from an agent prompt) commits local personal settings. Add `.claude/` to `.gitignore` on day one.
+— Found: commit `e89889c` in phase 2 (caught by `git status` after a `git add -A` in the smoke-script rename commit).
+
 ---
 
 ## MCP SDK
@@ -78,6 +90,18 @@ Every brand-logo entry has these fields; every product-icon entry does not. Task
 The scoring rule gives +1 for a query token matching a `use_case` substring, but every product-icon entry in the bundled manifest ships with `use_cases: []` (or the field absent — defaulted to `[]` by `toAssetSummary`). The use-case band therefore contributes 0 to every product-icon search result, only brand-logo queries benefit. Not a code bug — it's a data gap. Before tuning phase 2's scoring weights, either (a) enrich the manifest with real `use_cases` for product icons, or (b) drop the band for this brand entirely.
 — Surfaced while running `bun run try` on 2026-04-25.
 
+### "Data Cloud" rebrand to "Data 360" — name updated, URL slug retained
+The manifest carries the new display name, but the `Data-Cloud-*` path fragments and URL slug still use the old name. The ID `icon-data-cloud` is stable on purpose. Consumers who grep the URL for "data 360" will miss. Rule: `name` is authoritative for display, `keywords` cover both names, URLs retain the original slug.
+— Surfaced during 2026-04-25 Claude Desktop dog-food session.
+
+### No standalone Slack mark for dark surfaces
+Every dark-background Slack asset in the manifest is a co-branded "Slack from Salesforce" lockup. A request for "Slack logo on a dark slide" gets co-brand by default. Either add a sanctioned standalone Slack knockout to the manifest, or make `find_brand_logo` annotate results when only co-brand options exist for the requested background.
+— Surfaced during 2026-04-25 Claude Desktop dog-food session.
+
+### Agentforce — one icon, sub-products differentiate via accent color only
+The manifest has a single `icon-agentforce`. "Agentforce Sales" / "Agentforce Service" do not get dedicated icons — by design they share the parent mark with an accent-color tint (Sales = `#06A59A`, Service family = `#D4145A`). Tool descriptions don't say this, so sub-product queries silently return the generic mark with no explanation. Future tool descriptions should name this explicitly.
+— Surfaced during 2026-04-25 Claude Desktop dog-food session.
+
 ---
 
 ## CI / deployment
@@ -94,30 +118,13 @@ With Source = "Deploy from a branch → main / root", every `.ts`, `.json`, and 
 
 ## Dog-food findings (2026-04-25 Claude Desktop session)
 
-Full transcript preserved at `docs/dogfood/2026-04-25-claude-desktop-transcript.md`. The nine-prompt tour surfaced seven findings worth acting on.
-
-### Data staleness — "Data Cloud" was rebranded to "Data 360"
-The manifest already has the new name, but the `Data-Cloud-*` path fragments and the URL slug still carry the old name. Consumers who grep the URL will get confused. Not a bug — the ID `icon-data-cloud` is stable on purpose — but something to document in future tool descriptions: *keywords cover both names, URLs retain the original slug, `name` is authoritative for display*.
-
-### No standalone Slack mark for dark surfaces
-Every dark-background Slack asset in the manifest is a co-branded "Slack from Salesforce" lockup. A user asking for "Slack logo on a dark slide" gets co-brand by default, which may not be what they wanted. The LLM handled this well (flagged the gap, offered the white vs. inverse variants, suggested a workaround) but the data gap is real. Phase 2 / future manifest work: either add a sanctioned standalone Slack knockout or make `find_brand_logo` annotate results when only co-brand options exist for the requested background.
-
-### Agentforce — one icon, sub-products differentiate via accent color
-The manifest has a single `icon-agentforce`. Users asking for "Agentforce Sales" or "Agentforce Service" won't find a dedicated icon because by design they share the parent mark with an accent-color tint (Sales = `#06A59A`, Service family = `#D4145A`). Tool descriptions don't mention this, so a future prompt like "find the Agentforce Sales icon" will return the generic mark with no explanation of why that's correct.
+Full transcript preserved at `docs/dogfood/2026-04-25-claude-desktop-transcript.md`. Data-gap findings (Data Cloud rename, Slack dark-surface, Agentforce sub-products) live under "Data shape surprises" above. The YAGNI decision on `target_width`/`target_height` is captured authoritatively in `docs/superpowers/specs/2026-04-25-phase-2-scope-revision.md`. The remaining durable findings:
 
 ### `fetch_asset` gap → users get `curl` commands, not downloads
-Prompt 6 ("Download the Agentforce icon to my Desktop") did the obvious thing — the LLM handed back a URL plus a `curl` invocation. Perfectly reasonable fallback, but it does reveal that phase 2's `fetch_asset` tool is the single biggest ergonomic gap. When it lands, the test should be: the same prompt produces a file the user can open, not a command they have to run.
+Prompt 6 ("Download the Agentforce icon to my Desktop") did the obvious thing — the LLM handed back a URL plus a `curl` invocation. Reasonable fallback, but it is phase 2's single biggest ergonomic gap. Acceptance bar for `fetch_asset`: the same prompt produces a file the user can open, not a command they have to run.
 
-### Model correctly refuses to fabricate missing brands
-Prompt 8 ("Acme Corp logo"). The LLM said the library only carries the six real brands, did not call a tool with `{brand: "acme"}` to trigger `UnknownBrand`, did not hallucinate a URL. Tool descriptions' brand enumerations are doing their job.
-
-### Color-on-logo warning is landing
-Prompt 9 ("caption color under a Salesforce logo"). The LLM correctly routed to captions on the surrounding UI (citing `#9E9E9E` gray from an external FY27 spec) and explicitly warned against using brand blue/navy *on the logo itself*. This is exactly the brand-violation-avoidance language embedded in `get_brand_colors` and `find_brand_logo` descriptions. Worth preserving in phase 2 when tool descriptions inevitably get rewritten.
-
-### Tool-description aspect-ratio guidance is also landing
-Prompt 5 ("MuleSoft at 300px wide") — the LLM correctly computed height from `aspect_ratio.decimal` for three different MuleSoft assets (standalone vs. two lockups), AND flagged the sizing mismatch problem (a 300×298 square mark next to 300×101 wordmarks looks wrong). The decimal aspect ratio in the response is sufficient for this reasoning; dedicated dimension-computation tools (which phase 2 considered adding for `fetch_asset` target_width/height) may be less valuable than expected — the LLM does this math correctly on its own.
-
-**Implication for phase 2:** the `fetch_asset` `target_width`/`target_height` params from the spec may be over-engineered. Test whether the LLM gets correct dimensions without server-side math before implementing server-side rounding.
+### Tool descriptions' brand enumerations prevent hallucinated URLs
+Prompt 8 ("Acme Corp logo"). The LLM said the library only carries the six real brands, did not call a tool with `{brand: "acme"}` to trigger `UnknownBrand`, did not hallucinate a URL. Worth preserving when tool descriptions are rewritten for phase 2 — don't drop the explicit brand lists.
 
 ---
 
