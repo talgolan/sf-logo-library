@@ -1,8 +1,12 @@
 import { describe, it, expect } from "bun:test";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { fetchAssetTool } from "../../src/tools/fetch-asset.js";
 import bundled from "../../src/bundled/manifest.json" with { type: "json" };
 import type { Manifest } from "../../src/manifest/types.js";
 import { makeTestContext } from "../helpers/context.js";
+import { createAssetCache, type AssetCache } from "../../src/assets/cache.js";
 import type { SfLogosError } from "../../src/errors.js";
 
 function ctx() {
@@ -70,5 +74,35 @@ describe("fetch_asset — URL mode", () => {
 
   it("has a description >= 200 chars", () => {
     expect(fetchAssetTool.description.length).toBeGreaterThanOrEqual(200);
+  });
+});
+
+describe("fetch_asset — bytes mode", () => {
+  it("returns base64 bytes for a known id", async () => {
+    const root = mkdtempSync(join(tmpdir(), "fetch-asset-bytes-"));
+    try {
+      const cache: AssetCache = createAssetCache({
+        root,
+        manifestVersion: "2026-03-13",
+        fetcher: (url) =>
+          Promise.resolve({
+            status: 200,
+            bytes: new TextEncoder().encode(`<!-- ${url} -->`),
+            duration_ms: 1,
+          }),
+      });
+      const ctxWithCache = makeTestContext(bundled as unknown as Manifest, { cache });
+      const result = (await fetchAssetTool.handler(
+        { id: "icon-agentforce", mode: "bytes", format: "svg" },
+        ctxWithCache,
+      )) as { bytes_base64?: string; format: string };
+      expect(result.format).toBe("svg");
+      expect(typeof result.bytes_base64).toBe("string");
+      expect(result.bytes_base64?.length ?? 0).toBeGreaterThan(0);
+      const decoded = Buffer.from(result.bytes_base64 ?? "", "base64").toString("utf8");
+      expect(decoded).toContain("dam.usefulto.me"); // URL appears in our mock body
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 });

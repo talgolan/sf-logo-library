@@ -82,41 +82,33 @@ export const fetchAssetTool = defineTool<Input, AssetDetail>({
     description:
       "Resolve an asset to a URL, local path, or inline bytes. Exactly one of id/url required.",
   },
-  handler: (input, ctx) => {
+  handler: async (input, ctx) => {
     const haveId = typeof input.id === "string";
     const haveUrl = typeof input.url === "string";
     if (!haveId && !haveUrl) {
-      return Promise.reject(
-        new SfLogosError(
-          "InvalidInput",
-          "fetch_asset requires exactly one of `id` or `url`.",
-          {},
-        ),
+      throw new SfLogosError(
+        "InvalidInput",
+        "fetch_asset requires exactly one of `id` or `url`.",
+        {},
       );
     }
     if (haveId && haveUrl) {
-      return Promise.reject(
-        new SfLogosError("InvalidInput", "fetch_asset: supply `id` OR `url`, not both.", {}),
-      );
+      throw new SfLogosError("InvalidInput", "fetch_asset: supply `id` OR `url`, not both.", {});
     }
 
-    // --- url input path: mode='url' only at this stage. Task 9 finalizes. ---
+    // --- url input path: mode='url' only. Task 9 keeps this restriction. ---
     if (haveUrl) {
       const url = input.url as string;
       if (!url.startsWith(`${ASSET_BASE_URL}/`)) {
-        return Promise.reject(
-          new SfLogosError("InvalidAssetUrl", `url must be under ${ASSET_BASE_URL}/`, { url }),
-        );
+        throw new SfLogosError("InvalidAssetUrl", `url must be under ${ASSET_BASE_URL}/`, { url });
       }
       if (input.mode === "url" || input.mode === undefined) {
-        return Promise.resolve(minimalDetailFromUrl(url, input.format ?? "png"));
+        return minimalDetailFromUrl(url, input.format ?? "png");
       }
-      return Promise.reject(
-        new SfLogosError(
-          "InvalidInput",
-          "path/bytes modes for url input not yet implemented",
-          {},
-        ),
+      throw new SfLogosError(
+        "InvalidInput",
+        "path/bytes modes for url input not yet implemented",
+        {},
       );
     }
 
@@ -124,38 +116,49 @@ export const fetchAssetTool = defineTool<Input, AssetDetail>({
     const id = input.id as string;
     const found = findAssetById(ctx.manifest.brands, id);
     if (!found) {
-      return Promise.reject(
-        new SfLogosError("AssetNotFound", `No asset with id '${id}'.`, { id }),
-      );
+      throw new SfLogosError("AssetNotFound", `No asset with id '${id}'.`, { id });
     }
     const [logo, brand] = found;
     const summary = toAssetSummary(logo, brand);
 
     const format = chooseFormat(summary, input.format);
     if (format === null) {
-      return Promise.reject(
-        new SfLogosError("FormatUnavailable", `Asset '${id}' does not have the requested format.`, {
+      throw new SfLogosError(
+        "FormatUnavailable",
+        `Asset '${id}' does not have the requested format.`,
+        {
           id,
           requested_format: input.format ?? null,
           available_formats: (["svg", "png"] as const).filter((f) => summary.formats[f] !== null),
-        }),
+        },
       );
     }
 
     const url = summary.formats[format];
     if (url === null) {
-      return Promise.reject(
-        new SfLogosError("FormatUnavailable", "format URL missing", { id }),
-      );
+      throw new SfLogosError("FormatUnavailable", "format URL missing", { id });
     }
 
     if (input.mode === "url" || input.mode === undefined) {
-      return Promise.resolve({ ...summary, format, url } satisfies AssetDetail);
+      return { ...summary, format, url } satisfies AssetDetail;
     }
-    // path/bytes modes land in Tasks 8 and 9.
-    return Promise.reject(
-      new SfLogosError("InvalidInput", "mode=path/bytes not yet implemented", {}),
-    );
+
+    if (input.mode === "bytes") {
+      if (ctx.cache === undefined) {
+        throw new SfLogosError(
+          "InvalidInput",
+          "fetch_asset mode='bytes' requires a configured asset cache.",
+          {},
+        );
+      }
+      const path = await ctx.cache.getPath(id, format, url);
+      const { readFileSync } = await import("node:fs");
+      const bytes_base64 = readFileSync(path).toString("base64");
+      return { ...summary, format, url, bytes_base64 } satisfies AssetDetail;
+    }
+
+    // path mode lands in Task 9.
+    throw new SfLogosError("InvalidInput", "mode=path not yet implemented", {});
   },
 });
 
