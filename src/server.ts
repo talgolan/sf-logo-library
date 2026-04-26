@@ -16,12 +16,14 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
+import type { AssetCache } from "./assets/cache.js";
 import { SfLogosError } from "./errors.js";
 import type { Manifest } from "./manifest/types.js";
 import type { Counters } from "./observability/counters.js";
 import { ev } from "./observability/events.js";
 import type { Logger } from "./observability/logger.js";
 import { newReqId } from "./observability/req-id.js";
+import { fetchAssetTool } from "./tools/fetch-asset.js";
 import { findBrandLogoTool } from "./tools/find-brand-logo.js";
 import { findProductIconTool } from "./tools/find-product-icon.js";
 import { getBrandColorsTool } from "./tools/get-brand-colors.js";
@@ -35,12 +37,15 @@ export const ALL_TOOLS: Tool[] = [
   findProductIconTool as Tool,
   getBrandColorsTool as Tool,
   getColorRolesTool as Tool,
+  fetchAssetTool as Tool,
 ];
 
 export interface ServerDeps {
   manifest: Manifest;
   logger: Logger;
   counters: Counters;
+  /** Present when fetch_asset's path/bytes modes are needed. */
+  cache?: AssetCache;
 }
 
 export interface DispatchableServer {
@@ -66,6 +71,7 @@ export function buildServer(deps: ServerDeps): DispatchableServer {
       logger: deps.logger,
       reqId,
       counters: deps.counters,
+      ...(deps.cache !== undefined ? { cache: deps.cache } : {}),
     };
     deps.logger.emit(ev.toolInput({ tool: tool.name, req_id: reqId, input }));
     try {
@@ -165,6 +171,10 @@ export async function main(): Promise<void> {
   const { loadManifest } = await import("./manifest/loader.js");
   const { createLogger } = await import("./observability/logger.js");
   const { createCounters } = await import("./observability/counters.js");
+  const { createAssetCache } = await import("./assets/cache.js");
+  const { fetchAsset: fetchAssetFn } = await import("./assets/fetch.js");
+  const nodePath = await import("node:path");
+  const nodeOs = await import("node:os");
 
   const rawLevel = process.env["SFL_LOG"];
   const level: "debug" | "info" | "warn" | "error" =
@@ -190,7 +200,34 @@ export async function main(): Promise<void> {
 
   const startupStarted = Date.now();
   const { manifest, source } = await loadManifest({ logger });
-  const server = buildServer({ manifest, logger, counters });
+
+  // Resolve the OS cache root. XDG_CACHE_HOME wins if set (Linux convention,
+  // also honored on macOS by apps that opt in). SFL_CACHE_ROOT is a project-
+  // specific override useful for CI.
+  const home = nodeOs.homedir();
+  const cacheRoot =
+    process.env["SFL_CACHE_ROOT"] ??
+    process.env["XDG_CACHE_HOME"] ??
+    nodePath.resolve(
+      process.platform === "darwin"
+        ? `${home}/Library/Caches`
+        : process.platform === "win32"
+          ? process.env["LOCALAPPDATA"] ?? `${home}/AppData/Local`
+          : `${home}/.cache`,
+    );
+  const cache = createAssetCache({
+    root: nodePath.resolve(cacheRoot, "sf-logos-mcp"),
+    manifestVersion: manifest.lastUpdated,
+    fetcher: (url: string) =>
+      fetchAssetFn({
+        url,
+        userAgent: "sf-logos-mcp/0.1.0",
+        timeoutMs: 10_000,
+        fetch: globalThis.fetch,
+      }),
+  });
+
+  const server = buildServer({ manifest, logger, counters, cache });
 
   const transport = new StdioServerTransport();
   await server.mcp.connect(transport);

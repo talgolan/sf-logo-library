@@ -552,11 +552,12 @@ interface ScenarioResult {
 }
 
 async function runProtocolCheck(client: Client): Promise<ScenarioResult> {
-  const label = "protocol: tools/list returns 5 named tools with descriptions ≥ 100 chars";
+  const label = "protocol: tools/list returns 6 named tools with descriptions ≥ 100 chars";
   try {
     const result = await client.listTools();
     const names = result.tools.map((t) => t.name).sort();
     const expected = [
+      "fetch_asset",
       "find_brand_logo",
       "find_product_icon",
       "get_brand_colors",

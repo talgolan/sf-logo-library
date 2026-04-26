@@ -8,7 +8,7 @@ function rpc(id: number, method: string, params?: unknown): string {
 }
 
 describe("server e2e over stdio", () => {
-  it("lists exactly 5 tools and calls list_brands", async () => {
+  it("lists exactly 6 tools and calls list_brands", async () => {
     const child = spawn("node", ["bin/sf-logos-mcp"], { stdio: ["pipe", "pipe", "pipe"] });
     const chunks: Buffer[] = [];
     child.stdout.on("data", (c: Buffer) => chunks.push(c));
@@ -36,7 +36,7 @@ describe("server e2e over stdio", () => {
 
     const all = Buffer.concat(chunks).toString();
     const toolsListResp = findResponse(all, 2);
-    expect(toolsListResp?.result?.tools).toHaveLength(5);
+    expect(toolsListResp?.result?.tools).toHaveLength(6);
     const callResp = findResponse(all, 3);
     const textContent = callResp?.result?.content?.[0]?.text ?? "";
     const parsed = JSON.parse(textContent) as { brands: unknown[] };
