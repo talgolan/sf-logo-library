@@ -40,6 +40,10 @@ On any type with an index signature (or `Record<string, T>`), dot access (`obj.f
 An `async` function with no `await` in its body fails lint under strict rules. Two fixes: add a meaningful `await`, or drop `async` and return `Promise.resolve(...)` / `Promise.reject(...)` directly. The latter is correct when the function is synchronous but declared Promise-returning for interface parity.
 — Seen across: commits `76dcdda`, `4c57e62`.
 
+### `bun:test`'s `.rejects.toMatchObject()` trips `@typescript-eslint/no-confusing-void-expression`
+The chain `await expect(promise).rejects.toMatchObject({code: "X"})` is typed as returning `void` by `bun:test`'s type shims. Strict-type-checked rules reject using the result of a void expression. Rewrite as explicit try/catch with `expect(caught).toMatchObject(...)`. Same semantic coverage, lint-clean.
+— Adopted across all five tool tests in phase 1 (commits `76fbe8b` through `f7d9d49`).
+
 ### Bun's `globalThis.fetch` has a non-standard `preconnect` property
 Typing a fetch-injector param as `typeof globalThis.fetch` breaks test mocks that don't implement `preconnect`. Use a narrower signature: `(url: string, init?: RequestInit) => Promise<Response>`.
 — Found: commit `76dcdda`.
@@ -142,6 +146,12 @@ Two effective self-review moments:
 
 ### Keep `dist/` out of git and out of PRs
 `dist/` is built on demand; shipping it would bloat diffs and desync over time. CI, the e2e test, and `phase1:smoke` all build before asserting. Never commit `dist/`. `.gitignore` covers it; `files: ["bin/", "dist/", …]` in `package.json` ships it at publish time only.
+
+### Revise the spec when dog-food data contradicts it — don't just implement the spec anyway
+Phase 2's original spec called for server-side `target_width`/`target_height` dimension computation. The phase-1 dog-food session showed the LLM doing that math correctly unaided. Rather than build the feature and carry the complexity, the phase-2 spec was revised (see `docs/superpowers/specs/2026-04-25-phase-2-scope-revision.md`) to drop those params entirely; if real usage later shows the LLM getting dimensions wrong, revisit.
+
+This only works when the original spec is explicit enough that "did we build what the spec says" and "did the spec reflect reality" are separable questions. YAGNI applies to spec items too, not just code — but the discipline is to *amend the spec in writing*, not silently skip a section.
+— Process adopted 2026-04-25 across the phase-2 scope revision and plan.
 
 ---
 
