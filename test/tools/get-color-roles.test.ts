@@ -32,4 +32,20 @@ describe("get_color_roles", () => {
   it("has a description >= 200 chars", () => {
     expect(getColorRolesTool.description.length).toBeGreaterThanOrEqual(200);
   });
+
+  it("exposes caption-on-light → Neutral 60 (#939393)", async () => {
+    const ctx = makeTestContext(bundled as unknown as Manifest);
+    const result = await getColorRolesTool.handler({ roles: ["caption-on-light"] }, ctx);
+    expect(result.roles).toHaveLength(1);
+    expect(result.roles[0]?.hex).toBe("#939393");
+    expect(result.roles[0]?.name).toBe("Neutral 60");
+  });
+
+  it("exposes caption-on-dark → Cloud Blue 80 (#90D0FE)", async () => {
+    const ctx = makeTestContext(bundled as unknown as Manifest);
+    const result = await getColorRolesTool.handler({ roles: ["caption-on-dark"] }, ctx);
+    expect(result.roles).toHaveLength(1);
+    expect(result.roles[0]?.hex).toBe("#90D0FE");
+    expect(result.roles[0]?.name).toBe("Cloud Blue 80");
+  });
 });

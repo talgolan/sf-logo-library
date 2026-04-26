@@ -29,6 +29,9 @@ const DESCRIPTION = [
   "palette is not exposed here). This is for functional UI only — it is NOT a",
   "substitute for get_brand_colors when styling a logo's neighborhood.",
   "Unknown role names return an empty list, not an error.",
+  "For caption/footer text *near* (not on) a logo, ask for 'caption-on-light'",
+  "(#939393 Neutral 60, per FY27) or 'caption-on-dark' (#90D0FE Cloud Blue 80,",
+  "a quiet brand-tinted alternative to pure white on dark surfaces).",
 ].join(" ");
 
 export const getColorRolesTool = defineTool<Input, Output>({

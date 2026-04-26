@@ -4516,7 +4516,8 @@
           "name": "Cloud Blue 80",
           "hex": "#90D0FE",
           "roles": [
-            "info-light"
+            "info-light",
+            "caption-on-dark"
           ]
         },
         {
@@ -4611,7 +4612,8 @@
           "hex": "#939393",
           "roles": [
             "text-placeholder",
-            "icon-subdued"
+            "icon-subdued",
+            "caption-on-light"
           ]
         },
         {
