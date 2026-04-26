@@ -37,3 +37,6 @@ jobs:
 
       - name: Server e2e smoke (6 tool calls over stdio)
         run: bun run phase1:smoke
+
+      - name: MCP regression suite (assertive scenarios via SDK client)
+        run: bun run try:check
