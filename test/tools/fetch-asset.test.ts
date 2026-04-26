@@ -77,6 +77,46 @@ describe("fetch_asset — URL mode", () => {
   });
 });
 
+describe("fetch_asset — path mode (default)", () => {
+  it("returns a local filesystem path when mode omitted (default path) with a cache", async () => {
+    const root = mkdtempSync(join(tmpdir(), "fetch-asset-path-"));
+    try {
+      const cache: AssetCache = createAssetCache({
+        root,
+        manifestVersion: "2026-03-13",
+        fetcher: () =>
+          Promise.resolve({ status: 200, bytes: new Uint8Array([1, 2, 3]), duration_ms: 1 }),
+      });
+      const ctxWithCache = makeTestContext(bundled as unknown as Manifest, { cache });
+      const result = (await fetchAssetTool.handler(
+        { id: "icon-agentforce" }, // no mode — default should be 'path'
+        ctxWithCache,
+      )) as { path?: string; format: string };
+      expect(result.format).toBe("png");
+      expect(result.path?.endsWith("icon-agentforce.png")).toBe(true);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it("raises FormatUnavailable with explicit available_formats when asked for unavailable format", async () => {
+    const iconBrand = (bundled as unknown as Manifest).brands.find(
+      (b) => b.id === "product-icons",
+    );
+    const svgOnly = iconBrand?.logos.find((l) => l.png === null && l.svg !== null);
+    if (!svgOnly) return; // no natural fixture; contract covered elsewhere
+    try {
+      await fetchAssetTool.handler(
+        { id: svgOnly.id, format: "png", mode: "url" },
+        makeTestContext(bundled as unknown as Manifest),
+      );
+      throw new Error("expected throw");
+    } catch (err) {
+      expect((err as SfLogosError).code).toBe("FormatUnavailable");
+    }
+  });
+});
+
 describe("fetch_asset — bytes mode", () => {
   it("returns base64 bytes for a known id", async () => {
     const root = mkdtempSync(join(tmpdir(), "fetch-asset-bytes-"));

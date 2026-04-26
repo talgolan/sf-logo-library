@@ -96,20 +96,21 @@ export const fetchAssetTool = defineTool<Input, AssetDetail>({
       throw new SfLogosError("InvalidInput", "fetch_asset: supply `id` OR `url`, not both.", {});
     }
 
-    // --- url input path: mode='url' only. Task 9 keeps this restriction. ---
+    // --- url input path: mode='url' only. path/bytes imply a non-id cache
+    //     key the cache layout does not support; use id input for those. ---
     if (haveUrl) {
       const url = input.url as string;
       if (!url.startsWith(`${ASSET_BASE_URL}/`)) {
         throw new SfLogosError("InvalidAssetUrl", `url must be under ${ASSET_BASE_URL}/`, { url });
       }
-      if (input.mode === "url" || input.mode === undefined) {
-        return minimalDetailFromUrl(url, input.format ?? "png");
+      if ((input.mode ?? "url") !== "url") {
+        throw new SfLogosError(
+          "InvalidInput",
+          "url input only supports mode='url'. Use id input for path/bytes modes.",
+          {},
+        );
       }
-      throw new SfLogosError(
-        "InvalidInput",
-        "path/bytes modes for url input not yet implemented",
-        {},
-      );
+      return minimalDetailFromUrl(url, input.format ?? "png");
     }
 
     // --- id path: look up metadata and emit full AssetDetail. ---
@@ -139,26 +140,30 @@ export const fetchAssetTool = defineTool<Input, AssetDetail>({
       throw new SfLogosError("FormatUnavailable", "format URL missing", { id });
     }
 
-    if (input.mode === "url" || input.mode === undefined) {
+    const mode = input.mode ?? "path"; // phase-2 default (revised from phase-1 'url').
+
+    if (mode === "url") {
       return { ...summary, format, url } satisfies AssetDetail;
     }
 
-    if (input.mode === "bytes") {
-      if (ctx.cache === undefined) {
-        throw new SfLogosError(
-          "InvalidInput",
-          "fetch_asset mode='bytes' requires a configured asset cache.",
-          {},
-        );
-      }
-      const path = await ctx.cache.getPath(id, format, url);
-      const { readFileSync } = await import("node:fs");
-      const bytes_base64 = readFileSync(path).toString("base64");
-      return { ...summary, format, url, bytes_base64 } satisfies AssetDetail;
+    if (ctx.cache === undefined) {
+      throw new SfLogosError(
+        "InvalidInput",
+        `fetch_asset mode='${mode}' requires a configured asset cache.`,
+        {},
+      );
     }
 
-    // path mode lands in Task 9.
-    throw new SfLogosError("InvalidInput", "mode=path not yet implemented", {});
+    if (mode === "path") {
+      const path = await ctx.cache.getPath(id, format, url);
+      return { ...summary, format, url, path } satisfies AssetDetail;
+    }
+
+    // mode === "bytes" — narrowed by elimination.
+    const path = await ctx.cache.getPath(id, format, url);
+    const { readFileSync } = await import("node:fs");
+    const bytes_base64 = readFileSync(path).toString("base64");
+    return { ...summary, format, url, bytes_base64 } satisfies AssetDetail;
   },
 });
 
