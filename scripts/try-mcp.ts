@@ -334,6 +334,29 @@ const SCENARIOS: Scenario[] = [
       if (roles.length !== 0) throw new Error(`expected empty array, got ${roles.length} items`);
     },
   },
+  {
+    label:
+      "get_color_roles({roles:['caption-on-light','caption-on-dark']}) — FY27 caption swatches both present",
+    tool: "get_color_roles",
+    input: { roles: ["caption-on-light", "caption-on-dark"] },
+    expect: (out) => {
+      const roles = asArray<{ name: string; hex: string; roles: string[] }>(
+        asObject(out)["roles"],
+      );
+      const onLight = roles.find((r) => r.roles.includes("caption-on-light"));
+      const onDark = roles.find((r) => r.roles.includes("caption-on-dark"));
+      if (!onLight || onLight.hex !== "#939393") {
+        throw new Error(
+          `caption-on-light should map to Neutral 60 #939393, got ${JSON.stringify(onLight)}`,
+        );
+      }
+      if (!onDark || onDark.hex !== "#90D0FE") {
+        throw new Error(
+          `caption-on-dark should map to Cloud Blue 80 #90D0FE, got ${JSON.stringify(onDark)}`,
+        );
+      }
+    },
+  },
 
   // ---------------------------------------------------------- find_brand_logo
   {
