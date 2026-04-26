@@ -3,14 +3,14 @@
  *
  * Responsibility: format events into human or JSONL output; gate
  * printing by level; unconditionally capture events into the ring
- * buffer; optionally dual-write to a file.
+ * buffer; optionally dual-write to a file via a persistent WriteStream.
  * Errors: none thrown (log failures must never break the server).
  * Dependencies: ring.ts; node:fs (for optional file sink).
  *
  * See spec §5.3.1–5.3.6.
  */
 
-import { appendFileSync } from "node:fs";
+import { createWriteStream, type WriteStream } from "node:fs";
 import { createRing, type Ring } from "./ring.js";
 
 export type LogLevel = "debug" | "info" | "warn" | "error";
@@ -29,6 +29,8 @@ export interface Logger {
   ringSnapshot(): LogEvent[];
   resizeRing(capacity: number): void;
   setLevel(level: LogLevel): void;
+  flush(): Promise<void>;
+  close(): Promise<void>;
 }
 
 export interface LoggerOptions {
@@ -42,8 +44,14 @@ export interface LoggerOptions {
 export function createLogger(opts: LoggerOptions): Logger {
   let level = opts.level;
   const write = opts.stderr ?? ((line: string) => process.stderr.write(line + "\n"));
-  const filePath = opts.filePath;
   const ring: Ring<LogEvent> = createRing<LogEvent>(opts.ringCapacity ?? 200);
+
+  let fileStream: WriteStream | null = null;
+  if (opts.filePath !== undefined) {
+    fileStream = createWriteStream(opts.filePath, { flags: "a", encoding: "utf8" });
+    // Logger must never crash the server; swallow stream errors.
+    fileStream.on("error", () => undefined);
+  }
 
   function shouldPrint(eventLevel: LogLevel): boolean {
     if (eventLevel === "error") return true;
@@ -74,9 +82,9 @@ export function createLogger(opts: LoggerOptions): Logger {
       } catch {
         // never let logging break the server
       }
-      if (filePath) {
+      if (fileStream !== null) {
         try {
-          appendFileSync(filePath, line + "\n");
+          fileStream.write(line + "\n");
         } catch {
           // swallow
         }
@@ -90,6 +98,28 @@ export function createLogger(opts: LoggerOptions): Logger {
     },
     setLevel(l) {
       level = l;
+    },
+    flush() {
+      const stream = fileStream;
+      if (stream === null) return Promise.resolve();
+      return new Promise<void>((resolve) => {
+        // An empty write with a callback drains the pending queue — the
+        // callback fires after everything already queued has been flushed
+        // to the underlying fd.
+        stream.write("", () => {
+          resolve();
+        });
+      });
+    },
+    close() {
+      const stream = fileStream;
+      if (stream === null) return Promise.resolve();
+      fileStream = null;
+      return new Promise<void>((resolve) => {
+        stream.end(() => {
+          resolve();
+        });
+      });
     },
   };
 }

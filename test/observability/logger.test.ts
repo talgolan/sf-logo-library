@@ -42,3 +42,36 @@ describe("Logger", () => {
     expect(log.ringSnapshot()).toHaveLength(1);
   });
 });
+
+describe("Logger — file sink (async stream)", () => {
+  it("writes emitted lines to the configured file path", async () => {
+    const tmpPath = `/tmp/sf-logos-test-${String(process.pid)}-${String(Date.now())}.log`;
+    const log = createLogger({
+      level: "info",
+      format: "human",
+      stderr: () => undefined,
+      filePath: tmpPath,
+    });
+    log.emit({ event: "server.start", level: "info", version: "0.0.0", pid: 1, node_version: "v20" });
+    log.emit({
+      event: "server.ready",
+      level: "info",
+      tool_count: 6,
+      manifest_source: "live",
+      manifest_version: "x",
+      startup_ms: 1,
+    });
+    await log.flush();
+    const { readFileSync, unlinkSync } = await import("node:fs");
+    const content = readFileSync(tmpPath, "utf8");
+    try {
+      expect(content).toContain("server.start");
+      expect(content).toContain("server.ready");
+      const lineCount = content.split("\n").filter((l) => l.length > 0).length;
+      expect(lineCount).toBe(2);
+    } finally {
+      unlinkSync(tmpPath);
+      await log.close();
+    }
+  });
+});
