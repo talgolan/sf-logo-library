@@ -18,3 +18,6 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# Local Claude Code settings — never commit.
+.claude/

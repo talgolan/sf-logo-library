@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# phase1-smoke.sh
+# phase2-smoke.sh
 #
-# Boots the compiled MCP server, issues one call per phase-1 tool,
-# prints summarized results. Useful before tagging a release or
-# merging a branch.
+# Boots the compiled MCP server, issues one call per phase-2 tool (the
+# five phase-1 tools plus fetch_asset), prints summarized results.
+# Useful before tagging a release or merging a branch.
 #
-# Usage: bun run phase1:smoke
+# Usage: bun run phase2:smoke
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -25,6 +25,7 @@ cat >"$REQFILE" <<'JSON'
 {"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"get_color_roles","arguments":{"roles":["primary"]}}}
 {"jsonrpc":"2.0","id":6,"method":"tools/call","params":{"name":"find_brand_logo","arguments":{"brand":"salesforce","preferred_only":true}}}
 {"jsonrpc":"2.0","id":7,"method":"tools/call","params":{"name":"find_product_icon","arguments":{"query":"autonomous AI agent","limit":3}}}
+{"jsonrpc":"2.0","id":8,"method":"tools/call","params":{"name":"fetch_asset","arguments":{"id":"icon-agentforce","mode":"url"}}}
 JSON
 
 # timeout is not a macOS built-in; use perl (always present on macOS) as a portable fallback
@@ -51,6 +52,7 @@ check 4 'colors'
 check 5 'roles'
 check 6 'logos'
 check 7 'icon-agentforce'
+check 8 'dam.usefulto.me'
 
-echo "phase1 smoke: $pass pass / $fail fail"
+echo "phase2 smoke: $pass pass / $fail fail"
 exit "$fail"

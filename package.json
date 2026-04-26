@@ -19,7 +19,7 @@
     "test:coverage": "bun test --coverage",
     "test:node": "node --test dist/test/**/*.test.js",
     "refresh-manifest": "bash scripts/refresh-bundled-manifest.sh",
-    "phase1:smoke": "bash scripts/phase1-smoke.sh",
+    "phase2:smoke": "bash scripts/phase2-smoke.sh",
     "try": "bun run scripts/try-mcp.ts",
     "try:check": "bun run scripts/try-mcp.ts --check"
   },
