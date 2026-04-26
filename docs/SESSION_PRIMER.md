@@ -18,16 +18,16 @@ structured API on top of the same manifest.
 
 ## Current state (update when this changes)
 
-*Last updated: 2026-04-25 (commit `5e32aaf`)*
+*Last updated: 2026-04-25 (post-dogfood)*
 
 | Thing | State |
 |---|---|
-| `main` branch | Phase 1 shipped; CI green (`24943106748`). |
-| MCP server phase 1 | **Shipped.** 5 read-only tools, 82 tests, observability, end-to-end smoke. |
-| MCP server phase 2 | Not started. Scope: `fetch_asset` + on-disk cache + dimension math + diagnostics tool. Spec written. |
+| `main` branch | Phase 1 shipped; CI green. |
+| MCP server phase 1 | **Shipped.** 5 read-only tools, 82 tests, observability, end-to-end smoke, regression suite (`bun run try:check`). |
+| MCP server phase 2 | Not started, but dog-food findings are in. Scope: `fetch_asset` + on-disk cache + dimension math + diagnostics tool. Spec written. Phase-2 scope may need a revisit after dog-food (see LEARNINGS.md — dimension-math may be over-engineered). |
 | MCP server phase 3 | Deferred. Scope: full 9-step CI + publishable docs. Spec written. |
 | GitHub Pages | Served from `site/` via `.github/workflows/pages.yml`. Source = "GitHub Actions". |
-| Dog-food | Pending — user will install the server in a client and report findings. |
+| Dog-food | **Done.** Nine-prompt Claude Desktop session on 2026-04-25. Transcript: `docs/dogfood/2026-04-25-claude-desktop-transcript.md`. Load-bearing findings folded into `docs/LEARNINGS.md` under "Dog-food findings". |
 
 ## Where to look for detail
 

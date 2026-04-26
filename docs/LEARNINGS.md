@@ -88,6 +88,35 @@ With Source = "Deploy from a branch → main / root", every `.ts`, `.json`, and 
 
 ---
 
+## Dog-food findings (2026-04-25 Claude Desktop session)
+
+Full transcript preserved at `docs/dogfood/2026-04-25-claude-desktop-transcript.md`. The nine-prompt tour surfaced seven findings worth acting on.
+
+### Data staleness — "Data Cloud" was rebranded to "Data 360"
+The manifest already has the new name, but the `Data-Cloud-*` path fragments and the URL slug still carry the old name. Consumers who grep the URL will get confused. Not a bug — the ID `icon-data-cloud` is stable on purpose — but something to document in future tool descriptions: *keywords cover both names, URLs retain the original slug, `name` is authoritative for display*.
+
+### No standalone Slack mark for dark surfaces
+Every dark-background Slack asset in the manifest is a co-branded "Slack from Salesforce" lockup. A user asking for "Slack logo on a dark slide" gets co-brand by default, which may not be what they wanted. The LLM handled this well (flagged the gap, offered the white vs. inverse variants, suggested a workaround) but the data gap is real. Phase 2 / future manifest work: either add a sanctioned standalone Slack knockout or make `find_brand_logo` annotate results when only co-brand options exist for the requested background.
+
+### Agentforce — one icon, sub-products differentiate via accent color
+The manifest has a single `icon-agentforce`. Users asking for "Agentforce Sales" or "Agentforce Service" won't find a dedicated icon because by design they share the parent mark with an accent-color tint (Sales = `#06A59A`, Service family = `#D4145A`). Tool descriptions don't mention this, so a future prompt like "find the Agentforce Sales icon" will return the generic mark with no explanation of why that's correct.
+
+### `fetch_asset` gap → users get `curl` commands, not downloads
+Prompt 6 ("Download the Agentforce icon to my Desktop") did the obvious thing — the LLM handed back a URL plus a `curl` invocation. Perfectly reasonable fallback, but it does reveal that phase 2's `fetch_asset` tool is the single biggest ergonomic gap. When it lands, the test should be: the same prompt produces a file the user can open, not a command they have to run.
+
+### Model correctly refuses to fabricate missing brands
+Prompt 8 ("Acme Corp logo"). The LLM said the library only carries the six real brands, did not call a tool with `{brand: "acme"}` to trigger `UnknownBrand`, did not hallucinate a URL. Tool descriptions' brand enumerations are doing their job.
+
+### Color-on-logo warning is landing
+Prompt 9 ("caption color under a Salesforce logo"). The LLM correctly routed to captions on the surrounding UI (citing `#9E9E9E` gray from an external FY27 spec) and explicitly warned against using brand blue/navy *on the logo itself*. This is exactly the brand-violation-avoidance language embedded in `get_brand_colors` and `find_brand_logo` descriptions. Worth preserving in phase 2 when tool descriptions inevitably get rewritten.
+
+### Tool-description aspect-ratio guidance is also landing
+Prompt 5 ("MuleSoft at 300px wide") — the LLM correctly computed height from `aspect_ratio.decimal` for three different MuleSoft assets (standalone vs. two lockups), AND flagged the sizing mismatch problem (a 300×298 square mark next to 300×101 wordmarks looks wrong). The decimal aspect ratio in the response is sufficient for this reasoning; dedicated dimension-computation tools (which phase 2 considered adding for `fetch_asset` target_width/height) may be less valuable than expected — the LLM does this math correctly on its own.
+
+**Implication for phase 2:** the `fetch_asset` `target_width`/`target_height` params from the spec may be over-engineered. Test whether the LLM gets correct dimensions without server-side math before implementing server-side rounding.
+
+---
+
 ## Process
 
 ### Batch closely-related TDD tasks, not unrelated ones
