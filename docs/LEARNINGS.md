@@ -128,6 +128,28 @@ Prompt 8 ("Acme Corp logo"). The LLM said the library only carries the six real 
 
 ---
 
+## Dog-food findings (2026-04-27 — phase-2 validation)
+
+Full transcript at `docs/dogfood/2026-04-27-dog-food-phase-2.md`. Thirteen turns; every phase-2 feature validated (`fetch_asset` path mode, cache, `find_brand_logo` advisories, caption role tags). The remaining durable findings:
+
+### Client `Filesystem:move_file` depletes the MCP cache
+`fetch_asset(mode="path")` returns a cache path. Downstream clients that relocate the file (Claude Desktop's Filesystem extension exposes `move_file` but not `copy_file`) silently break the cache invariant — the "second hit is free" guarantee only holds for callers that leave the file in place. Observed in turns 6 and 9 of the 2026-04-27 transcript: Turn 9's `fetch_asset` had to re-fetch from the CDN because turn 6's move consumed the entry.
+**Implication for phase 3:** add a `destination_path` parameter. When supplied, server copies (not moves) the cached file to the caller's chosen path and returns both. Single tool call, cache preserved, no downstream filesystem-tool dance.
+
+### LLM computes dimensions unaided — phase-2 YAGNI holds
+Turn 5 — `MuleSoft at 300px wide`. LLM correctly multiplied `aspect_ratio.decimal = 1.0079` by the width input to derive 297.6px / 3.10", without asking the server. Confirms phase-2 scope revision: dropping `target_width`/`target_height` from `fetch_asset` did not cost correctness. Re-examine only if real usage later shows the LLM getting proportions wrong on exotic aspect ratios.
+
+### Caller dance for "download to location" is ~4 tool calls
+Current best-case path: `find_product_icon → fetch_asset(mode=path) → list_allowed_directories → move_file`. Works, but verbose, and each intermediate call leaves reasoning surface area for the LLM to wander into wrong answers (`mode=bytes` → truncated-base64 failure on the first attempt before the successful `mode=path` retry). A destination-aware `fetch_asset` collapses this to one tool call.
+
+### Symmetric advisory opportunity for `find_brand_logo`
+Turn 11 (`find_brand_logo(slack, co_branded: false)`) returned only the light-bg standalone; no dark-bg standalone exists. LLM correctly surfaced the gap in prose, but no machine-readable signal. Mirror the existing `only_co_branded_for_requested_background` tag with `only_light_surface_standalone_available` (or similar) when `co_branded: false` filtering eliminates all dark-surface options. Small, cheap, follows established pattern.
+
+### Claude Desktop's Filesystem extension needs both source AND destination allowlisted
+Non-obvious configuration requirement. `fetch_asset(mode=path)` returns `~/Library/Caches/sf-logos-mcp/...`; to relocate the file, the client's Filesystem extension must allowlist **both** that cache directory AND the destination (typically `~/Desktop`). Neither path is intuitive to pre-authorize. Also solved by a server-side `destination_path` param — the caller only needs its destination allowlisted.
+
+---
+
 ## Process
 
 ### Batch closely-related TDD tasks, not unrelated ones
