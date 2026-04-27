@@ -163,6 +163,8 @@ export interface AssetDetail extends AssetSummary {
   path?: string;
   /** Present when mode === "bytes". */
   bytes_base64?: string;
+  /** Present when mode === "path" AND destination_path was supplied. The cache path, for diagnostic visibility. */
+  cached_from?: string;
 }
 
 /** Per-brand row in list_brands output. */
