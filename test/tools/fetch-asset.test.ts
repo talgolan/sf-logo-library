@@ -146,3 +146,53 @@ describe("fetch_asset — bytes mode", () => {
     }
   });
 });
+
+describe("fetch_asset — destination_path input validation", () => {
+  it("rejects destination_path combined with url input", async () => {
+    try {
+      await fetchAssetTool.handler(
+        {
+          url: "https://dam.usefulto.me/x.svg",
+          destination_path: "/tmp/out.svg",
+          mode: "url",
+        } as never,
+        ctx(),
+      );
+      throw new Error("expected throw");
+    } catch (err) {
+      expect((err as SfLogosError).code).toBe("InvalidInput");
+    }
+  });
+
+  it("rejects destination_path combined with mode='url'", async () => {
+    try {
+      await fetchAssetTool.handler(
+        {
+          id: "icon-agentforce",
+          destination_path: "/tmp/out.png",
+          mode: "url",
+        } as never,
+        ctx(),
+      );
+      throw new Error("expected throw");
+    } catch (err) {
+      expect((err as SfLogosError).code).toBe("InvalidInput");
+    }
+  });
+
+  it("rejects destination_path combined with mode='bytes'", async () => {
+    try {
+      await fetchAssetTool.handler(
+        {
+          id: "icon-agentforce",
+          destination_path: "/tmp/out.png",
+          mode: "bytes",
+        } as never,
+        ctx(),
+      );
+      throw new Error("expected throw");
+    } catch (err) {
+      expect((err as SfLogosError).code).toBe("InvalidInput");
+    }
+  });
+});

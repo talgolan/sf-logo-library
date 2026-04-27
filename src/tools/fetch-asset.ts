@@ -34,6 +34,7 @@ interface Input {
   url?: string;
   format?: "svg" | "png";
   mode?: "url" | "path" | "bytes";
+  destination_path?: string;
 }
 
 const DESCRIPTION = [
@@ -47,6 +48,11 @@ const DESCRIPTION = [
   "mode=path) are usually what you want. Use svg when you need scalable fidelity",
   "and the consumer supports it. Aspect_ratio (decimal) is returned with every",
   "response — derive dimensions yourself rather than asking the server to.",
+  "Optional `destination_path` (absolute path only) writes the asset to that",
+  "exact location atomically. Fails with DestinationExists if the file already",
+  "exists (callers must delete or pick a new name). Combined with `id` only —",
+  "URL input does not accept destination_path. When used, `path` in the response",
+  "is the destination and `cached_from` is the cache path.",
 ].join(" ");
 
 export const fetchAssetTool = defineTool<Input, AssetDetail>({
@@ -77,6 +83,11 @@ export const fetchAssetTool = defineTool<Input, AssetDetail>({
         description:
           "'path' (default) returns a filesystem path, fetching via cache. 'url' returns just the URL. 'bytes' returns base64.",
       },
+      destination_path: {
+        type: "string",
+        description:
+          "Optional absolute path. When supplied, the server writes the asset to this location atomically. Requires id input and implies mode='path'. Fails with DestinationExists if the path already exists.",
+      },
     },
     additionalProperties: false,
     description:
@@ -94,6 +105,25 @@ export const fetchAssetTool = defineTool<Input, AssetDetail>({
     }
     if (haveId && haveUrl) {
       throw new SfLogosError("InvalidInput", "fetch_asset: supply `id` OR `url`, not both.", {});
+    }
+
+    const haveDestination = typeof input.destination_path === "string";
+
+    if (haveDestination) {
+      if (haveUrl) {
+        throw new SfLogosError(
+          "InvalidInput",
+          "destination_path requires id input. URL input only supports mode='url'; use find_* to resolve a URL to an id first.",
+          {},
+        );
+      }
+      if (input.mode !== undefined && input.mode !== "path") {
+        throw new SfLogosError(
+          "InvalidInput",
+          `destination_path implies mode='path'; got mode='${input.mode}'.`,
+          { mode: input.mode },
+        );
+      }
     }
 
     // --- url input path: mode='url' only. path/bytes imply a non-id cache
