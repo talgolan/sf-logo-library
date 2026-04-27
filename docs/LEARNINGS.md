@@ -152,6 +152,10 @@ Non-obvious configuration requirement. `fetch_asset(mode=path)` returns `~/Libra
 
 ## Process
 
+### Prefer per-scenario `setup` hooks over IIFE-at-module-load in `try-mcp.ts`
+Phase-3A Task 8 extended `Scenario` with a `cleanup?` hook but left per-scenario setup (pre-creating a collision file for the DestinationExists scenario) in an IIFE that runs at module load. Code review flagged this: `bun run try -- --list` or `--call` invocations now perform the setup unconditionally, leaking a tmp file because no cleanup runs when no scenarios are executed. Symmetric `setup?: () => void` and `cleanup?: () => void` hooks on the `Scenario` interface would dissolve both the leak and the failure-at-module-load risk (if `writeFileSync` throws, the script dies before `parseArgs` or `ensureBuilt` runs — a confusing crash in an unrelated block). Worth doing the refactor the next time the regression suite grows a scenario that needs setup.
+— Surfaced during Task 8 of phase 3A (commit `6561d82`), reviewer recommended ship-as-is + follow-up.
+
 ### Batch closely-related TDD tasks, not unrelated ones
 Batching Tasks 10–13 (four observability modules, spec §5.3), 15–17 (summary + tokenize + score), and 19–23 (five tools) each into a single implementer dispatch saved 8–12 subagent round-trips without losing review rigor. The Tasks 19–23 batch uncovered the product-icon missing-fields bug precisely because the implementer touched all five tools in one pass and noticed the inconsistent output shape.
 
