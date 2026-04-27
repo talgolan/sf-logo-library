@@ -24,7 +24,8 @@ describe("SfLogosError", () => {
       "UnknownBrand",
       "InvalidInput",
       "FetchFailed",
+      "DestinationExists",
     ];
-    expect(codes).toHaveLength(6);
+    expect(codes).toHaveLength(7);
   });
 });

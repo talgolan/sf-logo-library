@@ -15,7 +15,8 @@ export type SfLogosErrorCode =
   | "FormatUnavailable"
   | "UnknownBrand"
   | "InvalidInput"
-  | "FetchFailed";
+  | "FetchFailed"
+  | "DestinationExists";
 
 /**
  * Base error for all predictable failure modes.
