@@ -146,3 +146,214 @@ describe("fetch_asset — bytes mode", () => {
     }
   });
 });
+
+describe("fetch_asset — destination_path input validation", () => {
+  it("rejects destination_path combined with url input", async () => {
+    try {
+      await fetchAssetTool.handler(
+        {
+          url: "https://dam.usefulto.me/x.svg",
+          destination_path: "/tmp/out.svg",
+          mode: "url",
+        } as never,
+        ctx(),
+      );
+      throw new Error("expected throw");
+    } catch (err) {
+      expect((err as SfLogosError).code).toBe("InvalidInput");
+    }
+  });
+
+  it("rejects destination_path combined with mode='url'", async () => {
+    try {
+      await fetchAssetTool.handler(
+        {
+          id: "icon-agentforce",
+          destination_path: "/tmp/out.png",
+          mode: "url",
+        } as never,
+        ctx(),
+      );
+      throw new Error("expected throw");
+    } catch (err) {
+      expect((err as SfLogosError).code).toBe("InvalidInput");
+    }
+  });
+
+  it("rejects destination_path combined with mode='bytes'", async () => {
+    try {
+      await fetchAssetTool.handler(
+        {
+          id: "icon-agentforce",
+          destination_path: "/tmp/out.png",
+          mode: "bytes",
+        } as never,
+        ctx(),
+      );
+      throw new Error("expected throw");
+    } catch (err) {
+      expect((err as SfLogosError).code).toBe("InvalidInput");
+    }
+  });
+});
+
+describe("fetch_asset — destination_path happy path", () => {
+  it("writes to destination_path and returns path + cached_from", async () => {
+    const root = mkdtempSync(join(tmpdir(), "fetch-asset-dest-"));
+    const destDir = mkdtempSync(join(tmpdir(), "fetch-asset-dest-out-"));
+    try {
+      const cache: AssetCache = createAssetCache({
+        root,
+        manifestVersion: "2026-03-13",
+        fetcher: () =>
+          Promise.resolve({
+            status: 200,
+            bytes: new TextEncoder().encode("agentforce-bytes"),
+            duration_ms: 1,
+          }),
+      });
+      const ctxWithCache = makeTestContext(bundled as unknown as Manifest, { cache });
+      const destination = join(destDir, "agentforce.png");
+      const result = (await fetchAssetTool.handler(
+        { id: "icon-agentforce", destination_path: destination },
+        ctxWithCache,
+      )) as { path?: string; cached_from?: string; format: string };
+      expect(result.format).toBe("png");
+      expect(result.path).toBe(destination);
+      expect(result.cached_from?.endsWith("icon-agentforce.png")).toBe(true);
+      const { readFileSync, existsSync } = await import("node:fs");
+      expect(existsSync(destination)).toBe(true);
+      expect(readFileSync(destination, "utf8")).toBe("agentforce-bytes");
+      expect(existsSync(result.cached_from ?? "")).toBe(true);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+      rmSync(destDir, { recursive: true, force: true });
+    }
+  });
+
+  it("accepts mode='path' + destination_path (redundant but valid)", async () => {
+    const root = mkdtempSync(join(tmpdir(), "fetch-asset-dest-redundant-"));
+    const destDir = mkdtempSync(join(tmpdir(), "fetch-asset-dest-redundant-out-"));
+    try {
+      const cache: AssetCache = createAssetCache({
+        root,
+        manifestVersion: "2026-03-13",
+        fetcher: () =>
+          Promise.resolve({
+            status: 200,
+            bytes: new Uint8Array([1, 2, 3]),
+            duration_ms: 1,
+          }),
+      });
+      const ctxWithCache = makeTestContext(bundled as unknown as Manifest, { cache });
+      const destination = join(destDir, "agentforce.png");
+      const result = (await fetchAssetTool.handler(
+        { id: "icon-agentforce", destination_path: destination, mode: "path" },
+        ctxWithCache,
+      )) as { path?: string; cached_from?: string };
+      expect(result.path).toBe(destination);
+      expect(result.cached_from).toBeTruthy();
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+      rmSync(destDir, { recursive: true, force: true });
+    }
+  });
+
+  it("raises AssetNotFound for unknown id — cache/destination never touched", async () => {
+    const root = mkdtempSync(join(tmpdir(), "fetch-asset-dest-notfound-"));
+    const destDir = mkdtempSync(join(tmpdir(), "fetch-asset-dest-notfound-out-"));
+    try {
+      let fetcherCalls = 0;
+      const cache: AssetCache = createAssetCache({
+        root,
+        manifestVersion: "2026-03-13",
+        fetcher: () => {
+          fetcherCalls++;
+          return Promise.resolve({
+            status: 200,
+            bytes: new Uint8Array([0]),
+            duration_ms: 1,
+          });
+        },
+      });
+      const ctxWithCache = makeTestContext(bundled as unknown as Manifest, { cache });
+      const destination = join(destDir, "out.png");
+      try {
+        await fetchAssetTool.handler(
+          { id: "bogus-id", destination_path: destination },
+          ctxWithCache,
+        );
+        throw new Error("expected throw");
+      } catch (err) {
+        expect((err as SfLogosError).code).toBe("AssetNotFound");
+      }
+      expect(fetcherCalls).toBe(0);
+      const { existsSync } = await import("node:fs");
+      expect(existsSync(destination)).toBe(false);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+      rmSync(destDir, { recursive: true, force: true });
+    }
+  });
+
+  it("raises DestinationExists when destination already exists", async () => {
+    const root = mkdtempSync(join(tmpdir(), "fetch-asset-dest-exists-"));
+    const destDir = mkdtempSync(join(tmpdir(), "fetch-asset-dest-exists-out-"));
+    try {
+      const cache: AssetCache = createAssetCache({
+        root,
+        manifestVersion: "2026-03-13",
+        fetcher: () =>
+          Promise.resolve({
+            status: 200,
+            bytes: new Uint8Array([1, 2, 3]),
+            duration_ms: 1,
+          }),
+      });
+      const ctxWithCache = makeTestContext(bundled as unknown as Manifest, { cache });
+      const destination = join(destDir, "already-there.png");
+      const { writeFileSync } = await import("node:fs");
+      writeFileSync(destination, "pre-existing");
+      try {
+        await fetchAssetTool.handler(
+          { id: "icon-agentforce", destination_path: destination },
+          ctxWithCache,
+        );
+        throw new Error("expected throw");
+      } catch (err) {
+        expect((err as SfLogosError).code).toBe("DestinationExists");
+      }
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+      rmSync(destDir, { recursive: true, force: true });
+    }
+  });
+
+  it("raises InvalidInput when destination_path is not absolute", async () => {
+    const root = mkdtempSync(join(tmpdir(), "fetch-asset-dest-relpath-"));
+    try {
+      const cache: AssetCache = createAssetCache({
+        root,
+        manifestVersion: "2026-03-13",
+        fetcher: () =>
+          Promise.resolve({
+            status: 200,
+            bytes: new Uint8Array([1, 2, 3]),
+            duration_ms: 1,
+          }),
+      });
+      const ctxWithCache = makeTestContext(bundled as unknown as Manifest, { cache });
+      try {
+        await fetchAssetTool.handler(
+          { id: "icon-agentforce", destination_path: "relative/path.png" },
+          ctxWithCache,
+        );
+        throw new Error("expected throw");
+      } catch (err) {
+        expect((err as SfLogosError).code).toBe("InvalidInput");
+      }
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+});

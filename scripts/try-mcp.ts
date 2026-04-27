@@ -41,7 +41,7 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { spawnSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, writeFileSync, unlinkSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -205,6 +205,8 @@ interface Scenario {
   input: Record<string, unknown>;
   expect?: (output: unknown) => void;
   expectError?: { code: string };
+  /** Runs after the scenario regardless of pass/fail. For temp-file cleanup. */
+  cleanup?: () => void;
 }
 
 // Type guards to keep assertions concise.
@@ -613,6 +615,59 @@ const SCENARIOS: Scenario[] = [
     input: { url: "https://evil.example.com/x.svg", mode: "url" },
     expectError: { code: "InvalidAssetUrl" },
   },
+
+  // ---------------------------------------------------- fetch_asset (phase 3A — destination_path)
+  ...(() => {
+    const pid = String(process.pid);
+    const ts = String(Date.now());
+    const destGood = `/tmp/try-mcp-dest-${pid}-${ts}.png`;
+    const destExists = `/tmp/try-mcp-exists-${pid}-${ts}.png`;
+    // Pre-create the file the DestinationExists scenario collides with.
+    writeFileSync(destExists, "pre-existing");
+    return [
+      {
+        label:
+          "fetch_asset(destination_path=/tmp/...) — writes atomically; path=destination, cached_from=cache",
+        tool: "fetch_asset",
+        input: { id: "icon-agentforce", destination_path: destGood },
+        expect: (out: unknown) => {
+          const r = asObject(out);
+          const destPath = asString(r["path"], "path");
+          const cachedFrom = asString(r["cached_from"], "cached_from");
+          if (destPath !== destGood) {
+            throw new Error(`expected path=${destGood}, got ${destPath}`);
+          }
+          if (!cachedFrom.includes("sf-logos-mcp")) {
+            throw new Error(`cached_from should reference the cache dir, got ${cachedFrom}`);
+          }
+          if (!existsSync(destPath)) {
+            throw new Error(`destination file did not land on disk: ${destPath}`);
+          }
+        },
+        cleanup: () => {
+          try {
+            unlinkSync(destGood);
+          } catch {
+            /* already removed */
+          }
+        },
+      },
+      {
+        label:
+          "fetch_asset(destination_path pointing to existing file) → DestinationExists",
+        tool: "fetch_asset",
+        input: { id: "icon-agentforce", destination_path: destExists },
+        expectError: { code: "DestinationExists" },
+        cleanup: () => {
+          try {
+            unlinkSync(destExists);
+          } catch {
+            /* already removed */
+          }
+        },
+      },
+    ];
+  })(),
 ];
 
 // ---------------------------------------------------------------------------
@@ -687,6 +742,12 @@ async function runScenario(client: Client, s: Scenario): Promise<ScenarioResult>
       status: "fail",
       error: err instanceof Error ? err.message : String(err),
     };
+  } finally {
+    try {
+      s.cleanup?.();
+    } catch {
+      // Cleanup errors are silent — they would mask the real scenario result.
+    }
   }
 }
 

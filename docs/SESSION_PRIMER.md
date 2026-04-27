@@ -18,14 +18,15 @@ structured API on top of the same manifest.
 
 ## Current state (update when this changes)
 
-*Last updated: 2026-04-27 (phase-2 dog-food complete)*
+*Last updated: 2026-04-27 (phase-3A shipped)*
 
 | Thing | State |
 |---|---|
-| `main` branch | Phase 1 + phase 2 shipped; CI green. |
+| `main` branch | Phases 1, 2, and 3A shipped; CI green. |
 | MCP server phase 1 | **Shipped.** 5 read-only tools. |
-| MCP server phase 2 | **Shipped.** 6th tool `fetch_asset` (url / path / bytes; default path + png), on-disk cache under `<OS cache>/sf-logos-mcp/<manifest.lastUpdated>/<id>.<ext>`, `find_brand_logo` advisories (co-brand-only), `SIGUSR2` diagnostics snapshot. 110 tests, 27 regression scenarios (`bun run try:check`), 7-call smoke (`bun run phase2:smoke`). |
-| MCP server phase 3 | In scope. Strongest motivators from phase-2 dog-food: `fetch_asset(destination_path=…)` for cache preservation + single-call downloads; npm publish + public docs. |
+| MCP server phase 2 | **Shipped.** 6th tool `fetch_asset` (url / path / bytes; default path + png), on-disk cache under `<OS cache>/sf-logos-mcp/<manifest.lastUpdated>/<id>.<ext>`, `find_brand_logo` advisories (co-brand-only), `SIGUSR2` diagnostics snapshot. |
+| MCP server phase 3A | **Shipped.** `fetch_asset(destination_path=…)` — single-call atomic download to absolute path, cache preserved (server copies, not moves). New `DestinationExists` error code. Response adds `cached_from` diagnostic field. 125 tests, 29 regression scenarios (`bun run try:check`), 7-call smoke (`bun run phase2:smoke`). |
+| MCP server phase 3 (remaining) | In scope. npm publish pipeline, full docs set (per original spec §5.7), CI hardening (per §5.4.7), advisory symmetry. Separate specs when each turn comes. |
 | GitHub Pages | Served from `site/` via `.github/workflows/pages.yml`. Source = "GitHub Actions". |
 | Dog-food | Phase-2 done 2026-04-27. Transcript: [`docs/dogfood/2026-04-27-dog-food-phase-2.md`](dogfood/2026-04-27-dog-food-phase-2.md). Findings folded into LEARNINGS.md. |
 
@@ -35,6 +36,8 @@ structured API on top of the same manifest.
 - **Phase-2 scope revision:** [docs/superpowers/specs/2026-04-25-phase-2-scope-revision.md](superpowers/specs/2026-04-25-phase-2-scope-revision.md) — authoritative for phase 2. Supersedes the phase-2 portions of the original spec.
 - **Phase 1 plan (executed):** [docs/superpowers/plans/2026-04-25-phase-1-foundation.md](superpowers/plans/2026-04-25-phase-1-foundation.md) — 29 TDD-shaped tasks.
 - **Phase 2 plan (executed):** [docs/superpowers/plans/2026-04-25-phase-2-fetch-asset.md](superpowers/plans/2026-04-25-phase-2-fetch-asset.md) — 16 TDD-shaped tasks.
+- **Phase 3A spec (executed):** [docs/superpowers/specs/2026-04-27-phase-3a-destination-path.md](superpowers/specs/2026-04-27-phase-3a-destination-path.md) — `fetch_asset(destination_path=…)` single-feature design.
+- **Phase 3A plan (executed):** [docs/superpowers/plans/2026-04-27-phase-3a-destination-path.md](superpowers/plans/2026-04-27-phase-3a-destination-path.md) — 10 TDD-shaped tasks.
 - **Learnings log:** [docs/LEARNINGS.md](LEARNINGS.md) — every non-obvious finding across every session. Read this before writing code.
 - **Dog-food transcripts:** [docs/dogfood/](dogfood/) — verbatim records of real MCP-client sessions against the live server.
 - **Project conventions:** [CLAUDE.md](../CLAUDE.md) — runtime, commit style, scope discipline, the Pages→`site/` invariant.
@@ -61,7 +64,7 @@ bun install
 bun run typecheck && bun run lint && bun test
 
 # Confirm the built server still boots and serves every tool end-to-end.
-# 27 assertive scenarios hit the server via the real MCP SDK client.
+# 29 assertive scenarios hit the server via the real MCP SDK client.
 bun run try:check
 
 # (Also works: `bun run phase2:smoke` — 7 raw JSON-RPC calls.)
