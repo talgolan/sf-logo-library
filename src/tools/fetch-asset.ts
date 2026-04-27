@@ -185,8 +185,20 @@ export const fetchAssetTool = defineTool<Input, AssetDetail>({
     }
 
     if (mode === "path") {
-      const path = await ctx.cache.getPath(id, format, url);
-      return { ...summary, format, url, path } satisfies AssetDetail;
+      const cachePath = await ctx.cache.getPath(id, format, url);
+      if (haveDestination) {
+        const destination = input.destination_path as string;
+        const { copyToDestination } = await import("../assets/destination.js");
+        copyToDestination({ source: cachePath, destination });
+        return {
+          ...summary,
+          format,
+          url,
+          path: destination,
+          cached_from: cachePath,
+        } satisfies AssetDetail;
+      }
+      return { ...summary, format, url, path: cachePath } satisfies AssetDetail;
     }
 
     // mode === "bytes" — narrowed by elimination.
