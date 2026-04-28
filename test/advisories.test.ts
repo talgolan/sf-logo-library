@@ -1,7 +1,7 @@
 import { describe, it, expect } from "bun:test";
 import { ALL_ADVISORY_CODES, sortAdvisories, type AdvisoryCode } from "../src/advisories.js";
 
-describe("advisories — catalogue", () => {
+describe("advisories — catalog", () => {
   it("ALL_ADVISORY_CODES contains exactly 4 members, alphabetically sorted", () => {
     expect(ALL_ADVISORY_CODES).toHaveLength(4);
     const sorted = [...ALL_ADVISORY_CODES].sort();

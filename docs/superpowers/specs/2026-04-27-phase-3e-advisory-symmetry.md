@@ -16,7 +16,7 @@ Generalize the advisories channel. Today only `find_brand_logo` emits one adviso
 3. `find_product_icon` — add `empty_result_filter_too_narrow` (same idea, different inputs).
 4. `find_product_icon` — add `query_matched_no_scored_results` (when `query` is present, all `score > 0` candidates are filtered out by other constraints, and the result is empty even though the brand has icons).
 
-Promote `advisories` from an ad-hoc string array to a documented, stable, catalogued vocabulary. Every advisory code has a fixed meaning, a documented trigger condition, and a test scenario. Downstream LLMs get machine-readable hints rather than prose-only signals.
+Promote `advisories` from an ad-hoc string array to a documented, stable, catalogd vocabulary. Every advisory code has a fixed meaning, a documented trigger condition, and a test scenario. Downstream LLMs get machine-readable hints rather than prose-only signals.
 
 ## Motivation
 
@@ -30,7 +30,7 @@ The pattern generalizes. Every `find_*` tool has input filters that AND-combine;
 
 Advisories invert the problem: the server *knows* exactly which filter caused the empty result; it tells the caller directly.
 
-A secondary motivation: **the advisories channel is undertyped today.** It's a `string[]`. Phase 3E adds a typed union so adding a new code requires touching `src/advisories.ts` (the catalogue) and gets enforced by the compiler across every tool handler that might emit it. No more "did I spell it correctly?" bugs.
+A secondary motivation: **the advisories channel is undertyped today.** It's a `string[]`. Phase 3E adds a typed union so adding a new code requires touching `src/advisories.ts` (the catalog) and gets enforced by the compiler across every tool handler that might emit it. No more "did I spell it correctly?" bugs.
 
 ## Non-goals
 
@@ -46,7 +46,7 @@ A secondary motivation: **the advisories channel is undertyped today.** It's a `
 
 | # | Question | Decision |
 |---|---|---|
-| Q1 | Where does the code catalogue live? | `src/advisories.ts` — a single file exporting a string-literal union type, a list of all codes, and per-code description metadata. Mirrors `src/errors.ts`. |
+| Q1 | Where does the code catalog live? | `src/advisories.ts` — a single file exporting a string-literal union type, a list of all codes, and per-code description metadata. Mirrors `src/errors.ts`. |
 | Q2 | Should `advisories` be required on every response? | No. Remains optional: absent when no advisory applies. `exactOptionalPropertyTypes` rules apply. Rationale: backwards compatible with phase-2 behavior; easier for clients not parsing advisories. |
 | Q3 | Shape: `string[]` vs `AdvisoryCode[]` vs `{code, detail}[]` | `AdvisoryCode[]` (typed string-literal union). Keep the wire shape simple — a string per entry — but enforce the spelling via TypeScript. No per-entry `detail` payload in v1; add later if a code needs structured data. |
 | Q4 | Ordering of advisories in the array | Alphabetical by code. Deterministic output; easy to diff in tests. |
@@ -59,7 +59,7 @@ A secondary motivation: **the advisories channel is undertyped today.** It's a `
 
 ## Acceptance criteria
 
-1. `src/advisories.ts` exports an `AdvisoryCode` string-literal union with exactly four members (see §"Advisory catalogue" below).
+1. `src/advisories.ts` exports an `AdvisoryCode` string-literal union with exactly four members (see §"Advisory catalog" below).
 2. `find_brand_logo` can emit `only_co_branded_for_requested_background`, `only_light_surface_standalone_available`, or `empty_result_filter_too_narrow`.
 3. `find_product_icon` can emit `empty_result_filter_too_narrow` or `query_matched_no_scored_results`.
 4. Each advisory has at least one unit test that triggers it and at least one unit test that proves it is NOT emitted under an adjacent condition.
@@ -70,7 +70,7 @@ A secondary motivation: **the advisories channel is undertyped today.** It's a `
 9. Regression: no change to existing phase-2 dog-food Slack-dark-surface scenario (`try:check`). The advisory that was there stays; new advisories are additive.
 10. All gates pass: `bun run typecheck`, `bun run lint`, `bun test` (expected 125 → 133, +8 new scenarios), `bun run try:check` (29 → 32, +3 new regression scenarios), `bun run phase2:smoke` (7, unchanged).
 
-## Advisory catalogue
+## Advisory catalog
 
 ### `only_co_branded_for_requested_background` (existing)
 
@@ -109,7 +109,7 @@ A secondary motivation: **the advisories channel is undertyped today.** It's a `
 
 ```ts
 /**
- * advisories — Catalogue of machine-readable advisory codes emitted
+ * advisories — Catalog of machine-readable advisory codes emitted
  * on successful responses from find_* tools.
  *
  * Responsibility: single source of truth for the AdvisoryCode union,
@@ -336,7 +336,7 @@ Add an entry capturing the design rationale: why advisories are additive to succ
 
 | Risk | Mitigation |
 |---|---|
-| Advisory proliferation — every new edge case becomes a new code | Keep the catalogue small; prefer `empty_result_filter_too_narrow` as a general "your filters narrowed to zero" rather than per-filter codes. Add a code only when downstream LLMs consistently pick the wrong recovery. |
+| Advisory proliferation — every new edge case becomes a new code | Keep the catalog small; prefer `empty_result_filter_too_narrow` as a general "your filters narrowed to zero" rather than per-filter codes. Add a code only when downstream LLMs consistently pick the wrong recovery. |
 | `only_co_branded_*` behavior change (now suppressed when `co_branded: true` asked) breaks an existing caller | Dog-food showed no caller relied on the advisory firing when co-branded was explicitly requested. Low risk; documented in CHANGELOG. |
 | Two advisories firing simultaneously is confusing | Documented explicitly in `docs/tools.md` with the Slack example. The test `find-brand-logo.test.ts` scenario 3 locks the co-emission contract. |
 | `empty_result_filter_too_narrow` fires on legitimate "this brand has no logos" edge | Guarded by `brand.logos.length > 0` check: we only advise when the brand *had* candidates and filters narrowed them to zero. |
@@ -361,7 +361,7 @@ Add an entry capturing the design rationale: why advisories are additive to succ
 
 ## Order of operations within the plan
 
-1. **Catalogue first.** Write `src/advisories.ts` + `test/advisories.test.ts`. Commit.
+1. **Catalog first.** Write `src/advisories.ts` + `test/advisories.test.ts`. Commit.
 2. **Observability hook.** Add `advisory.emitted` event type + test. Commit.
 3. **Refactor `find_brand_logo`** to typed advisories + new codes + behavior change. Commit.
 4. **Refactor `find_product_icon`** to typed advisories + new codes. Commit.

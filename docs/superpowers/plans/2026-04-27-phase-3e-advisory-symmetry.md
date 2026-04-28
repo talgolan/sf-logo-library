@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Generalize the `advisories` channel from the single ad-hoc code introduced in phase 2 into a typed catalogue of four codes. Emit `only_light_surface_standalone_available` and `empty_result_filter_too_narrow` from `find_brand_logo`; emit `empty_result_filter_too_narrow` and `query_matched_no_scored_results` from `find_product_icon`. Suppress the existing `only_co_branded_for_requested_background` when the caller explicitly passed `co_branded: true`. Emit an `advisory.emitted` observability event per code per call.
+**Goal:** Generalize the `advisories` channel from the single ad-hoc code introduced in phase 2 into a typed catalog of four codes. Emit `only_light_surface_standalone_available` and `empty_result_filter_too_narrow` from `find_brand_logo`; emit `empty_result_filter_too_narrow` and `query_matched_no_scored_results` from `find_product_icon`. Suppress the existing `only_co_branded_for_requested_background` when the caller explicitly passed `co_branded: true`. Emit an `advisory.emitted` observability event per code per call.
 
 **Architecture:** New `src/advisories.ts` module is the single source of truth for the `AdvisoryCode` string-literal union plus a `sortAdvisories(Set)` helper. The two affected tool handlers build a `Set<AdvisoryCode>`, emit one `advisory.emitted` event per code, then sort and attach as an optional `AdvisoryCode[]` on successful responses. The existing `ctx.logger.emit(ev.*(...))` pattern is extended with one new event constructor; there is no separate "events" service.
 
@@ -35,11 +35,11 @@
 - `scripts/phase2-smoke.sh`: **7** JSON-RPC calls pass.
 
 **Target test counts after phase 3E:**
-- `bun test` total: **125 → ~136** (+2 catalogue, +1 event, +4 find_brand_logo, +4 find_product_icon). Expected delta is +11. Final verification confirms the exact count; the plan does not promise a specific delta beyond "≥ 125 + added scenarios".
+- `bun test` total: **125 → ~136** (+2 catalog, +1 event, +4 find_brand_logo, +4 find_product_icon). Expected delta is +11. Final verification confirms the exact count; the plan does not promise a specific delta beyond "≥ 125 + added scenarios".
 - `scripts/try-mcp.ts`: **29 → 32** (+3 scenarios).
 - `scripts/phase2-smoke.sh`: **7** (unchanged).
 
-**Order rationale:** catalogue first (everything imports it), then the `find_brand_logo` refactor in three behavior-preserving slices (structural rename → suppression refinement → new codes), then `find_product_icon` in two slices, then observability wiring (handlers already have logger access; adding emit late means the handler-logic tests don't need to stub an extra collaborator), then descriptions, then regression, then docs + PR.
+**Order rationale:** catalog first (everything imports it), then the `find_brand_logo` refactor in three behavior-preserving slices (structural rename → suppression refinement → new codes), then `find_product_icon` in two slices, then observability wiring (handlers already have logger access; adding emit late means the handler-logic tests don't need to stub an extra collaborator), then descriptions, then regression, then docs + PR.
 
 ---
 
@@ -182,7 +182,7 @@ Expected: commit lands. `git status --short` is empty.
 
 ---
 
-## Task 2: Advisory catalogue module
+## Task 2: Advisory catalog module
 
 **Goal:** Create `src/advisories.ts` as the single source of truth for the `AdvisoryCode` union, the alphabetized codes list, and the `sortAdvisories` helper. Write tests first (TDD).
 
@@ -198,7 +198,7 @@ Create `test/advisories.test.ts`:
 import { describe, it, expect } from "bun:test";
 import { ALL_ADVISORY_CODES, sortAdvisories, type AdvisoryCode } from "../src/advisories.js";
 
-describe("advisories — catalogue", () => {
+describe("advisories — catalog", () => {
   it("ALL_ADVISORY_CODES contains exactly 4 members, alphabetically sorted", () => {
     expect(ALL_ADVISORY_CODES).toHaveLength(4);
     const sorted = [...ALL_ADVISORY_CODES].sort();
@@ -238,7 +238,7 @@ Create `src/advisories.ts`:
 
 ```ts
 /**
- * advisories — Catalogue of machine-readable advisory codes emitted on
+ * advisories — Catalog of machine-readable advisory codes emitted on
  * successful responses from find_* tools.
  *
  * Responsibility: single source of truth for the AdvisoryCode union,
@@ -307,11 +307,11 @@ Expected: typecheck + lint exit 0. Tests: `127 pass / 0 fail` (baseline 125 + 2 
 ```bash
 git add src/advisories.ts test/advisories.test.ts
 git commit -m "$(cat <<'EOF'
-feat: advisories — typed catalogue of advisory codes
+feat: advisories — typed catalog of advisory codes
 
 New src/advisories.ts exports the AdvisoryCode string-literal union
 (4 codes), ALL_ADVISORY_CODES alphabetized list, and sortAdvisories
-helper. No handler yet uses these — this commit is the catalogue
+helper. No handler yet uses these — this commit is the catalog
 module in isolation; subsequent commits wire it into find_brand_logo
 and find_product_icon.
 
@@ -1407,7 +1407,7 @@ Add a new row after the phase-3A row. The current phase-3A row looks like:
 Insert a new row immediately after it:
 
 ```
-| MCP server phase 3E | **Shipped.** Typed `AdvisoryCode` catalogue (4 codes). `find_brand_logo` adds `only_light_surface_standalone_available` and `empty_result_filter_too_narrow`; existing `only_co_branded_for_requested_background` suppressed when `co_branded: true` is explicit. `find_product_icon` adds `empty_result_filter_too_narrow` and `query_matched_no_scored_results`. New `advisory.emitted` observability event per emission. 140 tests, 31 regression scenarios, 7-call smoke. |
+| MCP server phase 3E | **Shipped.** Typed `AdvisoryCode` catalog (4 codes). `find_brand_logo` adds `only_light_surface_standalone_available` and `empty_result_filter_too_narrow`; existing `only_co_branded_for_requested_background` suppressed when `co_branded: true` is explicit. `find_product_icon` adds `empty_result_filter_too_narrow` and `query_matched_no_scored_results`. New `advisory.emitted` observability event per emission. 140 tests, 31 regression scenarios, 7-call smoke. |
 ```
 
 Update the remaining-phase-3 row from:
@@ -1475,7 +1475,7 @@ bun run typecheck && bun run lint && bun test && bun run try:check && bun run ph
 Expected:
 - Typecheck: clean.
 - Lint: clean.
-- `bun test`: `140 pass / 0 fail` (125 baseline + 2 catalogue + 1 event + 5 find-brand-logo [tasks 5,6×2,7×2] + 5 find-product-icon [tasks 8×2, 9×3] + 2 emission events [task 10] = 140 — **verify empirically; if the count differs, note it in the PR body**).
+- `bun test`: `140 pass / 0 fail` (125 baseline + 2 catalog + 1 event + 5 find-brand-logo [tasks 5,6×2,7×2] + 5 find-product-icon [tasks 8×2, 9×3] + 2 emission events [task 10] = 140 — **verify empirically; if the count differs, note it in the PR body**).
 - `try:check`: `31/31 pass / 0 fail`.
 - `phase2:smoke`: 7 calls pass.
 
@@ -1517,7 +1517,7 @@ Run:
 gh pr create --title "feat: phase 3E — advisory symmetry across find_* tools" --body "$(cat <<'EOF'
 ## Summary
 
-- New typed `AdvisoryCode` catalogue (4 codes) in `src/advisories.ts`.
+- New typed `AdvisoryCode` catalog (4 codes) in `src/advisories.ts`.
 - `find_brand_logo` now emits `only_light_surface_standalone_available` and `empty_result_filter_too_narrow`, plus the existing `only_co_branded_for_requested_background` (now suppressed when `co_branded: true` is the caller's explicit ask).
 - `find_product_icon` now emits `empty_result_filter_too_narrow` and `query_matched_no_scored_results`.
 - New `advisory.emitted` observability event fired once per code per call.
@@ -1529,7 +1529,7 @@ Bundled with this PR are the three other phase-3 specs (3B/3C/3D) as documentati
 
 - [x] `bun run typecheck` clean.
 - [x] `bun run lint` clean.
-- [x] `bun test` — 140 pass / 0 fail (baseline 125 + 15 new scenarios across catalogue, events, both find_* tools).
+- [x] `bun test` — 140 pass / 0 fail (baseline 125 + 15 new scenarios across catalog, events, both find_* tools).
 - [x] `bun run try:check` — 31 regression scenarios pass (Slack dark strengthened + 2 new top-level).
 - [x] `bun run phase2:smoke` — 7 calls pass (unchanged).
 

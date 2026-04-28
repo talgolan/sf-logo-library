@@ -1,5 +1,5 @@
 /**
- * advisories — Catalogue of machine-readable advisory codes emitted on
+ * advisories — Catalog of machine-readable advisory codes emitted on
  * successful responses from find_* tools.
  *
  * Responsibility: single source of truth for the AdvisoryCode union,

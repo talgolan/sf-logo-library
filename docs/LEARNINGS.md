@@ -64,7 +64,7 @@ After `if (mode === "url")` and `if (mode === "path")` return, a trailing `if (m
 The Claude Code harness writes `.claude/settings.json` when the user approves permissions. If `.claude/` isn't in `.gitignore`, a `git add -A` (or `git add --all` from an agent prompt) commits local personal settings. Add `.claude/` to `.gitignore` on day one.
 — Found: commit `e89889c` in phase 2 (caught by `git status` after a `git add -A` in the smoke-script rename commit).
 
-### Compile-time exhaustiveness guards for string-literal-union catalogues
+### Compile-time exhaustiveness guards for string-literal-union catalogs
 
 When you define a string-literal union `Foo` and a parallel runtime array `ALL_FOO: readonly Foo[]`, TypeScript won't error if someone later adds a member to the union but forgets to extend the array — the array's element type is still satisfied. Close the gap with a mapped-type guard at the same module:
 
