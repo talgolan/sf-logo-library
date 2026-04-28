@@ -124,4 +124,21 @@ describe("find_brand_logo — advisories", () => {
     )) as { advisories?: AdvisoryCode[] };
     expect(result.advisories ?? []).not.toContain("only_light_surface_standalone_available");
   });
+
+  it("does NOT emit 'only_light_surface_standalone_available' for light-background request", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "slack", background: "light" },
+      ctx(),
+    )) as { advisories?: AdvisoryCode[] };
+    expect(result.advisories ?? []).not.toContain("only_light_surface_standalone_available");
+  });
+
+  it("emits 'only_light_surface_standalone_available' even when co_branded:true is explicit (co-brand advisory suppressed, light-surface advisory still fires)", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "slack", background: "dark", co_branded: true },
+      ctx(),
+    )) as { advisories?: AdvisoryCode[] };
+    expect(result.advisories ?? []).toContain("only_light_surface_standalone_available");
+    expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
+  });
 });
