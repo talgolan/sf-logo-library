@@ -84,4 +84,33 @@ describe("find_product_icon — advisories", () => {
     expect(result.icons.length).toBeGreaterThan(0);
     expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
   });
+
+  it("emits 'query_matched_no_scored_results' when query matches zero candidates (no other filters)", async () => {
+    const result = (await findProductIconTool.handler(
+      { query: "xyzzy-plugh-nowhere" },
+      ctx(),
+    )) as { icons: unknown[]; advisories?: AdvisoryCode[] };
+    expect(result.icons).toHaveLength(0);
+    expect(result.advisories ?? []).toContain("query_matched_no_scored_results");
+    expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
+  });
+
+  it("emits BOTH advisories when query misses AND filters narrowed the pool", async () => {
+    const result = (await findProductIconTool.handler(
+      { query: "xyzzy-plugh-nowhere", category: "AI" },
+      ctx(),
+    )) as { icons: unknown[]; advisories?: AdvisoryCode[] };
+    expect(result.icons).toHaveLength(0);
+    expect(result.advisories ?? []).toContain("query_matched_no_scored_results");
+    expect(result.advisories ?? []).toContain("empty_result_filter_too_narrow");
+  });
+
+  it("does NOT emit 'query_matched_no_scored_results' when results are found", async () => {
+    const result = (await findProductIconTool.handler({ query: "agentforce" }, ctx())) as {
+      icons: unknown[];
+      advisories?: AdvisoryCode[];
+    };
+    expect(result.icons.length).toBeGreaterThan(0);
+    expect(result.advisories ?? []).not.toContain("query_matched_no_scored_results");
+  });
 });

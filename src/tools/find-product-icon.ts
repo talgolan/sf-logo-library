@@ -120,7 +120,6 @@ export const findProductIconTool = defineTool<Input, Output>({
     }
 
     const postFilterCount = candidates.length;
-    void postFilterCount; // consumed in Task 9 for query_matched_no_scored_results
     const limit = clamp(input.limit ?? DEFAULT_LIMIT, 1, MAX_LIMIT);
 
     const queryTrimmed = input.query?.trim() ?? "";
@@ -152,6 +151,9 @@ export const findProductIconTool = defineTool<Input, Output>({
       input.background !== undefined;
     if (finalIcons.length === 0 && nonQueryFilterSupplied && preFilterCount > 0) {
       advisorySet.add("empty_result_filter_too_narrow");
+    }
+    if (finalIcons.length === 0 && hasQuery && postFilterCount > 0) {
+      advisorySet.add("query_matched_no_scored_results");
     }
 
     const advisories = sortAdvisories(advisorySet);
