@@ -48,13 +48,13 @@ const DESCRIPTION = [
   "the asset's variant, e.g. 'Knockout'), `preferred_only` (only the default-choice",
   "asset). Results sorted preferred-first. Always prefer SVG (summary.preferred_format).",
   "Never recolor or distort — preserve the aspect_ratio supplied on each result.",
-  "Data note: some brands have no standalone mark for dark backgrounds — notably Slack,",
-  "whose dark-surface assets are all Salesforce co-brand lockups. If every result has",
-  "`co_branded: true` when you asked for a dark background, the sanctioned options are:",
-  "place the light-background mark on a white card, use the co-brand, or ask the user.",
-  "When that happens, the response also carries",
-  "`advisories: ['only_co_branded_for_requested_background']` as a machine-readable",
-  "signal for callers that don't parse the co_branded flag themselves.",
+  "On success, the response may include `advisories` (optional string array) with one",
+  "or more of: `only_co_branded_for_requested_background` (every result is a",
+  "Salesforce-endorsed lockup when a specific background was requested — suppressed",
+  "when co_branded: true was the caller's explicit ask), `only_light_surface_standalone_available`",
+  "(dark background requested but only light-surface standalone marks exist for this brand —",
+  "place the light mark on a contrasting card), `empty_result_filter_too_narrow` (the",
+  "AND of filters eliminated every candidate — relaxing a filter is the likely recovery).",
 ].join(" ");
 
 export const findBrandLogoTool = defineTool<Input, Output>({

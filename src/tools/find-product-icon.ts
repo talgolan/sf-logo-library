@@ -51,6 +51,10 @@ const DESCRIPTION = [
   "Name drift: some products have been renamed (e.g. 'Data Cloud' → 'Data 360');",
   "keywords cover former names, but `name` is always the current canonical label —",
   "surface `name` to the user rather than the query string.",
+  "On success, the response may include `advisories` (optional string array) with one",
+  "or more of: `empty_result_filter_too_narrow` (non-query filters narrowed the pool to",
+  "zero — relax a filter), `query_matched_no_scored_results` (query matched no candidate",
+  "in the filtered pool — reword the query rather than relaxing filters).",
 ].join(" ");
 
 function clamp(n: number, min: number, max: number): number {
