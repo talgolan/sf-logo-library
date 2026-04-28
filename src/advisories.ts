@@ -33,6 +33,17 @@ export const ALL_ADVISORY_CODES: readonly AdvisoryCode[] = [
   "query_matched_no_scored_results",
 ];
 
+// Exhaustiveness guard: fails to compile if a union member is missing from
+// ALL_ADVISORY_CODES. Adding a new AdvisoryCode requires adding a key here;
+// adding a key that is not in the union fails at the type annotation.
+const _ALL_ADVISORY_CODES_EXHAUSTIVE: { readonly [K in AdvisoryCode]: true } = {
+  empty_result_filter_too_narrow: true,
+  only_co_branded_for_requested_background: true,
+  only_light_surface_standalone_available: true,
+  query_matched_no_scored_results: true,
+};
+void _ALL_ADVISORY_CODES_EXHAUSTIVE;
+
 /**
  * Sort a set of advisory codes alphabetically.
  *
