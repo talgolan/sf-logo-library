@@ -21,10 +21,10 @@
  * See spec §2 (find_brand_logo).
  */
 
+import { sortAdvisories, type AdvisoryCode } from "../advisories.js";
 import { SfLogosError } from "../errors.js";
 import { toAssetSummary } from "../manifest/summary.js";
 import type { AssetSummary, Background, BrandId } from "../manifest/types.js";
-import { sortAdvisories, type AdvisoryCode } from "../advisories.js";
 import { defineTool } from "./registry.js";
 
 interface Input {
