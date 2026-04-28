@@ -156,6 +156,15 @@ export const findBrandLogoTool = defineTool<Input, Output>({
       }
     }
 
+    const filterSupplied =
+      input.background !== undefined ||
+      input.co_branded !== undefined ||
+      input.variant !== undefined ||
+      input.preferred_only === true;
+    if (filterSupplied && logos.length === 0 && brand.logos.length > 0) {
+      advisorySet.add("empty_result_filter_too_narrow");
+    }
+
     const advisories = sortAdvisories(advisorySet);
     return Promise.resolve({
       logos: logos.map((l) => toAssetSummary(l, brand)),
