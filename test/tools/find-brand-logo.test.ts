@@ -3,6 +3,7 @@ import { findBrandLogoTool } from "../../src/tools/find-brand-logo.js";
 import bundled from "../../src/bundled/manifest.json" with { type: "json" };
 import type { Manifest } from "../../src/manifest/types.js";
 import { makeTestContext } from "../helpers/context.js";
+import type { AdvisoryCode } from "../../src/advisories.js";
 
 describe("find_brand_logo", () => {
   const ctx = () => makeTestContext(bundled as unknown as Manifest);
@@ -74,7 +75,7 @@ describe("find_brand_logo — advisories", () => {
     const result = (await findBrandLogoTool.handler(
       { brand: "slack", background: "dark" },
       ctx(),
-    )) as { logos: Array<{ co_branded: boolean }>; advisories?: string[] };
+    )) as { logos: Array<{ co_branded: boolean }>; advisories?: AdvisoryCode[] };
     expect(result.logos.length).toBeGreaterThan(0);
     expect(result.logos.every((l) => l.co_branded)).toBe(true);
     expect(result.advisories ?? []).toContain("only_co_branded_for_requested_background");
@@ -84,7 +85,7 @@ describe("find_brand_logo — advisories", () => {
     const result = (await findBrandLogoTool.handler(
       { brand: "salesforce", background: "light" },
       ctx(),
-    )) as { logos: Array<{ co_branded: boolean }>; advisories?: string[] };
+    )) as { logos: Array<{ co_branded: boolean }>; advisories?: AdvisoryCode[] };
     expect(result.logos.some((l) => !l.co_branded)).toBe(true);
     expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
   });
@@ -92,8 +93,94 @@ describe("find_brand_logo — advisories", () => {
   it("does NOT emit the advisory when background is not specified", async () => {
     const result = (await findBrandLogoTool.handler({ brand: "slack" }, ctx())) as {
       logos: Array<{ co_branded: boolean }>;
-      advisories?: string[];
+      advisories?: AdvisoryCode[];
     };
     expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
+  });
+
+  it("does NOT emit the advisory when co_branded: true was explicitly requested", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "slack", background: "dark", co_branded: true },
+      ctx(),
+    )) as { logos: Array<{ co_branded: boolean }>; advisories?: AdvisoryCode[] };
+    expect(result.logos.length).toBeGreaterThan(0);
+    expect(result.logos.every((l) => l.co_branded)).toBe(true);
+    expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
+  });
+
+  it("emits 'only_light_surface_standalone_available' for dark Slack (co-emits with co-brand advisory)", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "slack", background: "dark" },
+      ctx(),
+    )) as { advisories?: AdvisoryCode[] };
+    expect(result.advisories ?? []).toContain("only_light_surface_standalone_available");
+    expect(result.advisories ?? []).toContain("only_co_branded_for_requested_background");
+  });
+
+  it("does NOT emit 'only_light_surface_standalone_available' for dark Salesforce (standalone dark mark exists)", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "salesforce", background: "dark" },
+      ctx(),
+    )) as { advisories?: AdvisoryCode[] };
+    expect(result.advisories ?? []).not.toContain("only_light_surface_standalone_available");
+  });
+
+  it("does NOT emit 'only_light_surface_standalone_available' for light-background request", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "slack", background: "light" },
+      ctx(),
+    )) as { advisories?: AdvisoryCode[] };
+    expect(result.advisories ?? []).not.toContain("only_light_surface_standalone_available");
+  });
+
+  it("emits 'only_light_surface_standalone_available' even when co_branded:true is explicit (co-brand advisory suppressed, light-surface advisory still fires)", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "slack", background: "dark", co_branded: true },
+      ctx(),
+    )) as { advisories?: AdvisoryCode[] };
+    expect(result.advisories ?? []).toContain("only_light_surface_standalone_available");
+    expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
+  });
+
+  it("emits 'empty_result_filter_too_narrow' when filters eliminate every candidate", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "salesforce", background: "dark", variant: "__nonexistent_xyz__" },
+      ctx(),
+    )) as { logos: unknown[]; advisories?: AdvisoryCode[] };
+    expect(result.logos).toHaveLength(0);
+    expect(result.advisories ?? []).toContain("empty_result_filter_too_narrow");
+  });
+
+  it("does NOT emit 'empty_result_filter_too_narrow' when no filters are supplied", async () => {
+    const result = (await findBrandLogoTool.handler({ brand: "salesforce" }, ctx())) as {
+      logos: unknown[];
+      advisories?: AdvisoryCode[];
+    };
+    expect(result.logos.length).toBeGreaterThan(0);
+    expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
+  });
+
+  it("does NOT emit 'empty_result_filter_too_narrow' when filters still yield results", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "salesforce", background: "dark" },
+      ctx(),
+    )) as { logos: unknown[]; advisories?: AdvisoryCode[] };
+    expect(result.logos.length).toBeGreaterThan(0);
+    expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
+  });
+
+  it("writes an advisory.emitted event per code to the observability ring", async () => {
+    const c = ctx();
+    await findBrandLogoTool.handler({ brand: "slack", background: "dark" }, c);
+    const snapshot = c.logger.ringSnapshot();
+    const events = snapshot.filter((e) => e.event === "advisory.emitted");
+    const codes = events.map((e) => e["code"]).sort();
+    expect(codes).toEqual([
+      "only_co_branded_for_requested_background",
+      "only_light_surface_standalone_available",
+    ]);
+    for (const e of events) {
+      expect(e["tool"]).toBe("find_brand_logo");
+    }
   });
 });

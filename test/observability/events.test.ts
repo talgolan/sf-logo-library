@@ -32,4 +32,15 @@ describe("Event constructors", () => {
     const e = ev.internalError({ message: "boom", stack: "..." });
     expect(e.level).toBe("error");
   });
+
+  it("advisoryEmitted is debug-level with tool and code", () => {
+    const e = ev.advisoryEmitted({
+      tool: "find_brand_logo",
+      code: "only_co_branded_for_requested_background",
+    });
+    expect(e.event).toBe("advisory.emitted");
+    expect(e.level).toBe("debug");
+    expect(e["tool"]).toBe("find_brand_logo");
+    expect(e["code"]).toBe("only_co_branded_for_requested_background");
+  });
 });

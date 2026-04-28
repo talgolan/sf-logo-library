@@ -18,15 +18,16 @@ structured API on top of the same manifest.
 
 ## Current state (update when this changes)
 
-*Last updated: 2026-04-27 (phase-3A shipped)*
+*Last updated: 2026-04-27 (phase-3E shipped)*
 
 | Thing | State |
 |---|---|
-| `main` branch | Phases 1, 2, and 3A shipped; CI green. |
+| `main` branch | Phases 1, 2, 3A, and 3E shipped; CI green. |
 | MCP server phase 1 | **Shipped.** 5 read-only tools. |
 | MCP server phase 2 | **Shipped.** 6th tool `fetch_asset` (url / path / bytes; default path + png), on-disk cache under `<OS cache>/sf-logos-mcp/<manifest.lastUpdated>/<id>.<ext>`, `find_brand_logo` advisories (co-brand-only), `SIGUSR2` diagnostics snapshot. |
 | MCP server phase 3A | **Shipped.** `fetch_asset(destination_path=…)` — single-call atomic download to absolute path, cache preserved (server copies, not moves). New `DestinationExists` error code. Response adds `cached_from` diagnostic field. 125 tests, 29 regression scenarios (`bun run try:check`), 7-call smoke (`bun run phase2:smoke`). |
-| MCP server phase 3 (remaining) | In scope. npm publish pipeline, full docs set (per original spec §5.7), CI hardening (per §5.4.7), advisory symmetry. Separate specs when each turn comes. |
+| MCP server phase 3E | **Shipped.** Typed `AdvisoryCode` catalog (4 codes). `find_brand_logo` adds `only_light_surface_standalone_available` and `empty_result_filter_too_narrow`; existing `only_co_branded_for_requested_background` suppressed when `co_branded: true` is explicit. `find_product_icon` adds `empty_result_filter_too_narrow` and `query_matched_no_scored_results`. New `advisory.emitted` observability event per emission. 143 tests, 31 regression scenarios, 7-call smoke. |
+| MCP server phase 3 (remaining) | In scope: npm publish pipeline (3B), full docs set (3C, per §5.7), CI hardening (3D, per §5.4.7). All four phase-3 specs exist on `main`; 3B/3C/3D plans not yet written. |
 | GitHub Pages | Served from `site/` via `.github/workflows/pages.yml`. Source = "GitHub Actions". |
 | Dog-food | Phase-2 done 2026-04-27. Transcript: [`docs/dogfood/2026-04-27-dog-food-phase-2.md`](dogfood/2026-04-27-dog-food-phase-2.md). Findings folded into LEARNINGS.md. |
 

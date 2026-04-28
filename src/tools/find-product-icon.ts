@@ -16,9 +16,11 @@
  * See spec §2 (find_product_icon).
  */
 
+import { sortAdvisories, type AdvisoryCode } from "../advisories.js";
 import { SfLogosError } from "../errors.js";
 import { toAssetSummary } from "../manifest/summary.js";
 import type { AssetSummary, Background, ProductIconCategory } from "../manifest/types.js";
+import { ev } from "../observability/events.js";
 import { scoreLogo } from "../search/score.js";
 import { tokenize } from "../search/tokenize.js";
 import { defineTool } from "./registry.js";
@@ -32,6 +34,7 @@ interface Input {
 }
 interface Output {
   icons: AssetSummary[];
+  advisories?: AdvisoryCode[];
 }
 
 const DEFAULT_LIMIT = 10;
@@ -48,6 +51,10 @@ const DESCRIPTION = [
   "Name drift: some products have been renamed (e.g. 'Data Cloud' → 'Data 360');",
   "keywords cover former names, but `name` is always the current canonical label —",
   "surface `name` to the user rather than the query string.",
+  "On success, the response may include `advisories` (optional string array) with one",
+  "or more of: `empty_result_filter_too_narrow` (non-query filters narrowed the pool to",
+  "zero — relax a filter), `query_matched_no_scored_results` (query matched no candidate",
+  "in the filtered pool — reword the query rather than relaxing filters).",
 ].join(" ");
 
 function clamp(n: number, min: number, max: number): number {
@@ -100,6 +107,8 @@ export const findProductIconTool = defineTool<Input, Output>({
     const brand = ctx.manifest.brands.find((b) => b.id === "product-icons");
     if (!brand) return Promise.resolve({ icons: [] });
 
+    const preFilterCount = brand.logos.length;
+
     let candidates = brand.logos.slice();
     if (input.category !== undefined) {
       candidates = candidates.filter((l) => l.category === input.category);
@@ -115,10 +124,15 @@ export const findProductIconTool = defineTool<Input, Output>({
       });
     }
 
+    const postFilterCount = candidates.length;
     const limit = clamp(input.limit ?? DEFAULT_LIMIT, 1, MAX_LIMIT);
 
-    if (input.query !== undefined && input.query.trim().length > 0) {
-      const tokens = tokenize(input.query);
+    const queryTrimmed = input.query?.trim() ?? "";
+    const hasQuery = queryTrimmed.length > 0;
+
+    let finalIcons: AssetSummary[];
+    if (hasQuery) {
+      const tokens = tokenize(queryTrimmed);
       const scored = candidates
         .map((l) => ({ logo: l, score: scoreLogo(l, tokens) }))
         .filter((s) => s.score > 0)
@@ -126,17 +140,36 @@ export const findProductIconTool = defineTool<Input, Output>({
           b.score !== a.score ? b.score - a.score : a.logo.name.localeCompare(b.logo.name),
         )
         .slice(0, limit);
-      return Promise.resolve({
-        icons: scored.map((s) => ({
-          ...toAssetSummary(s.logo, brand),
-          match_score: s.score,
-        })),
-      });
+      finalIcons = scored.map((s) => ({
+        ...toAssetSummary(s.logo, brand),
+        match_score: s.score,
+      }));
+    } else {
+      candidates.sort((a, b) => a.name.localeCompare(b.name));
+      finalIcons = candidates.slice(0, limit).map((l) => toAssetSummary(l, brand));
     }
 
-    candidates.sort((a, b) => a.name.localeCompare(b.name));
+    const advisorySet = new Set<AdvisoryCode>();
+    const nonQueryFilterSupplied =
+      input.category !== undefined ||
+      (input.keywords !== undefined && input.keywords.length > 0) ||
+      input.background !== undefined;
+    // Non-query filters narrowed to zero; caller should relax category/keywords/background.
+    if (finalIcons.length === 0 && nonQueryFilterSupplied && preFilterCount > 0) {
+      advisorySet.add("empty_result_filter_too_narrow");
+    }
+    // Query scored zero against a non-empty candidate pool; caller should reword the query.
+    if (finalIcons.length === 0 && hasQuery && postFilterCount > 0) {
+      advisorySet.add("query_matched_no_scored_results");
+    }
+
+    for (const code of advisorySet) {
+      ctx.logger.emit(ev.advisoryEmitted({ tool: "find_product_icon", code }));
+    }
+    const advisories = sortAdvisories(advisorySet);
     return Promise.resolve({
-      icons: candidates.slice(0, limit).map((l) => toAssetSummary(l, brand)),
+      icons: finalIcons,
+      ...(advisories.length > 0 ? { advisories } : {}),
     });
   },
 });

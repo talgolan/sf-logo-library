@@ -527,11 +527,12 @@ const SCENARIOS: Scenario[] = [
   },
   {
     label:
-      "Slack dark-surface: all dark Slack results are co_branded=true (data gap documented in LEARNINGS)",
+      "Slack dark-surface: all dark Slack results are co_branded=true + both advisories emitted",
     tool: "find_brand_logo",
     input: { brand: "slack", background: "dark" },
     expect: (out) => {
-      const logos = asArray<{ co_branded: boolean }>(asObject(out)["logos"]);
+      const obj = asObject(out);
+      const logos = asArray<{ co_branded: boolean }>(obj["logos"]);
       if (logos.length === 0) {
         throw new Error(`expected at least one dark Slack asset`);
       }
@@ -542,6 +543,13 @@ const SCENARIOS: Scenario[] = [
               `update LEARNINGS.md and the find_brand_logo description.`,
           );
         }
+      }
+      const advisories = asArray<string>(obj["advisories"] ?? []);
+      if (!advisories.includes("only_co_branded_for_requested_background")) {
+        throw new Error(`expected advisory only_co_branded_for_requested_background`);
+      }
+      if (!advisories.includes("only_light_surface_standalone_available")) {
+        throw new Error(`expected advisory only_light_surface_standalone_available`);
       }
     },
   },
@@ -668,6 +676,40 @@ const SCENARIOS: Scenario[] = [
       },
     ];
   })(),
+
+  // --------------------------------------------- Phase 3E advisory scenarios
+  {
+    label:
+      "find_brand_logo(salesforce, background=dark, variant=__nope__) — advisory empty_result_filter_too_narrow",
+    tool: "find_brand_logo",
+    input: { brand: "salesforce", background: "dark", variant: "__nope__" },
+    expect: (out) => {
+      const obj = asObject(out);
+      const logos = asArray(obj["logos"]);
+      if (logos.length !== 0) throw new Error(`expected empty result, got ${logos.length}`);
+      const advisories = asArray<string>(obj["advisories"] ?? []);
+      if (!advisories.includes("empty_result_filter_too_narrow")) {
+        throw new Error(`expected advisory empty_result_filter_too_narrow, got ${JSON.stringify(advisories)}`);
+      }
+    },
+  },
+  {
+    label:
+      "find_product_icon(query='xyzzy-plugh-nowhere') — advisory query_matched_no_scored_results",
+    tool: "find_product_icon",
+    input: { query: "xyzzy-plugh-nowhere" },
+    expect: (out) => {
+      const obj = asObject(out);
+      const icons = asArray(obj["icons"]);
+      if (icons.length !== 0) throw new Error(`expected empty icons, got ${icons.length}`);
+      const advisories = asArray<string>(obj["advisories"] ?? []);
+      if (!advisories.includes("query_matched_no_scored_results")) {
+        throw new Error(
+          `expected advisory query_matched_no_scored_results, got ${JSON.stringify(advisories)}`,
+        );
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

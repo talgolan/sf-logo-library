@@ -21,9 +21,11 @@
  * See spec §2 (find_brand_logo).
  */
 
+import { sortAdvisories, type AdvisoryCode } from "../advisories.js";
 import { SfLogosError } from "../errors.js";
 import { toAssetSummary } from "../manifest/summary.js";
 import type { AssetSummary, Background, BrandId } from "../manifest/types.js";
+import { ev } from "../observability/events.js";
 import { defineTool } from "./registry.js";
 
 interface Input {
@@ -35,7 +37,7 @@ interface Input {
 }
 interface Output {
   logos: AssetSummary[];
-  advisories?: string[];
+  advisories?: AdvisoryCode[];
 }
 
 const DESCRIPTION = [
@@ -46,13 +48,13 @@ const DESCRIPTION = [
   "the asset's variant, e.g. 'Knockout'), `preferred_only` (only the default-choice",
   "asset). Results sorted preferred-first. Always prefer SVG (summary.preferred_format).",
   "Never recolor or distort — preserve the aspect_ratio supplied on each result.",
-  "Data note: some brands have no standalone mark for dark backgrounds — notably Slack,",
-  "whose dark-surface assets are all Salesforce co-brand lockups. If every result has",
-  "`co_branded: true` when you asked for a dark background, the sanctioned options are:",
-  "place the light-background mark on a white card, use the co-brand, or ask the user.",
-  "When that happens, the response also carries",
-  "`advisories: ['only_co_branded_for_requested_background']` as a machine-readable",
-  "signal for callers that don't parse the co_branded flag themselves.",
+  "On success, the response may include `advisories` (optional string array) with one",
+  "or more of: `only_co_branded_for_requested_background` (every result is a",
+  "Salesforce-endorsed lockup when a specific background was requested — suppressed",
+  "when co_branded: true was the caller's explicit ask), `only_light_surface_standalone_available`",
+  "(dark background requested but only light-surface standalone marks exist for this brand —",
+  "place the light mark on a contrasting card), `empty_result_filter_too_narrow` (the",
+  "AND of filters eliminated every candidate — relaxing a filter is the likely recovery).",
 ].join(" ");
 
 export const findBrandLogoTool = defineTool<Input, Output>({
@@ -135,11 +137,41 @@ export const findBrandLogoTool = defineTool<Input, Output>({
       return a.name.localeCompare(b.name);
     });
 
-    const advisories: string[] = [];
-    if (input.background !== undefined && logos.length > 0 && logos.every((l) => l.co_branded)) {
-      advisories.push("only_co_branded_for_requested_background");
+    const advisorySet = new Set<AdvisoryCode>();
+    // Suppress when co_branded:true was the caller's explicit ask — the "only co-brands"
+    // result is the answer, not an unexpected constraint worth flagging.
+    if (
+      input.background !== undefined &&
+      input.co_branded !== true &&
+      logos.length > 0 &&
+      logos.every((l) => l.co_branded)
+    ) {
+      advisorySet.add("only_co_branded_for_requested_background");
     }
 
+    if (input.background === "dark") {
+      const darkStandalone = brand.logos.some((l) => l.background === "dark" && !l.co_branded);
+      const lightStandalone = brand.logos.some((l) => l.background === "light" && !l.co_branded);
+      if (!darkStandalone && lightStandalone) {
+        advisorySet.add("only_light_surface_standalone_available");
+      }
+    }
+
+    const filterSupplied =
+      input.background !== undefined ||
+      input.co_branded !== undefined ||
+      input.variant !== undefined ||
+      input.preferred_only === true;
+    // Only fire if the brand has logos pre-filter — zero pre-filter means a
+    // data gap (no assets exist), not a filter-too-narrow situation.
+    if (filterSupplied && logos.length === 0 && brand.logos.length > 0) {
+      advisorySet.add("empty_result_filter_too_narrow");
+    }
+
+    for (const code of advisorySet) {
+      ctx.logger.emit(ev.advisoryEmitted({ tool: "find_brand_logo", code }));
+    }
+    const advisories = sortAdvisories(advisorySet);
     return Promise.resolve({
       logos: logos.map((l) => toAssetSummary(l, brand)),
       ...(advisories.length > 0 ? { advisories } : {}),

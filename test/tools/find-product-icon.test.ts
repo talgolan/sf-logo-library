@@ -2,6 +2,7 @@ import { describe, it, expect } from "bun:test";
 import { findProductIconTool } from "../../src/tools/find-product-icon.js";
 import bundled from "../../src/bundled/manifest.json" with { type: "json" };
 import type { Manifest } from "../../src/manifest/types.js";
+import type { AdvisoryCode } from "../../src/advisories.js";
 import { makeTestContext } from "../helpers/context.js";
 
 describe("find_product_icon", () => {
@@ -60,5 +61,68 @@ describe("find_product_icon", () => {
 
   it("has a description >= 200 chars", () => {
     expect(findProductIconTool.description.length).toBeGreaterThanOrEqual(200);
+  });
+});
+
+describe("find_product_icon — advisories", () => {
+  const ctx = () => makeTestContext(bundled as unknown as Manifest);
+
+  it("emits 'empty_result_filter_too_narrow' when category + keywords filter eliminates everything", async () => {
+    const result = (await findProductIconTool.handler(
+      { category: "Data", keywords: ["__nonexistent_xyz__"] },
+      ctx(),
+    )) as { icons: unknown[]; advisories?: AdvisoryCode[] };
+    expect(result.icons).toHaveLength(0);
+    expect(result.advisories ?? []).toContain("empty_result_filter_too_narrow");
+  });
+
+  it("does NOT emit 'empty_result_filter_too_narrow' when results exist", async () => {
+    const result = (await findProductIconTool.handler({ category: "AI" }, ctx())) as {
+      icons: unknown[];
+      advisories?: AdvisoryCode[];
+    };
+    expect(result.icons.length).toBeGreaterThan(0);
+    expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
+  });
+
+  it("emits 'query_matched_no_scored_results' when query matches zero candidates (no other filters)", async () => {
+    const result = (await findProductIconTool.handler(
+      { query: "xyzzy-plugh-nowhere" },
+      ctx(),
+    )) as { icons: unknown[]; advisories?: AdvisoryCode[] };
+    expect(result.icons).toHaveLength(0);
+    expect(result.advisories ?? []).toContain("query_matched_no_scored_results");
+    expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
+  });
+
+  it("emits BOTH advisories when query misses AND filters narrowed the pool", async () => {
+    const result = (await findProductIconTool.handler(
+      { query: "xyzzy-plugh-nowhere", category: "AI" },
+      ctx(),
+    )) as { icons: unknown[]; advisories?: AdvisoryCode[] };
+    expect(result.icons).toHaveLength(0);
+    expect(result.advisories ?? []).toContain("query_matched_no_scored_results");
+    expect(result.advisories ?? []).toContain("empty_result_filter_too_narrow");
+  });
+
+  it("does NOT emit 'query_matched_no_scored_results' when results are found", async () => {
+    const result = (await findProductIconTool.handler({ query: "agentforce" }, ctx())) as {
+      icons: unknown[];
+      advisories?: AdvisoryCode[];
+    };
+    expect(result.icons.length).toBeGreaterThan(0);
+    expect(result.advisories ?? []).not.toContain("query_matched_no_scored_results");
+  });
+
+  it("writes an advisory.emitted event per code to the observability ring", async () => {
+    const c = ctx();
+    await findProductIconTool.handler({ query: "xyzzy-plugh-nowhere", category: "AI" }, c);
+    const snapshot = c.logger.ringSnapshot();
+    const events = snapshot.filter((e) => e.event === "advisory.emitted");
+    const codes = events.map((e) => e["code"]).sort();
+    expect(codes).toEqual(["empty_result_filter_too_narrow", "query_matched_no_scored_results"]);
+    for (const e of events) {
+      expect(e["tool"]).toBe("find_product_icon");
+    }
   });
 });
