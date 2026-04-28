@@ -10,6 +10,7 @@
  */
 
 import type { LogEvent } from "./logger.js";
+import type { AdvisoryCode } from "../advisories.js";
 
 export const ev = {
   serverStart: (a: { version: string; node_version: string; pid: number }): LogEvent => ({
@@ -90,4 +91,8 @@ export const ev = {
     req_id?: string;
     tool?: string;
   }): LogEvent => ({ event: "internal.error", level: "error", ...a }),
+  advisoryEmitted: (a: {
+    tool: "find_brand_logo" | "find_product_icon";
+    code: AdvisoryCode;
+  }): LogEvent => ({ event: "advisory.emitted", level: "debug", ...a }),
 };
