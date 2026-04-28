@@ -161,6 +161,8 @@ export const findBrandLogoTool = defineTool<Input, Output>({
       input.co_branded !== undefined ||
       input.variant !== undefined ||
       input.preferred_only === true;
+    // Only fire if the brand has logos pre-filter — zero pre-filter means a
+    // data gap (no assets exist), not a filter-too-narrow situation.
     if (filterSupplied && logos.length === 0 && brand.logos.length > 0) {
       advisorySet.add("empty_result_filter_too_narrow");
     }

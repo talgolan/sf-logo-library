@@ -159,4 +159,13 @@ describe("find_brand_logo — advisories", () => {
     expect(result.logos.length).toBeGreaterThan(0);
     expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
   });
+
+  it("does NOT emit 'empty_result_filter_too_narrow' when filters still yield results", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "salesforce", background: "dark" },
+      ctx(),
+    )) as { logos: unknown[]; advisories?: AdvisoryCode[] };
+    expect(result.logos.length).toBeGreaterThan(0);
+    expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
+  });
 });
