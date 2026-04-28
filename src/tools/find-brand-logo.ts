@@ -24,6 +24,7 @@
 import { SfLogosError } from "../errors.js";
 import { toAssetSummary } from "../manifest/summary.js";
 import type { AssetSummary, Background, BrandId } from "../manifest/types.js";
+import { sortAdvisories, type AdvisoryCode } from "../advisories.js";
 import { defineTool } from "./registry.js";
 
 interface Input {
@@ -35,7 +36,7 @@ interface Input {
 }
 interface Output {
   logos: AssetSummary[];
-  advisories?: string[];
+  advisories?: AdvisoryCode[];
 }
 
 const DESCRIPTION = [
@@ -135,11 +136,12 @@ export const findBrandLogoTool = defineTool<Input, Output>({
       return a.name.localeCompare(b.name);
     });
 
-    const advisories: string[] = [];
+    const advisorySet = new Set<AdvisoryCode>();
     if (input.background !== undefined && logos.length > 0 && logos.every((l) => l.co_branded)) {
-      advisories.push("only_co_branded_for_requested_background");
+      advisorySet.add("only_co_branded_for_requested_background");
     }
 
+    const advisories = sortAdvisories(advisorySet);
     return Promise.resolve({
       logos: logos.map((l) => toAssetSummary(l, brand)),
       ...(advisories.length > 0 ? { advisories } : {}),
