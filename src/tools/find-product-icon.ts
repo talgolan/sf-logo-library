@@ -149,9 +149,11 @@ export const findProductIconTool = defineTool<Input, Output>({
       input.category !== undefined ||
       (input.keywords !== undefined && input.keywords.length > 0) ||
       input.background !== undefined;
+    // Non-query filters narrowed to zero; caller should relax category/keywords/background.
     if (finalIcons.length === 0 && nonQueryFilterSupplied && preFilterCount > 0) {
       advisorySet.add("empty_result_filter_too_narrow");
     }
+    // Query scored zero against a non-empty candidate pool; caller should reword the query.
     if (finalIcons.length === 0 && hasQuery && postFilterCount > 0) {
       advisorySet.add("query_matched_no_scored_results");
     }
