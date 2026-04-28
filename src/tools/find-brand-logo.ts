@@ -148,6 +148,14 @@ export const findBrandLogoTool = defineTool<Input, Output>({
       advisorySet.add("only_co_branded_for_requested_background");
     }
 
+    if (input.background === "dark") {
+      const darkStandalone = brand.logos.some((l) => l.background === "dark" && !l.co_branded);
+      const lightStandalone = brand.logos.some((l) => l.background === "light" && !l.co_branded);
+      if (!darkStandalone && lightStandalone) {
+        advisorySet.add("only_light_surface_standalone_available");
+      }
+    }
+
     const advisories = sortAdvisories(advisorySet);
     return Promise.resolve({
       logos: logos.map((l) => toAssetSummary(l, brand)),
