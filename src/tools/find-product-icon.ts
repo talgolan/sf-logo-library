@@ -16,6 +16,7 @@
  * See spec §2 (find_product_icon).
  */
 
+import { sortAdvisories, type AdvisoryCode } from "../advisories.js";
 import { SfLogosError } from "../errors.js";
 import { toAssetSummary } from "../manifest/summary.js";
 import type { AssetSummary, Background, ProductIconCategory } from "../manifest/types.js";
@@ -32,6 +33,7 @@ interface Input {
 }
 interface Output {
   icons: AssetSummary[];
+  advisories?: AdvisoryCode[];
 }
 
 const DEFAULT_LIMIT = 10;
@@ -100,6 +102,8 @@ export const findProductIconTool = defineTool<Input, Output>({
     const brand = ctx.manifest.brands.find((b) => b.id === "product-icons");
     if (!brand) return Promise.resolve({ icons: [] });
 
+    const preFilterCount = brand.logos.length;
+
     let candidates = brand.logos.slice();
     if (input.category !== undefined) {
       candidates = candidates.filter((l) => l.category === input.category);
@@ -115,10 +119,17 @@ export const findProductIconTool = defineTool<Input, Output>({
       });
     }
 
+    const postFilterCount = candidates.length;
+    void postFilterCount; // consumed in Task 9 for query_matched_no_scored_results
     const limit = clamp(input.limit ?? DEFAULT_LIMIT, 1, MAX_LIMIT);
 
-    if (input.query !== undefined && input.query.trim().length > 0) {
-      const tokens = tokenize(input.query);
+    const queryTrimmed = input.query?.trim() ?? "";
+    const hasQuery = queryTrimmed.length > 0;
+    void hasQuery; // consumed in Task 9
+
+    let finalIcons: AssetSummary[];
+    if (hasQuery) {
+      const tokens = tokenize(input.query as string);
       const scored = candidates
         .map((l) => ({ logo: l, score: scoreLogo(l, tokens) }))
         .filter((s) => s.score > 0)
@@ -126,17 +137,28 @@ export const findProductIconTool = defineTool<Input, Output>({
           b.score !== a.score ? b.score - a.score : a.logo.name.localeCompare(b.logo.name),
         )
         .slice(0, limit);
-      return Promise.resolve({
-        icons: scored.map((s) => ({
-          ...toAssetSummary(s.logo, brand),
-          match_score: s.score,
-        })),
-      });
+      finalIcons = scored.map((s) => ({
+        ...toAssetSummary(s.logo, brand),
+        match_score: s.score,
+      }));
+    } else {
+      candidates.sort((a, b) => a.name.localeCompare(b.name));
+      finalIcons = candidates.slice(0, limit).map((l) => toAssetSummary(l, brand));
     }
 
-    candidates.sort((a, b) => a.name.localeCompare(b.name));
+    const advisorySet = new Set<AdvisoryCode>();
+    const nonQueryFilterSupplied =
+      input.category !== undefined ||
+      (input.keywords !== undefined && input.keywords.length > 0) ||
+      input.background !== undefined;
+    if (finalIcons.length === 0 && nonQueryFilterSupplied && preFilterCount > 0) {
+      advisorySet.add("empty_result_filter_too_narrow");
+    }
+
+    const advisories = sortAdvisories(advisorySet);
     return Promise.resolve({
-      icons: candidates.slice(0, limit).map((l) => toAssetSummary(l, brand)),
+      icons: finalIcons,
+      ...(advisories.length > 0 ? { advisories } : {}),
     });
   },
 });
