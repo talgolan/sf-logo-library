@@ -20,6 +20,7 @@ import { sortAdvisories, type AdvisoryCode } from "../advisories.js";
 import { SfLogosError } from "../errors.js";
 import { toAssetSummary } from "../manifest/summary.js";
 import type { AssetSummary, Background, ProductIconCategory } from "../manifest/types.js";
+import { ev } from "../observability/events.js";
 import { scoreLogo } from "../search/score.js";
 import { tokenize } from "../search/tokenize.js";
 import { defineTool } from "./registry.js";
@@ -158,6 +159,9 @@ export const findProductIconTool = defineTool<Input, Output>({
       advisorySet.add("query_matched_no_scored_results");
     }
 
+    for (const code of advisorySet) {
+      ctx.logger.emit(ev.advisoryEmitted({ tool: "find_product_icon", code }));
+    }
     const advisories = sortAdvisories(advisorySet);
     return Promise.resolve({
       icons: finalIcons,

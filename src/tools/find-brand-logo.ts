@@ -25,6 +25,7 @@ import { sortAdvisories, type AdvisoryCode } from "../advisories.js";
 import { SfLogosError } from "../errors.js";
 import { toAssetSummary } from "../manifest/summary.js";
 import type { AssetSummary, Background, BrandId } from "../manifest/types.js";
+import { ev } from "../observability/events.js";
 import { defineTool } from "./registry.js";
 
 interface Input {
@@ -167,6 +168,9 @@ export const findBrandLogoTool = defineTool<Input, Output>({
       advisorySet.add("empty_result_filter_too_narrow");
     }
 
+    for (const code of advisorySet) {
+      ctx.logger.emit(ev.advisoryEmitted({ tool: "find_brand_logo", code }));
+    }
     const advisories = sortAdvisories(advisorySet);
     return Promise.resolve({
       logos: logos.map((l) => toAssetSummary(l, brand)),

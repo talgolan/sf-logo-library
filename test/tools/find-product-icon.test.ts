@@ -113,4 +113,16 @@ describe("find_product_icon — advisories", () => {
     expect(result.icons.length).toBeGreaterThan(0);
     expect(result.advisories ?? []).not.toContain("query_matched_no_scored_results");
   });
+
+  it("writes an advisory.emitted event per code to the observability ring", async () => {
+    const c = ctx();
+    await findProductIconTool.handler({ query: "xyzzy-plugh-nowhere", category: "AI" }, c);
+    const snapshot = c.logger.ringSnapshot();
+    const events = snapshot.filter((e) => e.event === "advisory.emitted");
+    const codes = events.map((e) => e["code"]).sort();
+    expect(codes).toEqual(["empty_result_filter_too_narrow", "query_matched_no_scored_results"]);
+    for (const e of events) {
+      expect(e["tool"]).toBe("find_product_icon");
+    }
+  });
 });

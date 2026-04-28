@@ -168,4 +168,19 @@ describe("find_brand_logo — advisories", () => {
     expect(result.logos.length).toBeGreaterThan(0);
     expect(result.advisories ?? []).not.toContain("empty_result_filter_too_narrow");
   });
+
+  it("writes an advisory.emitted event per code to the observability ring", async () => {
+    const c = ctx();
+    await findBrandLogoTool.handler({ brand: "slack", background: "dark" }, c);
+    const snapshot = c.logger.ringSnapshot();
+    const events = snapshot.filter((e) => e.event === "advisory.emitted");
+    const codes = events.map((e) => e["code"]).sort();
+    expect(codes).toEqual([
+      "only_co_branded_for_requested_background",
+      "only_light_surface_standalone_available",
+    ]);
+    for (const e of events) {
+      expect(e["tool"]).toBe("find_brand_logo");
+    }
+  });
 });
