@@ -3,6 +3,7 @@ import { findBrandLogoTool } from "../../src/tools/find-brand-logo.js";
 import bundled from "../../src/bundled/manifest.json" with { type: "json" };
 import type { Manifest } from "../../src/manifest/types.js";
 import { makeTestContext } from "../helpers/context.js";
+import type { AdvisoryCode } from "../../src/advisories.js";
 
 describe("find_brand_logo", () => {
   const ctx = () => makeTestContext(bundled as unknown as Manifest);
@@ -74,7 +75,7 @@ describe("find_brand_logo — advisories", () => {
     const result = (await findBrandLogoTool.handler(
       { brand: "slack", background: "dark" },
       ctx(),
-    )) as { logos: Array<{ co_branded: boolean }>; advisories?: string[] };
+    )) as { logos: Array<{ co_branded: boolean }>; advisories?: AdvisoryCode[] };
     expect(result.logos.length).toBeGreaterThan(0);
     expect(result.logos.every((l) => l.co_branded)).toBe(true);
     expect(result.advisories ?? []).toContain("only_co_branded_for_requested_background");
@@ -84,7 +85,7 @@ describe("find_brand_logo — advisories", () => {
     const result = (await findBrandLogoTool.handler(
       { brand: "salesforce", background: "light" },
       ctx(),
-    )) as { logos: Array<{ co_branded: boolean }>; advisories?: string[] };
+    )) as { logos: Array<{ co_branded: boolean }>; advisories?: AdvisoryCode[] };
     expect(result.logos.some((l) => !l.co_branded)).toBe(true);
     expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
   });
@@ -92,8 +93,18 @@ describe("find_brand_logo — advisories", () => {
   it("does NOT emit the advisory when background is not specified", async () => {
     const result = (await findBrandLogoTool.handler({ brand: "slack" }, ctx())) as {
       logos: Array<{ co_branded: boolean }>;
-      advisories?: string[];
+      advisories?: AdvisoryCode[];
     };
+    expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
+  });
+
+  it("does NOT emit the advisory when co_branded: true was explicitly requested", async () => {
+    const result = (await findBrandLogoTool.handler(
+      { brand: "slack", background: "dark", co_branded: true },
+      ctx(),
+    )) as { logos: Array<{ co_branded: boolean }>; advisories?: AdvisoryCode[] };
+    expect(result.logos.length).toBeGreaterThan(0);
+    expect(result.logos.every((l) => l.co_branded)).toBe(true);
     expect(result.advisories ?? []).not.toContain("only_co_branded_for_requested_background");
   });
 });

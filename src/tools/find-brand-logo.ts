@@ -137,7 +137,12 @@ export const findBrandLogoTool = defineTool<Input, Output>({
     });
 
     const advisorySet = new Set<AdvisoryCode>();
-    if (input.background !== undefined && logos.length > 0 && logos.every((l) => l.co_branded)) {
+    if (
+      input.background !== undefined &&
+      input.co_branded !== true &&
+      logos.length > 0 &&
+      logos.every((l) => l.co_branded)
+    ) {
       advisorySet.add("only_co_branded_for_requested_background");
     }
 
