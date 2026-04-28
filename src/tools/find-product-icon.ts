@@ -125,11 +125,10 @@ export const findProductIconTool = defineTool<Input, Output>({
 
     const queryTrimmed = input.query?.trim() ?? "";
     const hasQuery = queryTrimmed.length > 0;
-    void hasQuery; // consumed in Task 9
 
     let finalIcons: AssetSummary[];
     if (hasQuery) {
-      const tokens = tokenize(input.query as string);
+      const tokens = tokenize(queryTrimmed);
       const scored = candidates
         .map((l) => ({ logo: l, score: scoreLogo(l, tokens) }))
         .filter((s) => s.score > 0)
