@@ -137,6 +137,8 @@ export const findBrandLogoTool = defineTool<Input, Output>({
     });
 
     const advisorySet = new Set<AdvisoryCode>();
+    // Suppress when co_branded:true was the caller's explicit ask — the "only co-brands"
+    // result is the answer, not an unexpected constraint worth flagging.
     if (
       input.background !== undefined &&
       input.co_branded !== true &&
